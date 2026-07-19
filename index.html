@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fariya Raza — AI Engineer</title>
+<meta name="description" content="Fariya Raza builds production LLM systems and multi-agent architectures. Karachi based, shipping worldwide.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230B2038'/%3E%3Cpath d='M32 10 L54 32 L32 54 L10 32 Z' fill='none' stroke='%2362D9FF' stroke-width='4'/%3E%3Cpath d='M32 22 L42 32 L32 42 L22 32 Z' fill='%23FF7A29'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0B2038">
+<!-- Social previews: after deploying, og:image points at the live GitHub Pages URL
+     keep og-image.png next to this file in the repo -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fariya Raza — AI Engineer">
+<meta property="og:description" content="Production LLM systems and multi-agent architectures. Watch the pipelines run.">
+<meta property="og:url" content="https://fariyar.github.io/">
+<meta property="og:image" content="https://fariyar.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fariya Raza — AI Engineer">
+<meta name="twitter:description" content="Production LLM systems and multi-agent architectures. Watch the pipelines run.">
+<meta name="twitter:image" content="https://fariyar.github.io/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B2038;
+  --navy-deep:#071628;
+  --line:#1E3A5C;
+  --line-soft:rgba(98,217,255,.10);
+  --cyan:#62D9FF;
+  --cyan-dim:#3AA8CF;
+  --orange:#FF7A29;
+  --paper:#EEF3F7;
+  --paper-line:#C9D6E2;
+  --ink:#14263B;
+  --ink-soft:#4A6076;
+  --text:#D7E6F2;
+  --text-dim:#8FA9C0;
+  --display:'Unbounded',sans-serif;
+  --body:'Instrument Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--navy);
+  color:var(--text);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+::selection{background:var(--orange);color:var(--navy-deep)}
+
+/* ---------- blueprint grids ---------- */
+.grid-dark{
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px),
+    linear-gradient(rgba(98,217,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(98,217,255,.045) 1px, transparent 1px);
+  background-size:120px 120px,120px 120px,24px 24px,24px 24px;
+}
+.grid-paper{
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(rgba(30,58,92,.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,58,92,.14) 1px, transparent 1px),
+    linear-gradient(rgba(30,58,92,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,58,92,.06) 1px, transparent 1px);
+  background-size:120px 120px,120px 120px,24px 24px,24px 24px;
+  color:var(--ink);
+}
+
+/* ---------- custom cursor ---------- */
+.cursor{display:none}
+@media (pointer:fine){
+  body,a,button{cursor:none}
+  .cursor{
+    position:fixed;top:0;left:0;z-index:9999;pointer-events:none;
+    width:34px;height:34px;margin:-17px 0 0 -17px;
+    mix-blend-mode:difference;
+    transition:transform .18s cubic-bezier(.2,.8,.3,1);
+    display:block;
+  }
+  .cursor::before,.cursor::after{content:'';position:absolute;background:#fff}
+  .cursor::before{left:50%;top:0;width:1px;height:100%;transform:translateX(-50%)}
+  .cursor::after{top:50%;left:0;height:1px;width:100%;transform:translateY(-50%)}
+  .cursor .ring{position:absolute;inset:8px;border:1px solid #fff;border-radius:50%;transition:inset .18s ease}
+  .cursor.is-link{transform:rotate(45deg)}
+  .cursor.is-link .ring{inset:2px}
+}
+
+/* ---------- boot ---------- */
+#boot{
+  position:fixed;inset:0;z-index:9000;background:var(--navy-deep);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:13px;color:var(--cyan);
+  transition:opacity .5s ease, visibility .5s;
+}
+#boot.done{opacity:0;visibility:hidden}
+#boot pre{white-space:pre-wrap;min-width:min(520px,86vw)}
+
+/* ---------- rail ---------- */
+#rail{
+  position:fixed;top:0;left:0;right:0;z-index:800;height:44px;
+  display:flex;align-items:stretch;
+  background:rgba(7,22,40,.86);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+}
+#rail .stage{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+  color:var(--text-dim);border-right:1px dashed var(--line);
+  position:relative;overflow:hidden;text-decoration:none;
+  transition:color .3s;white-space:nowrap;
+}
+#rail .stage:last-child{border-right:none}
+#rail .stage i{
+  position:absolute;left:0;top:0;bottom:0;width:100%;
+  transform-origin:left;transform:scaleX(0);
+  background:linear-gradient(90deg,rgba(98,217,255,.16),rgba(98,217,255,.05));
+}
+#rail .stage.active{color:var(--cyan)}
+#rail .stage .dot{width:6px;height:6px;border:1px solid currentColor;transform:rotate(45deg);flex:none}
+#rail .stage.active .dot{background:var(--orange);border-color:var(--orange)}
+#rail .stage.back{flex:0 0 auto;padding:0 18px;color:var(--orange)}
+@media(max-width:760px){#rail .stage span.txt{display:none}#rail{font-size:9px}#rail .stage.back span.txt{display:inline}}
+
+/* ---------- shared ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+section{position:relative}
+.eyebrow{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--orange);display:flex;align-items:center;gap:14px;
+}
+.eyebrow::before{content:'';width:34px;height:1px;background:var(--orange)}
+.grid-paper .eyebrow{color:#C4560E}
+.grid-paper .eyebrow::before{background:#C4560E}
+h2{
+  font-family:var(--display);font-weight:700;
+  font-size:clamp(1.7rem,4vw,2.7rem);line-height:1.12;margin:.55em 0 .35em;
+  letter-spacing:-.01em;
+}
+.sec-head{padding:clamp(70px,10vh,120px) 0 clamp(24px,4vh,40px)}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.btn{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+  padding:15px 24px;border:1px solid var(--cyan);color:var(--cyan);
+  text-decoration:none;position:relative;overflow:hidden;display:inline-block;
+  transition:color .25s, border-color .25s;
+  background:rgba(7,22,40,.55);
+}
+.btn::before{content:'';position:absolute;inset:0;background:var(--cyan);transform:translateY(101%);transition:transform .3s cubic-bezier(.2,.8,.2,1);z-index:0}
+.btn span{position:relative;z-index:1}
+.btn:hover{color:var(--navy-deep)}
+.btn:hover::before{transform:none}
+.btn.solid{background:var(--orange);border-color:var(--orange);color:var(--navy-deep);font-weight:600}
+.btn.solid::before{background:#fff}
+.grid-paper .btn{border-color:var(--ink);color:var(--ink);background:rgba(255,255,255,.6)}
+.grid-paper .btn::before{background:var(--ink)}
+.grid-paper .btn:hover{color:var(--paper)}
+
+/* ---------- hero ---------- */
+#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding-top:44px;overflow:hidden}
+#agentCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#hero .scanline{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 3px, rgba(7,22,40,.18) 3px 4px);opacity:.5}
+#hero .content{position:relative;z-index:2;padding-bottom:clamp(40px,7vh,90px)}
+.plate{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;
+  border:1px solid var(--line);padding:8px 14px;color:var(--cyan);
+  background:rgba(7,22,40,.7);
+}
+.plate .pulse{width:8px;height:8px;border-radius:50%;background:var(--orange);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,122,41,.6)}60%{box-shadow:0 0 0 9px rgba(255,122,41,0)}}
+h1{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(2.6rem,9vw,7.2rem);line-height:.98;letter-spacing:-.02em;
+  margin:22px 0 10px;color:#fff;
+  text-shadow:0 0 60px rgba(98,217,255,.25);
+}
+h1 .row{display:block;overflow:hidden}
+h1 .row span{display:inline-block;transform:translateY(110%);animation:rise 1s cubic-bezier(.2,.8,.2,1) forwards}
+h1 .row:nth-child(2) span{animation-delay:.12s;color:transparent;-webkit-text-stroke:2px var(--cyan)}
+@keyframes rise{to{transform:none}}
+#hero .sub{max-width:640px;color:var(--text-dim);font-size:clamp(1rem,1.4vw,1.15rem)}
+#hero .sub b{color:var(--text);font-weight:600}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.corner{position:absolute;width:18px;height:18px;border:2px solid var(--cyan);opacity:.6;z-index:2}
+.corner.tl{top:56px;left:14px;border-right:none;border-bottom:none}
+.corner.tr{top:56px;right:14px;border-left:none;border-bottom:none}
+.corner.bl{bottom:14px;left:14px;border-right:none;border-top:none}
+.corner.br{bottom:14px;right:14px;border-left:none;border-top:none}
+
+/* ---------- ticker ---------- */
+#ticker{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--navy-deep);overflow:hidden;white-space:nowrap;
+  font-family:var(--mono);font-size:12.5px;color:var(--text-dim);
+  padding:12px 0;position:relative;z-index:2;
+}
+#ticker .track{display:inline-block;animation:scrollx 40s linear infinite}
+#ticker:hover .track{animation-play-state:paused}
+#ticker b{color:var(--cyan);font-weight:500}
+#ticker em{color:var(--orange);font-style:normal}
+#ticker .sep{margin:0 26px;color:var(--line)}
+@keyframes scrollx{to{transform:translateX(-50%)}}
+
+/* ---------- teaser cards (home) ---------- */
+#teaser .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;margin-bottom:26px}
+.tcard{
+  border:1.5px solid var(--ink);background:#fff;text-decoration:none;color:var(--ink);
+  padding:24px;box-shadow:6px 6px 0 rgba(20,38,59,.12);
+  transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s cubic-bezier(.2,.8,.2,1);
+  display:flex;flex-direction:column;gap:10px;
+}
+.tcard:hover{transform:translate(-3px,-3px);box-shadow:11px 11px 0 rgba(20,38,59,.16)}
+.tcard .id{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--ink-soft)}
+.tcard h3{font-family:var(--display);font-size:1.15rem;font-weight:700}
+.tcard p{font-size:.92rem;color:#2A3C50;flex:1}
+.tcard .go{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#C4560E}
+#teaser .all{display:flex;justify-content:center;padding-bottom:100px}
+
+/* ---------- systems view ---------- */
+#view-systems{display:none}
+body[data-view="systems"] #view-systems{display:block}
+body[data-view="systems"] #view-home{display:none}
+#sysHead{padding-top:44px}
+#sysHead .inner{padding:clamp(60px,9vh,110px) 0 clamp(26px,4vh,40px)}
+
+.sheet{
+  border:1.5px solid var(--ink);background:#fff;
+  margin-bottom:44px;position:relative;
+  box-shadow:6px 6px 0 rgba(20,38,59,.12);
+  scroll-margin-top:70px;
+}
+.sheet .head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  border-bottom:1.5px solid var(--ink);padding:20px 26px 16px;
+}
+.sheet .head h3{font-family:var(--display);font-weight:700;font-size:clamp(1.15rem,2.2vw,1.5rem);color:var(--ink)}
+.sheet .id{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--ink-soft)}
+.sheet .body{display:grid;grid-template-columns:1.5fr 1fr}
+@media(max-width:860px){.sheet .body{grid-template-columns:1fr}}
+.sheet .desc{padding:22px 26px;color:#2A3C50;border-right:1.5px dashed var(--paper-line)}
+@media(max-width:860px){.sheet .desc{border-right:none;border-bottom:1.5px dashed var(--paper-line)}}
+.sheet .desc p{font-size:.98rem}
+.sheet .metrics{padding:22px 26px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+.metric .num{font-family:var(--display);font-weight:700;font-size:clamp(1.35rem,2.4vw,1.8rem);color:var(--ink);line-height:1}
+.metric .num em{font-style:normal;color:var(--orange)}
+.metric .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+.sheet .foot{border-top:1.5px solid var(--ink);padding:14px 26px;display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.06em;border:1px solid var(--ink);padding:5px 11px;color:var(--ink);background:var(--paper)}
+.stamp{
+  position:absolute;top:14px;right:18px;z-index:3;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;font-weight:600;
+  color:#0E7A3D;border:2px solid #0E7A3D;padding:6px 10px;transform:rotate(6deg);
+  opacity:0;transition:opacity .5s .2s, transform .5s .2s;
+  background:rgba(255,255,255,.7);
+}
+.sheet.in .stamp{opacity:.92;transform:rotate(-4deg)}
+.stamp.live{color:#B4530A;border-color:#B4530A}
+
+/* ---------- animated workflow ---------- */
+.flow-wrap{
+  border-top:1.5px solid var(--ink);
+  background:
+    linear-gradient(rgba(30,58,92,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30,58,92,.05) 1px, transparent 1px);
+  background-size:24px 24px;
+  padding:30px 26px 18px;
+  overflow-x:auto;
+}
+.flow-wrap .flow-title{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:26px;display:flex;align-items:center;gap:10px;
+}
+.flow-wrap .flow-title::after{content:'';flex:1;height:1px;background:var(--paper-line)}
+.flow{position:relative;display:flex;align-items:flex-start;min-width:640px;padding-top:34px}
+.fstep{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;min-width:92px}
+.fstep .marker{
+  width:20px;height:20px;transform:rotate(45deg);
+  border:2px solid var(--ink);background:#fff;
+  transition:background .3s, border-color .3s, box-shadow .3s;
+  position:relative;z-index:2;
+}
+.fstep .lbl{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;font-weight:600;
+  color:var(--ink);margin-top:14px;text-transform:uppercase;
+}
+.fstep .sub{font-family:var(--mono);font-size:9.5px;color:var(--ink-soft);margin-top:3px;max-width:130px}
+.fstep .conn{
+  position:absolute;top:9px;left:calc(50% + 14px);right:calc(-50% + 14px);height:2px;
+  background:var(--paper-line);z-index:1;
+}
+.fstep .conn i{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:var(--cyan-dim);transition:transform .45s linear}
+.fstep:last-child .conn{display:none}
+.fstep.done .marker{background:var(--cyan);border-color:var(--cyan-dim)}
+.fstep.done .conn i{transform:scaleX(1)}
+.fstep.active .marker{
+  background:var(--orange);border-color:var(--orange);
+  box-shadow:0 0 0 6px rgba(255,122,41,.2), 0 0 18px rgba(255,122,41,.5);
+}
+.fstep.active .lbl{color:#C4560E}
+.fstep.fail .marker{background:#fff;border-color:#C81E1E;box-shadow:0 0 0 6px rgba(200,30,30,.15)}
+.fstep .badge{
+  position:absolute;top:-26px;left:50%;transform:translateX(-50%) translateY(6px);
+  font-family:var(--mono);font-size:9px;letter-spacing:.14em;font-weight:600;
+  padding:2px 8px;opacity:0;transition:opacity .25s, transform .25s;white-space:nowrap;
+}
+.fstep .badge.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.fstep .badge.pass{color:#0E7A3D;border:1.5px solid #0E7A3D;background:#fff}
+.fstep .badge.fail{color:#C81E1E;border:1.5px solid #C81E1E;background:#fff}
+.loop-arc{
+  position:absolute;border:1.5px dashed var(--orange);border-bottom:none;
+  border-radius:100% 100% 0 0 / 200% 200% 0 0;
+  height:30px;top:-22px;opacity:.35;transition:opacity .3s;
+}
+.loop-arc.hot{opacity:1;filter:drop-shadow(0 0 4px rgba(255,122,41,.6))}
+.loop-arc .llbl{
+  position:absolute;top:-16px;left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:#C4560E;background:var(--paper);padding:0 6px;
+}
+.flow-status{
+  font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);
+  margin-top:22px;display:flex;align-items:center;gap:10px;min-height:20px;
+}
+.flow-status::before{content:'▸';color:var(--orange)}
+.flow-status b{color:var(--ink);font-weight:600}
+
+/* ---------- testimonials ---------- */
+#reviews .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;padding-bottom:110px}
+.tst{
+  border:1.5px solid var(--ink);background:#fff;position:relative;
+  box-shadow:6px 6px 0 rgba(20,38,59,.12);
+  display:flex;flex-direction:column;
+  transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s cubic-bezier(.2,.8,.2,1);
+}
+.tst:hover{transform:translate(-3px,-3px);box-shadow:11px 11px 0 rgba(20,38,59,.16)}
+.tst .thead{
+  border-bottom:1.5px solid var(--ink);padding:16px 20px 12px;
+  display:flex;flex-direction:column;gap:6px;
+}
+.tst .proj{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.tst .rating{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--ink)}
+.tst .rating .diamonds{color:var(--orange);letter-spacing:3px;font-size:12px}
+.tst .rating b{font-weight:600}
+.tst blockquote{
+  padding:18px 20px;font-size:.93rem;color:#2A3C50;flex:1;
+  border-left:3px solid var(--cyan-dim);margin:14px 16px 14px 16px;
+  background:rgba(98,217,255,.05);
+}
+.tst blockquote em{font-style:normal;background:rgba(255,122,41,.16)}
+.tst .tfoot{border-top:1.5px dashed var(--paper-line);padding:12px 20px 16px;display:flex;flex-wrap:wrap;gap:6px}
+.tst .tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;border:1px solid var(--paper-line);padding:3px 9px;color:var(--ink-soft);background:var(--paper)}
+.tst .endorse{
+  position:absolute;top:-12px;right:14px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.18em;font-weight:600;
+  color:#0E7A3D;border:2px solid #0E7A3D;background:#fff;padding:4px 9px;
+  transform:rotate(3deg);
+}
+
+/* ---------- principle ---------- */
+#principle{padding:clamp(90px,14vh,160px) 0;text-align:center;overflow:hidden}
+#principle .line{font-family:var(--display);font-weight:700;font-size:clamp(1.5rem,4.6vw,3.4rem);line-height:1.25;letter-spacing:-.01em}
+#principle .line b{color:var(--cyan);font-weight:700}
+#principle .line em{font-style:normal;color:var(--orange)}
+#principle .line .dim{color:var(--text-dim)}
+#principle .caption{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--text-dim);margin-top:26px;text-transform:uppercase}
+
+/* ---------- experience ---------- */
+#exp .row{display:grid;grid-template-columns:170px 1fr;gap:26px;padding:26px 0;border-bottom:1px dashed var(--line)}
+@media(max-width:640px){#exp .row{grid-template-columns:1fr;gap:6px}}
+#exp .when{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--orange);padding-top:5px}
+#exp h3{font-size:1.12rem;font-weight:600;color:#fff}
+#exp .org{color:var(--cyan);font-weight:500}
+#exp p{color:var(--text-dim);font-size:.95rem;margin-top:6px;max-width:760px}
+
+/* ---------- skills ---------- */
+#skills .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-bottom:110px}
+#skills .cell{background:var(--navy);padding:26px 24px;transition:background .3s}
+#skills .cell:hover{background:var(--navy-deep)}
+#skills h3{font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
+#skills li{list-style:none;color:var(--text-dim);font-size:.94rem;padding:3px 0;border-bottom:1px dotted rgba(98,217,255,.12)}
+#skills li b{color:var(--text);font-weight:500}
+
+/* ---------- contact ---------- */
+.contact{background:var(--navy-deep);border-top:1px solid var(--line);padding:clamp(80px,12vh,140px) 0 40px;text-align:center}
+.mailcard{
+  display:inline-flex;align-items:center;gap:0;
+  border:1px solid var(--line);background:rgba(11,32,56,.7);
+  font-family:var(--mono);
+}
+.mailcard .mlabel{
+  font-size:10px;letter-spacing:.22em;color:var(--orange);
+  padding:14px 16px;border-right:1px dashed var(--line);
+}
+.mailcard .maddr{
+  font-size:14px;color:var(--text);letter-spacing:.02em;
+  padding:14px 18px;font-family:var(--mono);
+}
+.mailcard .mcopy{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+  color:var(--cyan);background:none;border:none;border-left:1px dashed var(--line);
+  padding:14px 16px;transition:color .25s, background .25s;
+}
+.mailcard .mcopy:hover{background:rgba(98,217,255,.1)}
+.mailcard .mcopy.ok{color:#4ADE80}
+@media(max-width:560px){
+  .mailcard{flex-direction:column;align-items:stretch}
+  .mailcard .mlabel{border-right:none;border-bottom:1px dashed var(--line)}
+  .mailcard .mcopy{border-left:none;border-top:1px dashed var(--line)}
+}
+.contact .links{margin-top:28px;display:flex;justify-content:center;flex-wrap:wrap;gap:14px}
+.contact .foot{margin-top:80px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--text-dim);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+  h1 .row span{transform:none}
+}
+</style>
+</head>
+<body class="grid-dark" data-view="home">
+
+<div class="cursor" id="cursor"><span class="ring"></span></div>
+<div id="boot" aria-hidden="true"><pre id="bootText"></pre></div>
+
+<nav id="rail" aria-label="Pipeline progress"></nav>
+
+<!-- ================================================== -->
+<!-- ==================== HOME VIEW =================== -->
+<!-- ================================================== -->
+<div id="view-home">
+
+<section id="hero">
+  <canvas id="agentCanvas" aria-hidden="true"></canvas>
+  <div class="scanline"></div>
+  <span class="corner tl"></span><span class="corner tr"></span>
+  <span class="corner bl"></span><span class="corner br"></span>
+  <div class="wrap content">
+    <div class="plate"><span class="pulse"></span> KHI · 24.86°N 67.00°E &nbsp;//&nbsp; ALL SYSTEMS NOMINAL</div>
+    <h1 aria-label="Fariya Raza">
+      <span class="row"><span>FARIYA</span></span>
+      <span class="row"><span>RAZA</span></span>
+    </h1>
+    <p class="sub">I build <b>multi-agent systems that survive production</b>. LangGraph orchestration, LLM cost engineering, and validation-gated pipelines for clients across the US and EU — shipped from Karachi, running everywhere.</p>
+    <div class="cta-row">
+      <a class="btn solid" href="mailto:sy.faraza2899@gmail.com"><span>Start a project</span></a>
+      <a class="btn" href="#/systems"><span>Explore the systems ▸</span></a>
+      <a class="btn" href="https://www.linkedin.com/in/fariyar/" target="_blank" rel="noopener"><span>LinkedIn</span></a>
+    </div>
+  </div>
+</section>
+
+<div id="ticker" aria-hidden="true"><div class="track" id="tickerTrack"></div></div>
+
+<section id="teaser" class="grid-paper">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">01 · Systems in production</div>
+      <h2>Every project ships with its pipeline.</h2>
+      <p style="max-width:620px;color:#2A3C50">Each system below has a full spec sheet with a live, animated workflow — so you can see exactly how the pieces move, where the QA gates sit, and what happens when something fails.</p>
+    </div>
+    <div class="cards">
+      <a class="tcard reveal" href="#/systems" data-target="run-01">
+        <span class="id">RUN-01</span><h3>LeadForge AI</h3>
+        <p>Six agents, one typed shared state, self-healing QA. Same architecture as the graph animating in the hero.</p>
+        <span class="go">OPEN FULL SPEC ▸</span>
+      </a>
+      <a class="tcard reveal" href="#/systems" data-target="run-02">
+        <span class="id">RUN-02</span><h3>Creative Generation Pipeline</h3>
+        <p>100+ QA-checked ad creatives a day. Prompt caching cut inference costs by 70–80%.</p>
+        <span class="go">OPEN FULL SPEC ▸</span>
+      </a>
+      <a class="tcard reveal" href="#/systems" data-target="run-03">
+        <span class="id">RUN-03</span><h3>Tournament Document Intelligence</h3>
+        <p>412 records merged with zero validation errors. AI extracts, deterministic logic validates.</p>
+        <span class="go">OPEN FULL SPEC ▸</span>
+      </a>
+    </div>
+    <div class="all reveal"><a class="btn" href="#/systems"><span>View all six systems ▸</span></a></div>
+  </div>
+</section>
+
+<section id="principle">
+  <div class="wrap">
+    <p class="line reveal"><b>AI extracts.</b><br><em>Deterministic logic validates.</em><br><span class="dim">Humans stay on consequential calls.</span></p>
+    <p class="caption reveal">— how every system on this page is built</p>
+  </div>
+</section>
+
+<section id="reviews" class="grid-paper">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">03 · Client sign-offs</div>
+      <h2>Straight from the review log.</h2>
+      <p style="max-width:620px;color:#2A3C50">Verbatim Upwork reviews. Every engagement below closed at 5.0 and was endorsed by the client.</p>
+    </div>
+    <div class="tgrid">
+
+      <article class="tst reveal">
+        <span class="endorse">✓ ENDORSED BY CLIENT</span>
+        <div class="thead">
+          <span class="proj">AI parsing of HTML &amp; PDF documents · May 2026</span>
+          <span class="rating"><span class="diamonds">◆◆◆◆◆</span><b>5.0</b></span>
+        </div>
+        <blockquote>"Really pleased with the work provided by Fariya. <em>Quick turnaround, was able to quickly understand the challenge and then proved that she can create the solution.</em> Even managed to take my app and implement the solution within it… Also jumped on a call with me to help set everything up on my laptop. I'd be happy to work with you again, Fariya!"</blockquote>
+        <div class="tfoot"><span class="tag">Solution Oriented</span><span class="tag">Clear Communicator</span><span class="tag">Accountable for Outcomes</span></div>
+      </article>
+
+      <article class="tst reveal">
+        <span class="endorse">✓ ENDORSED BY CLIENT</span>
+        <div class="thead">
+          <span class="proj">AI image generation automation · May 2026</span>
+          <span class="rating"><span class="diamonds">◆◆◆◆◆</span><b>5.0</b></span>
+        </div>
+        <blockquote>"Fariya is an exceptional communicator and <em>very proficient in working with AI engineering and automation</em>. She responds quickly and is very interested to get to a great result. Clear recommendation!"</blockquote>
+        <div class="tfoot"><span class="tag">Committed to Quality</span><span class="tag">Solution Oriented</span><span class="tag">Clear Communicator</span></div>
+      </article>
+
+      <article class="tst reveal">
+        <span class="endorse">✓ ENDORSED BY CLIENT</span>
+        <div class="thead">
+          <span class="proj">Marketing agency automation · May 2026</span>
+          <span class="rating"><span class="diamonds">◆◆◆◆◆</span><b>5.0</b></span>
+        </div>
+        <blockquote>"What stood out most was her creativity when it came to automation… she helped us build a phone number enrichment automation — a workflow that pulled lead data from our email sequencer, found LinkedIn profiles, and extracted phone numbers to route directly into our CRM. <em>If you're looking for someone who is reliable, fast-learning, and brings genuine creative thinking to automation, Fariya is someone I'd recommend without hesitation.</em>"</blockquote>
+        <div class="tfoot"><span class="tag">Reliable</span><span class="tag">Collaborative</span><span class="tag">Committed to Quality</span><span class="tag">Detail Oriented</span></div>
+      </article>
+
+      <article class="tst reveal">
+        <span class="endorse">✓ ENDORSED BY CLIENT</span>
+        <div class="thead">
+          <span class="proj">Python web scraping · Feb 2026</span>
+          <span class="rating"><span class="diamonds">◆◆◆◆◆</span><b>5.0</b></span>
+        </div>
+        <blockquote>"Fariya <em>came up with a creative solution for the problem at hand</em>… overall she fulfilled her task well and I can recommend her."</blockquote>
+        <div class="tfoot"><span class="tag">Reliable</span><span class="tag">Solution Oriented</span><span class="tag">Clear Communicator</span></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="exp">
+  <div class="wrap" style="padding-bottom:110px">
+    <div class="sec-head reveal">
+      <div class="eyebrow">04 · Track record</div>
+      <h2>Where the systems shipped.</h2>
+    </div>
+    <div class="row reveal">
+      <div class="when">2025 — NOW</div>
+      <div><h3>Software Consultant / Python Developer · <span class="org">TheProject19</span></h3>
+      <p>US software agency. Enterprise ETL for a US e-commerce retailer (68K+ orders, 25 audited columns, layered root-cause debugging alongside the client’s QC team) and an employee portal + SharePoint→WorkVivo migration for Atlas Air.</p></div>
+    </div>
+    <div class="row reveal">
+      <div class="when">ONGOING</div>
+      <div><h3>AI Engineer · <span class="org">DTC Education Brand, EU</span></h3>
+      <p>Independent client. The creative generation pipeline, the OpenClaw analytics agent, and zero-touch ads handoff automation — all running in production.</p></div>
+    </div>
+    <div class="row reveal">
+      <div class="when">2026 — NOW</div>
+      <div><h3>AI Systems Architect · <span class="org">Alkahest Elixir, US</span></h3>
+      <p>Rebuilt a failing agent prototype into a Python/LangGraph dialectic system: cyclic debate workflows, stateful history, dynamic sub-agent spawning, large-context Claude with prompt caching.</p></div>
+    </div>
+    <div class="row reveal">
+      <div class="when">2026 — NOW</div>
+      <div><h3>ML / Data Science Expert · <span class="org">AfterQuery</span></h3>
+      <p>Applied ML and data science engagements.</p></div>
+    </div>
+    <div class="row reveal">
+      <div class="when">COMPLETED</div>
+      <div><h3>AI Engineer · <span class="org">Tournament Data Platform, Serbia</span></h3>
+      <p>Independent client. The validation-gated document intelligence pipeline — 412 records, zero errors.</p></div>
+    </div>
+    <div class="row reveal" style="border-bottom:none">
+      <div class="when">JUL–AUG 2024</div>
+      <div><h3>AI &amp; Geospatial Intern · <span class="org">SUPARCO 🛰</span></h3>
+      <p>Pakistan's national space agency. Satellite imagery classification with AI models, geosensing tools in Python + TensorFlow, and a web-based landscape classification app.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">Toolkit</div>
+      <h2>The stack behind the stamps.</h2>
+    </div>
+    <div class="grid reveal">
+      <div class="cell"><h3>LLM Engineering</h3><ul>
+        <li><b>Claude · OpenAI · Gemini</b> APIs</li>
+        <li>Prompt caching &amp; cost optimization</li>
+        <li>Structured outputs (Pydantic)</li>
+        <li>Vision pipelines · eval &amp; QA loops</li>
+        <li>Provider-agnostic layers · MCP</li>
+      </ul></div>
+      <div class="cell"><h3>Agent Systems</h3><ul>
+        <li><b>LangGraph</b> cyclic workflows</li>
+        <li>Typed shared state</li>
+        <li>Retry-with-correction</li>
+        <li>Dynamic sub-agent spawning</li>
+        <li>Stateful long-context workflows</li>
+      </ul></div>
+      <div class="cell"><h3>Engineering</h3><ul>
+        <li><b>Python</b> · FastAPI · Node.js</li>
+        <li>React / Next.js 14 · SSE</li>
+        <li>SQL Server · complex ETL</li>
+        <li>n8n automation · pytest</li>
+      </ul></div>
+      <div class="cell"><h3>Infrastructure</h3><ul>
+        <li>Docker / Compose · Railway</li>
+        <li>Hardened Linux VPS</li>
+        <li>GDPR / EU data residency</li>
+        <li>GPU inference (RunPod)</li>
+        <li>Scikit-learn · TensorFlow</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="justify-content:center">05 · Ship something together</div>
+    <h2 class="reveal" style="margin-bottom:34px">Have a system that needs to exist?</h2>
+    <div class="mailcard reveal">
+      <span class="mlabel">DIRECT LINE</span>
+      <span class="maddr">sy.faraza2899@gmail.com</span>
+      <button class="mcopy" data-copy="sy.faraza2899@gmail.com">COPY</button>
+    </div>
+    <div class="links reveal">
+      <a class="btn solid" href="mailto:sy.faraza2899@gmail.com"><span>Write to me</span></a>
+      <a class="btn" href="https://www.linkedin.com/in/fariyar/" target="_blank" rel="noopener"><span>LinkedIn</span></a>
+      <a class="btn" href="tel:+923304611611"><span>+92 330 4611611</span></a>
+    </div>
+    <div class="foot">
+      <span>FARIYA RAZA · AI ENGINEER</span>
+      <span>KARACHI (UTC+5) · FULL EU OVERLAP</span>
+      <span>BUILT LIKE MY PIPELINES: NO WASTED CALLS</span>
+    </div>
+  </div>
+</section>
+
+</div><!-- /view-home -->
+
+<!-- ================================================== -->
+<!-- ================== SYSTEMS VIEW ================== -->
+<!-- ================================================== -->
+<div id="view-systems">
+
+<section id="sysHead" class="grid-paper">
+  <div class="wrap">
+    <div class="inner">
+      <div class="eyebrow">Systems index · Full spec sheets</div>
+      <h2 style="max-width:800px">Six production systems.<br>Watch each pipeline run.</h2>
+      <p style="max-width:640px;color:#2A3C50">Every diagram below is the real shape of the system: the steps light up in the order the code executes, the orange arcs are retry loops, and the red flashes are what QA gates are for.</p>
+    </div>
+
+    <!-- RUN-01 -->
+    <article class="sheet" id="run-01">
+      <span class="stamp">◈ VALIDATED · 0 ERRORS</span>
+      <div class="head"><h3>LeadForge AI</h3><span class="id">RUN-01 / MULTI-AGENT ORCHESTRATION</span></div>
+      <div class="body">
+        <div class="desc"><p>Six agents — Researcher, Website Intelligence, ICP Scorer, Opportunity Finder, Outreach Writer, QA Validator — coordinated through a LangGraph orchestrator with typed shared state and retry-with-correction loops. Provider-agnostic LLM layer, Pydantic-validated outputs, SSE streaming into a Next.js 14 frontend, deployed on Railway with pytest coverage.</p></div>
+        <div class="metrics">
+          <div class="metric"><div class="num"><em>6</em> agents</div><div class="lbl">One typed shared state</div></div>
+          <div class="metric"><div class="num">Retry + correct</div><div class="lbl">Self-healing QA loop</div></div>
+        </div>
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-title">Live workflow · one lead, end to end</div>
+        <div class="flow" data-flow="leadforge"></div>
+        <div class="flow-status" data-status="leadforge">standby…</div>
+      </div>
+      <div class="foot"><span class="chip">LangGraph</span><span class="chip">Claude</span><span class="chip">Pydantic</span><span class="chip">FastAPI</span><span class="chip">Next.js 14</span><span class="chip">Railway</span></div>
+    </article>
+
+    <!-- RUN-02 -->
+    <article class="sheet" id="run-02">
+      <span class="stamp live">◈ RUNNING DAILY</span>
+      <div class="head"><h3>AI Creative Generation Pipeline</h3><span class="id">RUN-02 / GENERATIVE OPS</span></div>
+      <div class="body">
+        <div class="desc"><p>A production pipeline generating on-brand Meta ad creatives for an EU education brand. Two-stage generation with prompt caching, a vision-model QA loop that enforces brand rules, and automatic regeneration on failure with capped retries. Zero-touch: it runs on schedule whether anyone is watching or not.</p></div>
+        <div class="metrics">
+          <div class="metric"><div class="num"><em>100+</em>/day</div><div class="lbl">QA-checked creatives</div></div>
+          <div class="metric"><div class="num"><em>−70–80%</em></div><div class="lbl">Inference cost via prompt caching</div></div>
+        </div>
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-title">Live workflow · one creative, hands-free</div>
+        <div class="flow" data-flow="creative"></div>
+        <div class="flow-status" data-status="creative">standby…</div>
+      </div>
+      <div class="foot"><span class="chip">n8n</span><span class="chip">Claude</span><span class="chip">Image Gen</span><span class="chip">Vision QA</span><span class="chip">Meta Ads</span></div>
+    </article>
+
+    <!-- RUN-03 -->
+    <article class="sheet" id="run-03">
+      <span class="stamp">◈ VALIDATED · 0 ERRORS</span>
+      <div class="head"><h3>Tournament Document Intelligence</h3><span class="id">RUN-03 / VALIDATION-GATED PARSING</span></div>
+      <div class="body">
+        <div class="desc"><p>Multi-format intake — HTML, text PDF, and scanned PDF via vision models — feeding an 8-tier fuzzy entity resolver built for OCR noise, with a hard validation gate before anything reaches the merged dataset. 412 records, 286 fights, 89 categories: zero errors in production.</p></div>
+        <div class="metrics">
+          <div class="metric"><div class="num"><em>412</em> records</div><div class="lbl">286 fights · 89 categories</div></div>
+          <div class="metric"><div class="num"><em>0</em> validation errors</div><div class="lbl">On the production run</div></div>
+        </div>
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-title">Live workflow · one document, any format</div>
+        <div class="flow" data-flow="tournament"></div>
+        <div class="flow-status" data-status="tournament">standby…</div>
+      </div>
+      <div class="foot"><span class="chip">Python</span><span class="chip">Gemini Vision</span><span class="chip">Fuzzy Matching</span><span class="chip">Validation Gate</span></div>
+    </article>
+
+    <!-- RUN-04 -->
+    <article class="sheet" id="run-04">
+      <span class="stamp live">◈ 24/7 UNATTENDED</span>
+      <div class="head"><h3>OpenClaw Analytics Agent</h3><span class="id">RUN-04 / SECURE AGENT DEPLOYMENT</span></div>
+      <div class="body">
+        <div class="desc"><p>Claude as the reasoning engine over GA4, Meta Marketing API, Google Ads, and Kajabi — deployed on a hardened Hetzner VPS for GDPR/EU data residency. Key-only SSH, dual firewall, fail2ban, loopback-only services over SSH tunnel. Talks to the team through Slack, on its own schedule.</p></div>
+        <div class="metrics">
+          <div class="metric"><div class="num"><em>4</em> live integrations</div><div class="lbl">Non-expiring auth</div></div>
+          <div class="metric"><div class="num">EU resident</div><div class="lbl">GDPR-conscious infra</div></div>
+        </div>
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-title">Live workflow · one morning digest</div>
+        <div class="flow" data-flow="openclaw"></div>
+        <div class="flow-status" data-status="openclaw">standby…</div>
+      </div>
+      <div class="foot"><span class="chip">Claude</span><span class="chip">MCP</span><span class="chip">Docker</span><span class="chip">Hetzner</span><span class="chip">Slack</span><span class="chip">Hardened Linux</span></div>
+    </article>
+
+    <!-- RUN-05 -->
+    <article class="sheet" id="run-05">
+      <span class="stamp live">◈ LIVE DEMO DEPLOYED</span>
+      <div class="head"><h3>DentaSmile AI</h3><span class="id">RUN-05 / SELF-HOSTED GPU INFERENCE</span></div>
+      <div class="body">
+        <div class="desc"><p>Full-stack SaaS generating realistic previews of cosmetic dentistry outcomes from patient photos. Self-hosted Qwen Image Edit on RunPod L40S GPUs, with async job orchestration across three services — designed around ~110s inference times that blow past standard browser timeouts.</p></div>
+        <div class="metrics">
+          <div class="metric"><div class="num"><em>3</em> services</div><div class="lbl">Async job orchestration</div></div>
+          <div class="metric"><div class="num">L40S</div><div class="lbl">Self-hosted open-weight inference</div></div>
+        </div>
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-title">Live workflow · one smile preview</div>
+        <div class="flow" data-flow="dentasmile"></div>
+        <div class="flow-status" data-status="dentasmile">standby…</div>
+      </div>
+      <div class="foot"><span class="chip">Qwen Image Edit</span><span class="chip">RunPod</span><span class="chip">FastAPI</span><span class="chip">Next.js</span><span class="chip">GPU Inference</span></div>
+    </article>
+
+    <!-- RUN-06 -->
+    <article class="sheet" id="run-06" style="margin-bottom:110px">
+      <span class="stamp">◈ PARITY VERIFIED</span>
+      <div class="head"><h3>E-Commerce Fulfillment ETL</h3><span class="id">RUN-06 / ENTERPRISE DATA PIPELINE</span></div>
+      <div class="body">
+        <div class="desc"><p>Delivered through TheProject19 for a US e-commerce retailer: ShipHero → SQL Server ingestion via n8n + GraphQL, feeding stored-procedure silver tables and downstream fact tables. Hardened through layered root-cause debugging — multi-cause data inflation, voided-shipment handling, stored-procedure logic errors — verified column by column against the legacy production system.</p></div>
+        <div class="metrics">
+          <div class="metric"><div class="num"><em>68K+</em> orders</div><div class="lbl">Reconciled in parity audit</div></div>
+          <div class="metric"><div class="num"><em>25</em> columns</div><div class="lbl">Audited against legacy</div></div>
+        </div>
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-title">Live workflow · nightly sync</div>
+        <div class="flow" data-flow="etl"></div>
+        <div class="flow-status" data-status="etl">standby…</div>
+      </div>
+      <div class="foot"><span class="chip">n8n</span><span class="chip">GraphQL</span><span class="chip">SQL Server</span><span class="chip">Stored Procs</span><span class="chip">Parity Audits</span></div>
+    </article>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="justify-content:center">Want one of these for your business?</div>
+    <h2 class="reveal" style="margin-bottom:34px">Let's design your pipeline.</h2>
+    <div class="mailcard reveal">
+      <span class="mlabel">DIRECT LINE</span>
+      <span class="maddr">sy.faraza2899@gmail.com</span>
+      <button class="mcopy" data-copy="sy.faraza2899@gmail.com">COPY</button>
+    </div>
+    <div class="links reveal">
+      <a class="btn solid" href="mailto:sy.faraza2899@gmail.com"><span>Write to me</span></a>
+      <a class="btn" href="#/"><span>◂ Back to index</span></a>
+      <a class="btn" href="https://www.linkedin.com/in/fariyar/" target="_blank" rel="noopener"><span>LinkedIn</span></a>
+    </div>
+    <div class="foot">
+      <span>FARIYA RAZA · AI ENGINEER</span>
+      <span>KARACHI (UTC+5) · FULL EU OVERLAP</span>
+      <span>EVERY DIAGRAM ABOVE IS A REAL SYSTEM</span>
+    </div>
+  </div>
+</section>
+
+</div><!-- /view-systems -->
+
+<script>
+/* ================= flow definitions ================= */
+const FLOWS={
+  leadforge:{
+    steps:[
+      {l:'INTAKE',s:'lead enters',say:'new lead received → typed state initialized'},
+      {l:'RESEARCH',s:'2 agents in parallel',say:'Researcher + Website Intelligence gathering context'},
+      {l:'SCORE',s:'ICP fit',say:'ICP Scorer ranking lead against ideal profile'},
+      {l:'WRITE',s:'outreach draft',say:'Outreach Writer drafting personalized message'},
+      {l:'QA GATE',s:'Pydantic + rules',say:'QA Validator checking structure and quality',gate:true},
+      {l:'SHIP',s:'validated output',say:'validated lead package streamed to frontend via SSE ✓'}
+    ],
+    loop:{from:4,to:3,label:'retry + correct'}
+  },
+  creative:{
+    steps:[
+      {l:'TRIGGER',s:'sheet / schedule',say:'scheduled run fires → brief pulled from Sheets'},
+      {l:'PROMPT',s:'Claude · cached',say:'Claude composes prompt — cache hit, cost −78%'},
+      {l:'GENERATE',s:'image model',say:'image model rendering on-brand creative'},
+      {l:'VISION QA',s:'brand rules',say:'vision model auditing against brand rulebook',gate:true},
+      {l:'PUBLISH',s:'Drive + Sheets',say:'creative approved → filed to Drive, logged to Sheets ✓'}
+    ],
+    loop:{from:3,to:2,label:'regen ≤3'}
+  },
+  tournament:{
+    steps:[
+      {l:'INTAKE',s:'HTML · PDF · scan',say:'document received — format detected automatically'},
+      {l:'EXTRACT',s:'rules + vision',say:'rule-based + Gemini vision extraction running'},
+      {l:'RESOLVE',s:'8-tier fuzzy',say:'8-tier fuzzy resolver reconciling OCR noise'},
+      {l:'VALIDATE',s:'hard gate',say:'hard validation gate checking every record',gate:true},
+      {l:'MERGE',s:'clean dataset',say:'record merged — 412/412 clean, 0 errors ✓'}
+    ],
+    loop:{from:3,to:2,label:'re-resolve'}
+  },
+  openclaw:{
+    steps:[
+      {l:'TRIGGER',s:'cron / Slack ask',say:'morning cron fires (or someone asks in Slack)'},
+      {l:'REASON',s:'Claude + MCP',say:'Claude planning which data sources to pull'},
+      {l:'FETCH',s:'GA4 · Meta · Ads · Kajabi',say:'querying 4 live integrations, non-expiring auth'},
+      {l:'SYNTHESIZE',s:'insight, not dumps',say:'Claude turning raw metrics into decisions'},
+      {l:'DELIVER',s:'Slack digest',say:'digest posted to Slack — from a hardened EU box ✓'}
+    ]
+  },
+  dentasmile:{
+    steps:[
+      {l:'UPLOAD',s:'patient photo',say:'patient photo uploaded via Next.js frontend'},
+      {l:'QUEUE',s:'async job',say:'job queued — because inference outlives browser timeouts'},
+      {l:'INFER',s:'Qwen @ L40S · ~110s',say:'self-hosted Qwen Image Edit rendering on RunPod GPU'},
+      {l:'POLL',s:'status checks',say:'frontend polling job status across 3 services'},
+      {l:'DELIVER',s:'smile preview',say:'realistic preview delivered to the patient ✓'}
+    ]
+  },
+  etl:{
+    steps:[
+      {l:'PULL',s:'ShipHero GraphQL',say:'n8n pulling orders via paginated GraphQL'},
+      {l:'TRANSFORM',s:'clean + decode',say:'decoding IDs, translating carriers, excluding voids'},
+      {l:'LOAD',s:'live table',say:'bulk loading into SQL Server live table'},
+      {l:'SILVER PROC',s:'stored procedure',say:'stored procedure building silver reporting table'},
+      {l:'AUDIT',s:'parity vs legacy',say:'68,890 orders reconciled against legacy — parity ✓',gate:true}
+    ]
+  }
+};
+
+/* ================= build flow DOM ================= */
+const ARCS=[];
+function buildFlows(){
+  document.querySelectorAll('.flow').forEach(el=>{
+    const cfg=FLOWS[el.dataset.flow];if(!cfg)return;
+    cfg.steps.forEach((st)=>{
+      const d=document.createElement('div');d.className='fstep';
+      d.innerHTML=`<span class="badge"></span><span class="conn"><i></i></span><span class="marker"></span><span class="lbl">${st.l}</span><span class="sub">${st.s}</span>`;
+      el.appendChild(d);
+    });
+    if(cfg.loop){
+      const arc=document.createElement('div');arc.className='loop-arc';
+      arc.innerHTML=`<span class="llbl">${cfg.loop.label}</span>`;
+      el.appendChild(arc);
+      ARCS.push({el,cfg});
+      addEventListener('resize',()=>positionArc(el,cfg));
+    }
+  });
+}
+function repositionAllArcs(){ARCS.forEach(a=>positionArc(a.el,a.cfg))}
+function positionArc(el,cfg){
+  const steps=el.querySelectorAll('.fstep');
+  const a=steps[cfg.loop.to],b=steps[cfg.loop.from],arc=el.querySelector('.loop-arc');
+  if(!a||!b||!arc)return;
+  const er=el.getBoundingClientRect(),ar=a.getBoundingClientRect(),br=b.getBoundingClientRect();
+  const left=ar.left-er.left+ar.width/2+el.scrollLeft;
+  const right=br.left-er.left+br.width/2+el.scrollLeft;
+  arc.style.left=left+'px';arc.style.width=(right-left)+'px';
+}
+
+/* ================= flow animation engine ================= */
+const flowTimers=new Map();
+function runFlow(el){
+  const cfg=FLOWS[el.dataset.flow];
+  const steps=[...el.querySelectorAll('.fstep')];
+  const status=document.querySelector(`.flow-status[data-status="${el.dataset.flow}"]`);
+  const arc=el.querySelector('.loop-arc');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let cycle=0,cancelled=false;
+  const timers=[];
+  function wait(ms){return new Promise(r=>{const t=setTimeout(r,reduce?0:ms);timers.push(t)})}
+  function setStatus(txt){if(status)status.innerHTML='<b>'+txt+'</b>'}
+  async function reset(){
+    steps.forEach(s=>{s.classList.remove('done','active','fail');
+      const b=s.querySelector('.badge');b.className='badge';b.textContent=''});
+    if(arc)arc.classList.remove('hot');
+  }
+  async function cycleRun(){
+    while(!cancelled){
+      await reset();
+      const failThis=cfg.loop&&(cycle%2===1); // every other run trips QA
+      for(let i=0;i<steps.length;i++){
+        if(cancelled)return;
+        const st=steps[i];
+        st.classList.add('active');
+        setStatus(cfg.steps[i].say);
+        await wait(1050);
+        // QA gate drama
+        if(cfg.steps[i].gate&&failThis&&i===cfg.loop.from){
+          const b=st.querySelector('.badge');
+          st.classList.remove('active');st.classList.add('fail');
+          b.textContent='✗ FAIL';b.classList.add('fail','show');
+          setStatus('QA rejected output — routing back for correction');
+          if(arc)arc.classList.add('hot');
+          await wait(950);
+          b.classList.remove('show');st.classList.remove('fail');
+          // rewind
+          for(let k=i;k>=cfg.loop.to;k--)steps[k].classList.remove('done','active');
+          i=cfg.loop.to-1; // will ++ to loop.to
+          await wait(350);
+          if(arc)arc.classList.remove('hot');
+          // only fail once per cycle
+          cfg.steps[cfg.loop.from]._failed=true;
+          continue;
+        }
+        if(cfg.steps[i].gate){
+          const b=st.querySelector('.badge');
+          b.textContent='✓ PASS';b.classList.add('pass','show');
+          await wait(500);
+          b.classList.remove('show');
+        }
+        st.classList.remove('active');st.classList.add('done');
+      }
+      // clear one-shot fail flags
+      cfg.steps.forEach(s=>delete s._failed);
+      setStatus(cfg.steps[cfg.steps.length-1].say);
+      await wait(1900);
+      cycle++;
+      if(reduce)return; // single pass under reduced motion
+    }
+  }
+  cycleRun();
+  return()=>{cancelled=true;timers.forEach(clearTimeout)};
+}
+function watchFlows(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    const el=e.target;
+    if(e.isIntersecting&&!flowTimers.has(el)){
+      flowTimers.set(el,runFlow(el));
+    }else if(!e.isIntersecting&&flowTimers.has(el)){
+      flowTimers.get(el)();flowTimers.delete(el);
+    }
+  }),{threshold:.35});
+  document.querySelectorAll('.flow').forEach(el=>io.observe(el));
+}
+
+/* ================= rail ================= */
+const RAILS={
+  home:[
+    {href:'#hero',sec:'hero',txt:'00 · INTAKE'},
+    {href:'#teaser',sec:'teaser',txt:'01 · SYSTEMS'},
+    {href:'#principle',sec:'principle',txt:'02 · VALIDATE'},
+    {href:'#reviews',sec:'reviews',txt:'03 · SIGN-OFFS'},
+    {href:'#exp',sec:'exp',txt:'04 · TRACK'},
+    {href:'#contact',sec:'contact',txt:'05 · SHIP'}
+  ],
+  systems:[
+    {href:'#/',back:true,txt:'◂ INDEX'},
+    {href:'#run-01',sec:'run-01',txt:'RUN-01'},
+    {href:'#run-02',sec:'run-02',txt:'RUN-02'},
+    {href:'#run-03',sec:'run-03',txt:'RUN-03'},
+    {href:'#run-04',sec:'run-04',txt:'RUN-04'},
+    {href:'#run-05',sec:'run-05',txt:'RUN-05'},
+    {href:'#run-06',sec:'run-06',txt:'RUN-06'}
+  ]
+};
+function buildRail(view){
+  const rail=document.getElementById('rail');
+  rail.innerHTML='';
+  RAILS[view].forEach(s=>{
+    const a=document.createElement('a');
+    a.className='stage'+(s.back?' back':'');
+    a.href=s.href;if(s.sec)a.dataset.sec=s.sec;
+    a.innerHTML=`<i></i><span class="dot"></span><span class="txt">${s.txt}</span>`;
+    if(s.back){a.innerHTML=`<span class="txt">${s.txt}</span>`}
+    rail.appendChild(a);
+  });
+  bindCursorTargets();
+}
+function updateRail(){
+  const stages=[...document.querySelectorAll('#rail .stage[data-sec]')];
+  const y=scrollY+innerHeight*.4;
+  stages.forEach((st,i)=>{
+    const sec=document.getElementById(st.dataset.sec);if(!sec)return;
+    const top=sec.offsetTop,h=sec.offsetHeight;
+    const p=Math.max(0,Math.min(1,(y-top)/h));
+    st.querySelector('i').style.transform=`scaleX(${p})`;
+    st.classList.toggle('active',(p>0&&p<1)||(i===stages.length-1&&p>=1));
+  });
+}
+addEventListener('scroll',updateRail,{passive:true});
+
+/* ================= router (JS-driven, sandbox-proof) ================= */
+function go(view,targetId){
+  document.body.dataset.view=view;
+  buildRail(view);
+  try{history.replaceState(null,'',view==='systems'?'#/systems':'#/')}catch(e){}
+  requestAnimationFrame(()=>{
+    if(view==='systems')repositionAllArcs();
+    if(targetId){
+      const el=document.getElementById(targetId);
+      if(el)el.scrollIntoView({behavior:'auto',block:'start'});
+      else scrollTo(0,0);
+    }else{
+      scrollTo(0,0);
+    }
+    updateRail();
+    observeReveals();
+  });
+}
+/* delegated clicks: works even when the sandbox blocks hash navigation */
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a');if(!a)return;
+  const href=a.getAttribute('href')||'';
+  if(href.startsWith('#/systems')){
+    e.preventDefault();
+    go('systems',a.dataset.target||null);
+  }else if(href==='#/'){
+    e.preventDefault();
+    go('home',null);
+  }else if(href.startsWith('#run-')){
+    e.preventDefault();
+    if(document.body.dataset.view==='systems'){
+      const el=document.getElementById(href.slice(1));
+      if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+    }else{
+      go('systems',href.slice(1));
+    }
+  }else if(href.startsWith('#')&&href.length>1){
+    e.preventDefault();
+    const el=document.getElementById(href.slice(1));
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+});
+/* direct loads with a hash still land on the right view */
+function route(){
+  const view=location.hash.startsWith('#/systems')?'systems':'home';
+  go(view,null);
+}
+addEventListener('hashchange',route);
+
+/* ================= boot sequence ================= */
+(function(){
+  const boot=document.getElementById('boot'),el=document.getElementById('bootText');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const lines=[
+    '> fariya.init()',
+    '> loading agents .......... 6/6 OK',
+    '> prompt cache ............ WARM',
+    '> validation gate ......... ARMED',
+    '> status .................. SHIPPING'
+  ];
+  if(reduce||sessionStorage.getItem('booted')){boot.classList.add('done');return}
+  sessionStorage.setItem('booted','1');
+  let i=0;
+  (function next(){
+    if(i<lines.length){el.textContent+=lines[i]+'\n';i++;setTimeout(next,170)}
+    else setTimeout(()=>boot.classList.add('done'),330);
+  })();
+  setTimeout(()=>boot.classList.add('done'),2400);
+})();
+
+/* ================= custom cursor ================= */
+const cursorEl=document.getElementById('cursor');
+function bindCursorTargets(){
+  if(!matchMedia('(pointer:fine)').matches)return;
+  document.querySelectorAll('a,button,.sheet,.tcard').forEach(el=>{
+    if(el._cb)return;el._cb=true;
+    el.addEventListener('mouseenter',()=>cursorEl.classList.add('is-link'));
+    el.addEventListener('mouseleave',()=>cursorEl.classList.remove('is-link'));
+  });
+}
+if(matchMedia('(pointer:fine)').matches){
+  addEventListener('mousemove',e=>{cursorEl.style.left=e.clientX+'px';cursorEl.style.top=e.clientY+'px'});
+}
+
+/* ================= agent graph canvas (hero) ================= */
+(function(){
+  const cv=document.getElementById('agentCanvas');if(!cv)return;
+  const ctx=cv.getContext('2d');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let W,H,DPR;
+  const NODES=[
+    {id:'RESEARCH',x:.10,y:.30},
+    {id:'ARCHITECT',x:.28,y:.16},
+    {id:'INTEGRATE',x:.30,y:.52},
+    {id:'ORCHESTRATE',x:.50,y:.30},
+    {id:'AUTOMATE',x:.66,y:.14},
+    {id:'OPTIMIZE',x:.70,y:.48},
+    {id:'VALIDATE',x:.86,y:.30}
+  ];
+  const EDGES=[[0,1],[0,2],[1,3],[2,3],[3,4],[3,5],[4,6],[5,6],[6,3]];
+  const packets=[];const mouse={x:-9e3,y:-9e3};
+  function resize(){
+    DPR=Math.min(devicePixelRatio||1,2);
+    W=cv.clientWidth;H=cv.clientHeight;
+    cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
+    NODES.forEach(n=>{n.px=n.x*W;n.py=n.y*H;n.ox=n.px;n.oy=n.py;n.pulse=0;n.phase=Math.random()*6.28});
+  }
+  resize();addEventListener('resize',resize);
+  cv.parentElement.addEventListener('mousemove',e=>{
+    const r=cv.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;
+  });
+  cv.parentElement.addEventListener('mouseleave',()=>{mouse.x=-9e3;mouse.y=-9e3});
+  function spawn(){
+    const e=EDGES[Math.floor(Math.random()*EDGES.length)];
+    packets.push({e,t:0,speed:.004+Math.random()*.005,retry:e[0]===6});
+  }
+  for(let k=0;k<7;k++)spawn();
+  setInterval(()=>{if(!document.hidden&&packets.length<16&&document.body.dataset.view==='home')spawn()},700);
+  let t=0;
+  function frame(){
+    if(document.body.dataset.view!=='home'){requestAnimationFrame(frame);return}
+    t+=1;ctx.clearRect(0,0,W,H);
+    const small=W<720;
+    NODES.forEach(n=>{
+      const dx=n.ox+Math.sin(t*.008+n.phase)*10-n.px;
+      const dy=n.oy+Math.cos(t*.006+n.phase)*8-n.py;
+      n.px+=dx*.05;n.py+=dy*.05;
+      const mdx=n.px-mouse.x,mdy=n.py-mouse.y,d=Math.hypot(mdx,mdy);
+      if(d<150&&d>0){n.px+=mdx/d*(150-d)*.03;n.py+=mdy/d*(150-d)*.03}
+      n.pulse*=.94;
+    });
+    EDGES.forEach(e=>{
+      const a=NODES[e[0]],b=NODES[e[1]],retry=e[0]===6;
+      ctx.beginPath();ctx.moveTo(a.px,a.py);
+      const mx=(a.px+b.px)/2,my=(a.py+b.py)/2-(retry?70:22);
+      ctx.quadraticCurveTo(mx,my,b.px,b.py);
+      ctx.strokeStyle=retry?'rgba(255,122,41,.35)':'rgba(98,217,255,.22)';
+      ctx.lineWidth=1;ctx.setLineDash(retry?[5,6]:[]);ctx.stroke();ctx.setLineDash([]);
+    });
+    for(let i=packets.length-1;i>=0;i--){
+      const p=packets[i];p.t+=p.speed*(reduce?0:1);
+      if(p.t>=1){NODES[p.e[1]].pulse=1;packets.splice(i,1);continue}
+      const a=NODES[p.e[0]],b=NODES[p.e[1]];
+      const mx=(a.px+b.px)/2,my=(a.py+b.py)/2-(p.retry?70:22);
+      const u=1-p.t;
+      const x=u*u*a.px+2*u*p.t*mx+p.t*p.t*b.px;
+      const y=u*u*a.py+2*u*p.t*my+p.t*p.t*b.py;
+      ctx.beginPath();ctx.arc(x,y,p.retry?3.4:2.6,0,6.28);
+      ctx.fillStyle=p.retry?'#FF7A29':'#62D9FF';
+      ctx.shadowColor=ctx.fillStyle;ctx.shadowBlur=10;ctx.fill();ctx.shadowBlur=0;
+    }
+    ctx.font='500 10px "IBM Plex Mono",monospace';
+    NODES.forEach((n,idx)=>{
+      const r=(idx===6?9:7)+n.pulse*7;
+      if(n.pulse>.05){
+        ctx.beginPath();ctx.arc(n.px,n.py,r+10*(1-n.pulse),0,6.28);
+        ctx.strokeStyle=`rgba(255,122,41,${n.pulse*.7})`;ctx.lineWidth=1.5;ctx.stroke();
+      }
+      ctx.save();ctx.translate(n.px,n.py);ctx.rotate(Math.PI/4);
+      ctx.fillStyle=idx===6?'#FF7A29':'#0B2038';
+      ctx.strokeStyle=idx===6?'#FF7A29':'#62D9FF';ctx.lineWidth=1.5;
+      ctx.fillRect(-r/1.4,-r/1.4,r*1.43,r*1.43);
+      ctx.strokeRect(-r/1.4,-r/1.4,r*1.43,r*1.43);
+      ctx.restore();
+      if(!small){ctx.fillStyle='rgba(143,169,192,.9)';ctx.fillText(n.id,n.px+14,n.py+4)}
+    });
+    requestAnimationFrame(frame);
+  }
+  if(!reduce)requestAnimationFrame(frame);
+})();
+
+/* ================= ticker ================= */
+(function(){
+  const items=[
+    '<b>[pipeline]</b> 100+ creatives generated · QA passed',
+    '<em>[cache]</em> prompt cache hit · cost −78%',
+    '<b>[validate]</b> 412 records merged · 0 errors',
+    '<b>[etl]</b> 68,890 orders reconciled · parity OK',
+    '<em>[agent]</em> QA Validator → retry-with-correction → PASS',
+    '<b>[deploy]</b> hardened VPS · fail2ban active · EU resident',
+    '<em>[gpu]</em> qwen-image-edit @ L40S · job 110s · async OK',
+    '<b>[suparco]</b> satellite tile classified · terrain: coastal'
+  ];
+  const seq=items.map(i=>i+'<span class="sep">◈</span>').join('');
+  const tr=document.getElementById('tickerTrack');if(tr)tr.innerHTML=seq+seq;
+})();
+
+/* ================= reveals ================= */
+let revealIO;
+function observeReveals(){
+  if(revealIO)revealIO.disconnect();
+  revealIO=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');revealIO.unobserve(e.target)}
+  }),{threshold:.12});
+  document.querySelectorAll('.reveal,.sheet').forEach(el=>revealIO.observe(el));
+}
+
+/* ================= copy email ================= */
+document.querySelectorAll('.mcopy').forEach(b=>{
+  b.addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(b.dataset.copy)}
+    catch(e){
+      const ta=document.createElement('textarea');ta.value=b.dataset.copy;
+      document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+    }
+    const t=b.textContent;b.textContent='COPIED ✓';b.classList.add('ok');
+    setTimeout(()=>{b.textContent=t;b.classList.remove('ok')},1600);
+  });
+});
+
+/* ================= init ================= */
+buildFlows();
+watchFlows();
+route();
+</script>
+</body>
+</html>
