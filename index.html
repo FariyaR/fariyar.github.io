@@ -1034,7 +1034,7 @@ addEventListener('scroll',updateRail,{passive:true});
 function go(view,targetId){
   document.body.dataset.view=view;
   buildRail(view);
-  try{history.replaceState(null,'',view==='systems'?'#/systems':'#/')}catch(e){}
+  try{history.replaceState(null,'',location.pathname.replace(/index\.html$/,'')+(view==='systems'?'#/systems':'#/'))}catch(e){}
   requestAnimationFrame(()=>{
     if(view==='systems')repositionAllArcs();
     if(targetId){
