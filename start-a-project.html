@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start a Project — Fariya Raza</title>
+<meta name="description" content="Tell me about the system you need. Structured project intake for LLM pipelines, multi-agent systems, and automation.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230B2038'/%3E%3Cpath d='M32 10 L54 32 L32 54 L10 32 Z' fill='none' stroke='%2362D9FF' stroke-width='4'/%3E%3Cpath d='M32 22 L42 32 L32 42 L22 32 Z' fill='%23FF7A29'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0B2038">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Start a Project — Fariya Raza">
+<meta property="og:description" content="Tell me about the system you need. I reply within 24 hours.">
+<meta property="og:url" content="https://fariyar.github.io/start-a-project.html">
+<meta property="og:image" content="https://fariyar.github.io/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B2038; --navy-deep:#071628; --cyan:#62D9FF; --cyan-dim:#3AA8CF;
+  --orange:#FF7A29; --text:#D7E6F2; --text-dim:#8FA9C0; --line:#1E3A5C;
+  --line-soft:rgba(98,217,255,.10);
+  --display:'Unbounded',sans-serif; --body:'Instrument Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--navy); color:var(--text); font-family:var(--body);
+  font-size:17px; line-height:1.6; overflow-x:hidden;
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+::selection{background:var(--orange);color:var(--navy-deep)}
+
+/* ---------- top bar ---------- */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 5vw;border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--text-dim);
+  background:rgba(7,22,40,.7);backdrop-filter:blur(6px);
+  position:sticky;top:0;z-index:10;
+}
+.topbar a{color:var(--cyan);text-decoration:none}
+.topbar a:hover{color:var(--orange)}
+.logo{display:flex;align-items:center;gap:12px}
+.logo svg{display:block}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#3ddc84;margin-right:8px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:64px 5vw 96px}
+.kicker{font-family:var(--mono);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:18px}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(34px,5vw,58px);line-height:1.08;color:#fff;margin-bottom:18px}
+.lede{color:var(--text-dim);max-width:56ch;margin-bottom:56px}
+.lede strong{color:var(--cyan);font-weight:600}
+.grid{display:grid;grid-template-columns:1.6fr 1fr;gap:56px;align-items:start}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+/* ---------- form ---------- */
+form{border:1px solid var(--line);background:rgba(7,22,40,.55);padding:40px}
+.form-head{
+  font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--cyan-dim);
+  border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:32px;
+  display:flex;justify-content:space-between;
+}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:640px){.row{grid-template-columns:1fr}}
+.field{margin-bottom:26px}
+label{
+  display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text-dim);margin-bottom:9px;
+}
+label .req{color:var(--orange)}
+label .opt{color:var(--cyan-dim);text-transform:none;letter-spacing:0}
+input,select,textarea{
+  width:100%;background:var(--navy-deep);border:1px solid var(--line);
+  color:var(--text);font-family:var(--body);font-size:16px;padding:13px 15px;
+  transition:border-color .2s, box-shadow .2s;border-radius:0;appearance:none;
+}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2362D9FF' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 15px center;padding-right:40px;cursor:pointer;
+}
+textarea{min-height:170px;resize:vertical;line-height:1.55}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(98,217,255,.12)}
+input::placeholder,textarea::placeholder{color:#4A6076}
+.hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
+
+.submit-btn{
+  font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  background:var(--orange);border:1px solid var(--orange);color:var(--navy-deep);
+  font-weight:600;padding:17px 34px;cursor:pointer;position:relative;overflow:hidden;
+  transition:color .25s;width:100%;
+}
+.submit-btn::before{content:'';position:absolute;inset:0;background:#fff;transform:translateY(101%);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.submit-btn span{position:relative;z-index:1}
+.submit-btn:hover::before{transform:none}
+.fine{font-family:var(--mono);font-size:11.5px;color:#4A6076;margin-top:16px;letter-spacing:.04em}
+.fine a{color:var(--cyan-dim)}
+
+/* ---------- side panel ---------- */
+.panel{border:1px solid var(--line);background:rgba(7,22,40,.55)}
+.panel-head{
+  font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--cyan-dim);
+  border-bottom:1px solid var(--line);padding:18px 28px;
+}
+.panel-body{padding:28px}
+.step{display:flex;gap:18px;margin-bottom:28px}
+.step:last-child{margin-bottom:0}
+.step-num{
+  font-family:var(--mono);font-size:12px;color:var(--orange);border:1px solid var(--line);
+  width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.step h3{font-family:var(--body);font-size:16px;font-weight:600;color:#fff;margin-bottom:4px}
+.step p{font-size:14.5px;color:var(--text-dim)}
+.step p em{color:var(--cyan);font-style:normal}
+.direct{
+  margin-top:24px;border:1px solid var(--line);background:var(--navy-deep);
+  padding:22px 28px;font-family:var(--mono);font-size:13px;
+}
+.direct .lbl{font-size:11px;letter-spacing:.2em;color:var(--text-dim);margin-bottom:8px}
+.direct a{color:var(--cyan);text-decoration:none;word-break:break-all}
+.direct a:hover{color:var(--orange)}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.badge{
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--cyan);
+  border:1px solid var(--line);padding:6px 12px;background:rgba(98,217,255,.05);
+}
+.badge.orange{color:var(--orange)}
+
+/* ---------- success state ---------- */
+.success{
+  display:none;border:1px solid var(--cyan);background:rgba(98,217,255,.06);
+  padding:48px 40px;text-align:center;
+}
+.success.show{display:block}
+.success .mark{font-size:40px;color:#3ddc84;margin-bottom:12px}
+.success h2{font-family:var(--display);font-weight:700;font-size:26px;color:#fff;margin-bottom:10px}
+.success p{color:var(--text-dim);max-width:44ch;margin:0 auto 24px}
+.success a{color:var(--cyan)}
+footer{
+  border-top:1px solid var(--line);padding:26px 5vw;display:flex;flex-wrap:wrap;gap:16px;
+  justify-content:space-between;font-family:var(--mono);font-size:11.5px;
+  letter-spacing:.12em;color:#4A6076;
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">
+    <a href="index.html" aria-label="Back to portfolio" style="display:flex;align-items:center;gap:12px">
+      <svg width="30" height="30" viewBox="0 0 64 64"><rect width="64" height="64" fill="none"/><path d="M32 10 L54 32 L32 54 L10 32 Z" fill="none" stroke="#62D9FF" stroke-width="4"/><path d="M32 22 L42 32 L32 42 L22 32 Z" fill="#FF7A29"/></svg>
+      <span>◂ BACK TO PORTFOLIO</span>
+    </a>
+  </div>
+  <div><span class="status-dot"></span>INTAKE-01 // ACCEPTING NEW PROJECTS</div>
+</div>
+
+<div class="wrap">
+  <p class="kicker">06 · Project intake</p>
+  <h1>Start a project.</h1>
+  <p class="lede">Skip the discovery-call roulette. Give me the shape of the problem below and you'll get a <strong>reply within 24 hours</strong> — with first questions, a rough approach, or both.</p>
+
+  <div class="success" id="successBox">
+    <div class="mark">✓</div>
+    <h2>Brief received.</h2>
+    <p>Your project brief just landed in my inbox. Expect a reply within 24 hours (Karachi time, full EU overlap). A copy of what happens next was sent to your email.</p>
+    <a href="index.html">◂ Back to the portfolio</a>
+  </div>
+
+  <div class="grid" id="formGrid">
+    <form action="https://formsubmit.co/sy.faraza2899@gmail.com" method="POST" id="intakeForm">
+      <div class="form-head"><span>NEW PROJECT BRIEF</span><span>EST. 3 MIN</span></div>
+
+      <!-- FormSubmit config -->
+      <input type="hidden" name="_subject" value="🚀 New project inquiry — fariyar.github.io">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://fariyar.github.io/start-a-project.html?sent=1">
+      <input type="hidden" name="_autoresponse" value="Thanks for your project brief — it just landed in my inbox. I review every inquiry personally and will reply within 24 hours with first questions or a rough approach. — Fariya Raza · AI Engineer · fariyar.github.io">
+      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
+
+      <div class="row">
+        <div class="field">
+          <label for="name">Name <span class="req">*</span></label>
+          <input type="text" id="name" name="Name" required placeholder="Jane Founder">
+        </div>
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="Email" required placeholder="jane@company.com">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="company">Company / Website <span class="opt">(optional)</span></label>
+          <input type="text" id="company" name="Company or Website" placeholder="company.com">
+        </div>
+        <div class="field">
+          <label for="role">Your Role <span class="opt">(optional)</span></label>
+          <input type="text" id="role" name="Role" placeholder="Founder, CTO, Ops lead…">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="ptype">Project Type <span class="req">*</span></label>
+          <select id="ptype" name="Project Type" required>
+            <option value="" disabled selected>Select one…</option>
+            <option>Multi-agent system / orchestration</option>
+            <option>LLM pipeline (generation, parsing, QA)</option>
+            <option>Automation / workflow (n8n, integrations)</option>
+            <option>Document intelligence / data extraction</option>
+            <option>Data engineering / ETL</option>
+            <option>AI SaaS product build</option>
+            <option>Rescue mission — fix a failing AI system</option>
+            <option>Not sure yet — need guidance</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="budget">Budget Range (USD) <span class="req">*</span></label>
+          <select id="budget" name="Budget Range" required>
+            <option value="" disabled selected>Select one…</option>
+            <option>Under $1,000</option>
+            <option>$1,000 – $5,000</option>
+            <option>$5,000 – $10,000</option>
+            <option>$10,000 – $25,000</option>
+            <option>$25,000+</option>
+            <option>Ongoing / retainer</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="timeline">Timeline <span class="req">*</span></label>
+          <select id="timeline" name="Timeline" required>
+            <option value="" disabled selected>Select one…</option>
+            <option>ASAP — it's urgent</option>
+            <option>Within a month</option>
+            <option>1–3 months</option>
+            <option>Flexible / exploring</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="source">How Did You Find Me? <span class="opt">(optional)</span></label>
+          <select id="source" name="Found Via">
+            <option value="" disabled selected>Select one…</option>
+            <option>Upwork</option>
+            <option>LinkedIn</option>
+            <option>Referral</option>
+            <option>Search</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="desc">Project Description <span class="req">*</span></label>
+        <textarea id="desc" name="Project Description" required placeholder="What should the system do? What exists today (stack, tools, data)? What does success look like? Rough numbers help — volume per day, formats, integrations."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="links">Links <span class="opt">(optional — docs, repo, current site, Loom)</span></label>
+        <input type="text" id="links" name="Links" placeholder="https://…">
+      </div>
+
+      <button type="submit" class="submit-btn"><span>Send project brief ▸</span></button>
+      <p class="fine">Goes straight to my inbox. No newsletters, no spam — your details are used only to reply to this inquiry. Prefer email? <a href="mailto:sy.faraza2899@gmail.com">sy.faraza2899@gmail.com</a></p>
+    </form>
+
+    <div>
+      <div class="panel">
+        <div class="panel-head">WHAT HAPPENS NEXT</div>
+        <div class="panel-body">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div><h3>Brief lands in my inbox</h3>
+            <p>You get an instant confirmation email. I reply personally <em>within 24 hours</em>.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div><h3>Scoping call or written spec</h3>
+            <p>A short call (or async thread, your choice) to pin down requirements, constraints, and QA gates.</p></div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div><h3>Proposal with architecture sketch</h3>
+            <p>Fixed scope, milestones, and a diagram of the pipeline we'd build — <em>like the ones on this site</em>.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="direct">
+        <div class="lbl">DIRECT LINE</div>
+        <a href="mailto:sy.faraza2899@gmail.com">sy.faraza2899@gmail.com</a>
+      </div>
+
+      <div class="badges">
+        <span class="badge orange">★ 5.0 ON UPWORK</span>
+        <span class="badge">REPLIES &lt; 24H</span>
+        <span class="badge">KHI · UTC+5</span>
+        <span class="badge">FULL EU OVERLAP</span>
+        <span class="badge">GDPR-CONSCIOUS</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>FARIYA RAZA · AI ENGINEER</span>
+  <span>BUILT LIKE MY PIPELINES: NO WASTED CALLS</span>
+</footer>
+
+<script>
+// success state after FormSubmit redirect (?sent=1)
+if (new URLSearchParams(location.search).has('sent')) {
+  document.getElementById('successBox').classList.add('show');
+  document.getElementById('formGrid').style.display = 'none';
+  history.replaceState({}, '', location.pathname);
+}
+// disable button on submit to prevent doubles
+document.getElementById('intakeForm').addEventListener('submit', function () {
+  var b = this.querySelector('.submit-btn');
+  b.disabled = true;
+  b.querySelector('span').textContent = 'Sending…';
+});
+</script>
+</body>
+</html>
