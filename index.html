@@ -196,6 +196,18 @@ h1 .row:nth-child(2) span{animation-delay:.12s;color:transparent;-webkit-text-st
 .corner.bl{bottom:14px;left:14px;border-right:none;border-top:none}
 .corner.br{bottom:14px;right:14px;border-left:none;border-top:none}
 
+/* ---------- mobile hero: keep the graph out of the text ---------- */
+@media(max-width:700px){
+  #agentCanvas{
+    height:50%;
+    opacity:.55;
+    -webkit-mask-image:linear-gradient(to bottom,#000 45%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 45%,transparent 100%);
+  }
+  .plate{font-size:10px;letter-spacing:.12em;padding:7px 11px}
+  #hero .sub{font-size:.98rem}
+}
+
 /* ---------- ticker ---------- */
 #ticker{
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);
@@ -637,7 +649,6 @@ body[data-view="systems"] #view-home{display:none}
     <div class="links reveal">
       <a class="btn solid" href="mailto:sy.faraza2899@gmail.com"><span>Write to me</span></a>
       <a class="btn" href="https://www.linkedin.com/in/fariyar/" target="_blank" rel="noopener"><span>LinkedIn</span></a>
-      <a class="btn" href="tel:+923304611611"><span>+92 330 4611611</span></a>
     </div>
     <div class="foot">
       <span>FARIYA RAZA · AI ENGINEER</span>
