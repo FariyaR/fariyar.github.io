@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fariya Raza — AI Engineer</title>
-<meta name="description" content="Fariya Raza builds production LLM systems and multi-agent architectures. Karachi based, shipping worldwide.">
+<title>Fariya Raza · AI Systems That Do Your Repetitive Work</title>
+<meta name="description" content="Fariya Raza builds AI systems that take repetitive work off your team's plate: quotes, follow-ups, reports, documents, ad creatives. Done automatically and checked before they ship.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230B2038'/%3E%3Cpath d='M32 10 L54 32 L32 54 L10 32 Z' fill='none' stroke='%2362D9FF' stroke-width='4'/%3E%3Cpath d='M32 22 L42 32 L32 42 L22 32 Z' fill='%23FF7A29'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0B2038">
 <!-- Social previews: after deploying, og:image points at the live GitHub Pages URL
      keep og-image.png next to this file in the repo -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Fariya Raza — AI Engineer">
+<meta property="og:title" content="Fariya Raza · AI Engineer">
 <meta property="og:description" content="Production LLM systems and multi-agent architectures. Watch the pipelines run.">
 <meta property="og:url" content="https://fariyar.github.io/">
 <meta property="og:image" content="https://fariyar.github.io/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Fariya Raza — AI Engineer">
+<meta name="twitter:title" content="Fariya Raza · AI Engineer">
 <meta name="twitter:description" content="Production LLM systems and multi-agent architectures. Watch the pipelines run.">
 <meta name="twitter:image" content="https://fariyar.github.io/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -127,7 +127,8 @@ body{
 #rail .stage .dot{width:6px;height:6px;border:1px solid currentColor;transform:rotate(45deg);flex:none}
 #rail .stage.active .dot{background:var(--orange);border-color:var(--orange)}
 #rail .stage.back{flex:0 0 auto;padding:0 18px;color:var(--orange)}
-@media(max-width:760px){#rail .stage span.txt{display:none}#rail{font-size:9px}#rail .stage.back span.txt{display:inline}}
+#rail .stage.act{flex:0 0 auto;padding:0 16px;color:var(--orange);border-left:1px dashed var(--line)}
+@media(max-width:760px){#rail .stage span.txt{display:none}#rail{font-size:9px}#rail .stage.back span.txt{display:inline}#rail .stage.act span.txt{display:inline}}
 
 /* ---------- shared ---------- */
 .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
@@ -179,7 +180,7 @@ h2{
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,122,41,.6)}60%{box-shadow:0 0 0 9px rgba(255,122,41,0)}}
 h1{
   font-family:var(--display);font-weight:900;
-  font-size:clamp(2.6rem,9vw,7.2rem);line-height:.98;letter-spacing:-.02em;
+  font-size:clamp(1.75rem,4.4vw,3.5rem);line-height:1.06;letter-spacing:-.02em;
   margin:22px 0 10px;color:#fff;
   text-shadow:0 0 60px rgba(98,217,255,.25);
 }
@@ -189,6 +190,10 @@ h1 .row:nth-child(2) span{animation-delay:.12s;color:transparent;-webkit-text-st
 @keyframes rise{to{transform:none}}
 #hero .sub{max-width:640px;color:var(--text-dim);font-size:clamp(1rem,1.4vw,1.15rem)}
 #hero .sub b{color:var(--text);font-weight:600}
+#hero .proofline{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;
+  color:var(--cyan);margin-top:16px;
+}
 .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
 .corner{position:absolute;width:18px;height:18px;border:2px solid var(--cyan);opacity:.6;z-index:2}
 .corner.tl{top:56px;left:14px;border-right:none;border-bottom:none}
@@ -196,11 +201,10 @@ h1 .row:nth-child(2) span{animation-delay:.12s;color:transparent;-webkit-text-st
 .corner.bl{bottom:14px;left:14px;border-right:none;border-top:none}
 .corner.br{bottom:14px;right:14px;border-left:none;border-top:none}
 
-/* ---------- mobile hero: keep the graph out of the text ---------- */
+/* mobile hero: keep the graph out of the text */
 @media(max-width:700px){
   #agentCanvas{
-    height:50%;
-    opacity:.55;
+    height:50%;opacity:.55;
     -webkit-mask-image:linear-gradient(to bottom,#000 45%,transparent 100%);
     mask-image:linear-gradient(to bottom,#000 45%,transparent 100%);
   }
@@ -457,16 +461,15 @@ body[data-view="systems"] #view-home{display:none}
   <span class="corner bl"></span><span class="corner br"></span>
   <div class="wrap content">
     <div class="plate"><span class="pulse"></span> KHI · 24.86°N 67.00°E &nbsp;//&nbsp; ALL SYSTEMS NOMINAL</div>
-    <h1 aria-label="Fariya Raza">
-      <span class="row"><span>FARIYA</span></span>
-      <span class="row"><span>RAZA</span></span>
+    <h1 aria-label="Your business, on autopilot.">
+      <span class="row"><span>YOUR BUSINESS,</span></span>
+      <span class="row"><span>ON AUTOPILOT.</span></span>
     </h1>
-    <p class="sub">I build <b>multi-agent systems that survive production</b>. LangGraph orchestration, LLM cost engineering, and validation-gated pipelines for clients across the US and EU — shipped from Karachi, running everywhere.</p>
+    <p class="sub">Your team is doing work a machine should do. I'm <b>Fariya Raza</b>, and I build AI-powered ecosystems that <b>take your team to its full potential.</b></p>
+    <p class="proofline">5.0 on Upwork &nbsp;·&nbsp; 6 systems live &nbsp;·&nbsp; 0 errors</p>
     <div class="cta-row">
       <a class="btn solid" href="start-a-project.html"><span>Start a project</span></a>
-      <a class="btn" href="#/systems"><span>Explore the systems ▸</span></a>
-      <a class="btn" href="services.html"><span>Services ▸</span></a>
-      <a class="btn" href="https://www.linkedin.com/in/fariyar/" target="_blank" rel="noopener"><span>LinkedIn</span></a>
+      <a class="btn" href="#/systems"><span>See it working ▸</span></a>
     </div>
   </div>
 </section>
@@ -476,24 +479,24 @@ body[data-view="systems"] #view-home{display:none}
 <section id="teaser" class="grid-paper">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">01 · Systems in production</div>
-      <h2>Every project ships with its pipeline.</h2>
-      <p style="max-width:620px;color:#2A3C50">Each system below has a full spec sheet with a live, animated workflow — so you can see exactly how the pieces move, where the QA gates sit, and what happens when something fails.</p>
+      <div class="eyebrow">01 · Proof, running live</div>
+      <h2>Don't take my word for it. Watch the machines.</h2>
+      <p style="max-width:620px;color:#2A3C50">These are real systems doing real work for clients right now. Each one comes with an animated diagram that shows you, step by step, exactly what it does. No jargon needed.</p>
     </div>
     <div class="cards">
       <a class="tcard reveal" href="#/systems" data-target="run-01">
         <span class="id">RUN-01</span><h3>LeadForge AI</h3>
-        <p>Six agents, one typed shared state, self-healing QA. Same architecture as the graph animating in the hero.</p>
+        <p>Finds your ideal customers, researches them, and writes personal outreach. Six AI workers that check each other before anything reaches you.</p>
         <span class="go">OPEN FULL SPEC ▸</span>
       </a>
       <a class="tcard reveal" href="#/systems" data-target="run-02">
         <span class="id">RUN-02</span><h3>Creative Generation Pipeline</h3>
-        <p>100+ QA-checked ad creatives a day. Prompt caching cut inference costs by 70–80%.</p>
+        <p>Makes 100+ ready-to-run ad images a day, each checked against brand rules before a human ever sees it, at 70–80% lower AI cost.</p>
         <span class="go">OPEN FULL SPEC ▸</span>
       </a>
       <a class="tcard reveal" href="#/systems" data-target="run-03">
-        <span class="id">RUN-03</span><h3>Tournament Document Intelligence</h3>
-        <p>412 records merged with zero validation errors. AI extracts, deterministic logic validates.</p>
+        <span class="id">RUN-03</span><h3>Document Intelligence</h3>
+        <p>Reads messy documents, even bad scans, and turns them into clean data. 412 records processed. Zero errors.</p>
         <span class="go">OPEN FULL SPEC ▸</span>
       </a>
     </div>
@@ -503,8 +506,8 @@ body[data-view="systems"] #view-home{display:none}
 
 <section id="principle">
   <div class="wrap">
-    <p class="line reveal"><b>AI extracts.</b><br><em>Deterministic logic validates.</em><br><span class="dim">Humans stay on consequential calls.</span></p>
-    <p class="caption reveal">— how every system on this page is built</p>
+    <p class="line reveal"><b>AI for speed.</b><br><em>Code for certainty.</em><br><span class="dim">You for judgment.</span></p>
+    <p class="caption reveal">the rule every system here follows</p>
   </div>
 </section>
 
@@ -512,8 +515,8 @@ body[data-view="systems"] #view-home{display:none}
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="eyebrow">03 · Client sign-offs</div>
-      <h2>Straight from the review log.</h2>
-      <p style="max-width:620px;color:#2A3C50">Verbatim Upwork reviews. Every engagement below closed at 5.0 and was endorsed by the client.</p>
+      <h2>Clients said it better than I could.</h2>
+      <p style="max-width:620px;color:#2A3C50">Word-for-word Upwork reviews. Every single job: five stars.</p>
     </div>
     <div class="tgrid">
 
@@ -543,7 +546,7 @@ body[data-view="systems"] #view-home{display:none}
           <span class="proj">Marketing agency automation · May 2026</span>
           <span class="rating"><span class="diamonds">◆◆◆◆◆</span><b>5.0</b></span>
         </div>
-        <blockquote>"What stood out most was her creativity when it came to automation… she helped us build a phone number enrichment automation — a workflow that pulled lead data from our email sequencer, found LinkedIn profiles, and extracted phone numbers to route directly into our CRM. <em>If you're looking for someone who is reliable, fast-learning, and brings genuine creative thinking to automation, Fariya is someone I'd recommend without hesitation.</em>"</blockquote>
+        <blockquote>"What stood out most was her creativity when it came to automation… she helped us build a phone number enrichment automation: a workflow that pulled lead data from our email sequencer, found LinkedIn profiles, and extracted phone numbers to route directly into our CRM. <em>If you're looking for someone who is reliable, fast-learning, and brings genuine creative thinking to automation, Fariya is someone I'd recommend without hesitation.</em>"</blockquote>
         <div class="tfoot"><span class="tag">Reliable</span><span class="tag">Collaborative</span><span class="tag">Committed to Quality</span><span class="tag">Detail Oriented</span></div>
       </article>
 
@@ -568,29 +571,29 @@ body[data-view="systems"] #view-home{display:none}
       <h2>Where the systems shipped.</h2>
     </div>
     <div class="row reveal">
-      <div class="when">2025 — NOW</div>
+      <div class="when">2025–NOW</div>
       <div><h3>Software Consultant / Python Developer · <span class="org">TheProject19</span></h3>
       <p>US software agency. Enterprise ETL for a US e-commerce retailer (68K+ orders, 25 audited columns, layered root-cause debugging alongside the client’s QC team) and an employee portal + SharePoint→WorkVivo migration for Atlas Air.</p></div>
     </div>
     <div class="row reveal">
       <div class="when">ONGOING</div>
       <div><h3>AI Engineer · <span class="org">DTC Education Brand, EU</span></h3>
-      <p>Independent client. The creative generation pipeline, the OpenClaw analytics agent, and zero-touch ads handoff automation — all running in production.</p></div>
+      <p>Independent client. The creative generation pipeline, the OpenClaw analytics agent, and zero-touch ads handoff automation. All running in production.</p></div>
     </div>
     <div class="row reveal">
-      <div class="when">2026 — NOW</div>
+      <div class="when">2026–NOW</div>
       <div><h3>AI Systems Architect · <span class="org">Alkahest Elixir, US</span></h3>
       <p>Rebuilt a failing agent prototype into a Python/LangGraph dialectic system: cyclic debate workflows, stateful history, dynamic sub-agent spawning, large-context Claude with prompt caching.</p></div>
     </div>
     <div class="row reveal">
-      <div class="when">2026 — NOW</div>
+      <div class="when">2026–NOW</div>
       <div><h3>ML / Data Science Expert · <span class="org">AfterQuery</span></h3>
       <p>Applied ML and data science engagements.</p></div>
     </div>
     <div class="row reveal">
       <div class="when">COMPLETED</div>
       <div><h3>AI Engineer · <span class="org">Tournament Data Platform, Serbia</span></h3>
-      <p>Independent client. The validation-gated document intelligence pipeline — 412 records, zero errors.</p></div>
+      <p>Independent client. The validation-gated document intelligence pipeline: 412 records, zero errors.</p></div>
     </div>
     <div class="row reveal" style="border-bottom:none">
       <div class="when">JUL–AUG 2024</div>
@@ -640,15 +643,16 @@ body[data-view="systems"] #view-home{display:none}
 
 <section id="contact" class="contact">
   <div class="wrap">
-    <div class="eyebrow reveal" style="justify-content:center">05 · Ship something together</div>
-    <h2 class="reveal" style="margin-bottom:34px">Have a system that needs to exist?</h2>
+    <div class="eyebrow reveal" style="justify-content:center">05 · Talk to me</div>
+    <h2 class="reveal" style="margin-bottom:12px">What's eating your team's hours?</h2>
+    <p class="reveal" style="max-width:52ch;margin:0 auto 34px;color:var(--text-dim)">Tell me what your business still does by hand. I'll tell you honestly whether a machine can do it, what it would cost, and how fast you'd have it.</p>
     <div class="mailcard reveal">
       <span class="mlabel">DIRECT LINE</span>
       <span class="maddr">sy.faraza2899@gmail.com</span>
       <button class="mcopy" data-copy="sy.faraza2899@gmail.com">COPY</button>
     </div>
     <div class="links reveal">
-      <a class="btn solid" href="mailto:sy.faraza2899@gmail.com"><span>Write to me</span></a>
+      <a class="btn solid" href="https://calendly.com/sy-faraza2899/30min" target="_blank" rel="noopener"><span>Book a call</span></a>
       <a class="btn" href="https://www.linkedin.com/in/fariyar/" target="_blank" rel="noopener"><span>LinkedIn</span></a>
       <a class="btn" href="services.html"><span>Services ▸</span></a>
     </div>
@@ -671,8 +675,8 @@ body[data-view="systems"] #view-home{display:none}
   <div class="wrap">
     <div class="inner">
       <div class="eyebrow">Systems index · Full spec sheets</div>
-      <h2 style="max-width:800px">Six production systems.<br>Watch each pipeline run.</h2>
-      <p style="max-width:640px;color:#2A3C50">Every diagram below is the real shape of the system: the steps light up in the order the code executes, the orange arcs are retry loops, and the red flashes are what QA gates are for.</p>
+      <h2 style="max-width:800px">Six systems.<br>Watch them do the work.</h2>
+      <p style="max-width:640px;color:#2A3C50">Each diagram is the real shape of a system I built. The steps light up in the order the real code runs. Orange arcs mean the system caught its own mistake and fixed it. Red flashes mean a bad result was stopped before it ever reached the client.</p>
     </div>
 
     <!-- RUN-01 -->
@@ -680,7 +684,7 @@ body[data-view="systems"] #view-home{display:none}
       <span class="stamp">◈ VALIDATED · 0 ERRORS</span>
       <div class="head"><h3>LeadForge AI</h3><span class="id">RUN-01 / MULTI-AGENT ORCHESTRATION</span></div>
       <div class="body">
-        <div class="desc"><p>Six agents — Researcher, Website Intelligence, ICP Scorer, Opportunity Finder, Outreach Writer, QA Validator — coordinated through a LangGraph orchestrator with typed shared state and retry-with-correction loops. Provider-agnostic LLM layer, Pydantic-validated outputs, SSE streaming into a Next.js 14 frontend, deployed on Railway with pytest coverage.</p></div>
+        <div class="desc"><p><b>What it does: finds good-fit customers and writes personal outreach, with no human needed until final approval.</b> Six agents (Researcher, Website Intelligence, ICP Scorer, Opportunity Finder, Outreach Writer, QA Validator) coordinated through a LangGraph orchestrator with typed shared state and retry-with-correction loops. Provider-agnostic LLM layer, Pydantic-validated outputs, SSE streaming into a Next.js 14 frontend, deployed on Railway with pytest coverage.</p></div>
         <div class="metrics">
           <div class="metric"><div class="num"><em>6</em> agents</div><div class="lbl">One typed shared state</div></div>
           <div class="metric"><div class="num">Retry + correct</div><div class="lbl">Self-healing QA loop</div></div>
@@ -699,7 +703,7 @@ body[data-view="systems"] #view-home{display:none}
       <span class="stamp live">◈ RUNNING DAILY</span>
       <div class="head"><h3>AI Creative Generation Pipeline</h3><span class="id">RUN-02 / GENERATIVE OPS</span></div>
       <div class="body">
-        <div class="desc"><p>A production pipeline generating on-brand Meta ad creatives for an EU education brand. Two-stage generation with prompt caching, a vision-model QA loop that enforces brand rules, and automatic regeneration on failure with capped retries. Zero-touch: it runs on schedule whether anyone is watching or not.</p></div>
+        <div class="desc"><p><b>What it does: makes the company's ads while everyone sleeps, and only ships the ones that pass inspection.</b> A production pipeline generating on-brand Meta ad creatives for an EU education brand. Two-stage generation with prompt caching, a vision-model QA loop that enforces brand rules, and automatic regeneration on failure with capped retries. Zero-touch: it runs on schedule whether anyone is watching or not.</p></div>
         <div class="metrics">
           <div class="metric"><div class="num"><em>100+</em>/day</div><div class="lbl">QA-checked creatives</div></div>
           <div class="metric"><div class="num"><em>−70–80%</em></div><div class="lbl">Inference cost via prompt caching</div></div>
@@ -718,7 +722,7 @@ body[data-view="systems"] #view-home{display:none}
       <span class="stamp">◈ VALIDATED · 0 ERRORS</span>
       <div class="head"><h3>Tournament Document Intelligence</h3><span class="id">RUN-03 / VALIDATION-GATED PARSING</span></div>
       <div class="body">
-        <div class="desc"><p>Multi-format intake — HTML, text PDF, and scanned PDF via vision models — feeding an 8-tier fuzzy entity resolver built for OCR noise, with a hard validation gate before anything reaches the merged dataset. 412 records, 286 fights, 89 categories: zero errors in production.</p></div>
+        <div class="desc"><p><b>What it does: turns messy paperwork into clean, correct data, automatically.</b> Multi-format intake (HTML, text PDF, and scanned PDF via vision models) feeding an 8-tier fuzzy entity resolver built for OCR noise, with a hard validation gate before anything reaches the merged dataset. 412 records, 286 fights, 89 categories: zero errors in production.</p></div>
         <div class="metrics">
           <div class="metric"><div class="num"><em>412</em> records</div><div class="lbl">286 fights · 89 categories</div></div>
           <div class="metric"><div class="num"><em>0</em> validation errors</div><div class="lbl">On the production run</div></div>
@@ -737,7 +741,7 @@ body[data-view="systems"] #view-home{display:none}
       <span class="stamp live">◈ 24/7 UNATTENDED</span>
       <div class="head"><h3>OpenClaw Analytics Agent</h3><span class="id">RUN-04 / SECURE AGENT DEPLOYMENT</span></div>
       <div class="body">
-        <div class="desc"><p>Claude as the reasoning engine over GA4, Meta Marketing API, Google Ads, and Kajabi — deployed on a hardened Hetzner VPS for GDPR/EU data residency. Key-only SSH, dual firewall, fail2ban, loopback-only services over SSH tunnel. Talks to the team through Slack, on its own schedule.</p></div>
+        <div class="desc"><p><b>What it does: reads the company's marketing numbers every morning and tells the team what matters, in Slack.</b> Claude as the reasoning engine over GA4, Meta Marketing API, Google Ads, and Kajabi, deployed on a hardened Hetzner VPS for GDPR/EU data residency. Key-only SSH, dual firewall, fail2ban, loopback-only services over SSH tunnel. Talks to the team through Slack, on its own schedule.</p></div>
         <div class="metrics">
           <div class="metric"><div class="num"><em>4</em> live integrations</div><div class="lbl">Non-expiring auth</div></div>
           <div class="metric"><div class="num">EU resident</div><div class="lbl">GDPR-conscious infra</div></div>
@@ -756,7 +760,7 @@ body[data-view="systems"] #view-home{display:none}
       <span class="stamp live">◈ LIVE DEMO DEPLOYED</span>
       <div class="head"><h3>DentaSmile AI</h3><span class="id">RUN-05 / SELF-HOSTED GPU INFERENCE</span></div>
       <div class="body">
-        <div class="desc"><p>Full-stack SaaS generating realistic previews of cosmetic dentistry outcomes from patient photos. Self-hosted Qwen Image Edit on RunPod L40S GPUs, with async job orchestration across three services — designed around ~110s inference times that blow past standard browser timeouts.</p></div>
+        <div class="desc"><p><b>What it does: shows dental patients a realistic preview of their new smile before they commit.</b> Full-stack SaaS generating realistic previews of cosmetic dentistry outcomes from patient photos. Self-hosted Qwen Image Edit on RunPod L40S GPUs, with async job orchestration across three services, designed around ~110s inference times that blow past standard browser timeouts.</p></div>
         <div class="metrics">
           <div class="metric"><div class="num"><em>3</em> services</div><div class="lbl">Async job orchestration</div></div>
           <div class="metric"><div class="num">L40S</div><div class="lbl">Self-hosted open-weight inference</div></div>
@@ -775,7 +779,7 @@ body[data-view="systems"] #view-home{display:none}
       <span class="stamp">◈ PARITY VERIFIED</span>
       <div class="head"><h3>E-Commerce Fulfillment ETL</h3><span class="id">RUN-06 / ENTERPRISE DATA PIPELINE</span></div>
       <div class="body">
-        <div class="desc"><p>Delivered through TheProject19 for a US e-commerce retailer: ShipHero → SQL Server ingestion via n8n + GraphQL, feeding stored-procedure silver tables and downstream fact tables. Hardened through layered root-cause debugging — multi-cause data inflation, voided-shipment handling, stored-procedure logic errors — verified column by column against the legacy production system.</p></div>
+        <div class="desc"><p><b>What it does: keeps an online retailer's revenue numbers right, automatically, every night.</b> Delivered through TheProject19 for a US e-commerce retailer: ShipHero → SQL Server ingestion via n8n + GraphQL, feeding stored-procedure silver tables and downstream fact tables. Hardened through layered root-cause debugging (multi-cause data inflation, voided-shipment handling, stored-procedure logic errors), verified column by column against the legacy production system.</p></div>
         <div class="metrics">
           <div class="metric"><div class="num"><em>68K+</em> orders</div><div class="lbl">Reconciled in parity audit</div></div>
           <div class="metric"><div class="num"><em>25</em> columns</div><div class="lbl">Audited against legacy</div></div>
@@ -794,14 +798,14 @@ body[data-view="systems"] #view-home{display:none}
 <section class="contact">
   <div class="wrap">
     <div class="eyebrow reveal" style="justify-content:center">Want one of these for your business?</div>
-    <h2 class="reveal" style="margin-bottom:34px">Let's design your pipeline.</h2>
+    <h2 class="reveal" style="margin-bottom:34px">Want work like this off your plate?</h2>
     <div class="mailcard reveal">
       <span class="mlabel">DIRECT LINE</span>
       <span class="maddr">sy.faraza2899@gmail.com</span>
       <button class="mcopy" data-copy="sy.faraza2899@gmail.com">COPY</button>
     </div>
     <div class="links reveal">
-      <a class="btn solid" href="mailto:sy.faraza2899@gmail.com"><span>Write to me</span></a>
+      <a class="btn solid" href="https://calendly.com/sy-faraza2899/30min" target="_blank" rel="noopener"><span>Book a call</span></a>
       <a class="btn" href="#/"><span>◂ Back to index</span></a>
       <a class="btn" href="https://www.linkedin.com/in/fariyar/" target="_blank" rel="noopener"><span>LinkedIn</span></a>
     </div>
@@ -832,7 +836,7 @@ const FLOWS={
   creative:{
     steps:[
       {l:'TRIGGER',s:'sheet / schedule',say:'scheduled run fires → brief pulled from Sheets'},
-      {l:'PROMPT',s:'Claude · cached',say:'Claude composes prompt — cache hit, cost −78%'},
+      {l:'PROMPT',s:'Claude · cached',say:'Claude composes prompt · cache hit, cost −78%'},
       {l:'GENERATE',s:'image model',say:'image model rendering on-brand creative'},
       {l:'VISION QA',s:'brand rules',say:'vision model auditing against brand rulebook',gate:true},
       {l:'PUBLISH',s:'Drive + Sheets',say:'creative approved → filed to Drive, logged to Sheets ✓'}
@@ -841,11 +845,11 @@ const FLOWS={
   },
   tournament:{
     steps:[
-      {l:'INTAKE',s:'HTML · PDF · scan',say:'document received — format detected automatically'},
+      {l:'INTAKE',s:'HTML · PDF · scan',say:'document received · format detected automatically'},
       {l:'EXTRACT',s:'rules + vision',say:'rule-based + Gemini vision extraction running'},
       {l:'RESOLVE',s:'8-tier fuzzy',say:'8-tier fuzzy resolver reconciling OCR noise'},
       {l:'VALIDATE',s:'hard gate',say:'hard validation gate checking every record',gate:true},
-      {l:'MERGE',s:'clean dataset',say:'record merged — 412/412 clean, 0 errors ✓'}
+      {l:'MERGE',s:'clean dataset',say:'record merged · 412/412 clean, 0 errors ✓'}
     ],
     loop:{from:3,to:2,label:'re-resolve'}
   },
@@ -855,13 +859,13 @@ const FLOWS={
       {l:'REASON',s:'Claude + MCP',say:'Claude planning which data sources to pull'},
       {l:'FETCH',s:'GA4 · Meta · Ads · Kajabi',say:'querying 4 live integrations, non-expiring auth'},
       {l:'SYNTHESIZE',s:'insight, not dumps',say:'Claude turning raw metrics into decisions'},
-      {l:'DELIVER',s:'Slack digest',say:'digest posted to Slack — from a hardened EU box ✓'}
+      {l:'DELIVER',s:'Slack digest',say:'digest posted to Slack · from a hardened EU box ✓'}
     ]
   },
   dentasmile:{
     steps:[
       {l:'UPLOAD',s:'patient photo',say:'patient photo uploaded via Next.js frontend'},
-      {l:'QUEUE',s:'async job',say:'job queued — because inference outlives browser timeouts'},
+      {l:'QUEUE',s:'async job',say:'job queued · because inference outlives browser timeouts'},
       {l:'INFER',s:'Qwen @ L40S · ~110s',say:'self-hosted Qwen Image Edit rendering on RunPod GPU'},
       {l:'POLL',s:'status checks',say:'frontend polling job status across 3 services'},
       {l:'DELIVER',s:'smile preview',say:'realistic preview delivered to the patient ✓'}
@@ -873,7 +877,7 @@ const FLOWS={
       {l:'TRANSFORM',s:'clean + decode',say:'decoding IDs, translating carriers, excluding voids'},
       {l:'LOAD',s:'live table',say:'bulk loading into SQL Server live table'},
       {l:'SILVER PROC',s:'stored procedure',say:'stored procedure building silver reporting table'},
-      {l:'AUDIT',s:'parity vs legacy',say:'68,890 orders reconciled against legacy — parity ✓',gate:true}
+      {l:'AUDIT',s:'parity vs legacy',say:'68,890 orders reconciled against legacy · parity ✓',gate:true}
     ]
   }
 };
@@ -940,7 +944,7 @@ function runFlow(el){
           const b=st.querySelector('.badge');
           st.classList.remove('active');st.classList.add('fail');
           b.textContent='✗ FAIL';b.classList.add('fail','show');
-          setStatus('QA rejected output — routing back for correction');
+          setStatus('QA rejected output · routing back for correction');
           if(arc)arc.classList.add('hot');
           await wait(950);
           b.classList.remove('show');st.classList.remove('fail');
@@ -987,21 +991,25 @@ function watchFlows(){
 /* ================= rail ================= */
 const RAILS={
   home:[
-    {href:'#hero',sec:'hero',txt:'00 · INTAKE'},
-    {href:'#teaser',sec:'teaser',txt:'01 · SYSTEMS'},
-    {href:'#principle',sec:'principle',txt:'02 · VALIDATE'},
-    {href:'#reviews',sec:'reviews',txt:'03 · SIGN-OFFS'},
+    {href:'#hero',sec:'hero',txt:'00 · START'},
+    {href:'#teaser',sec:'teaser',txt:'01 · PROOF'},
+    {href:'#principle',sec:'principle',txt:'02 · THE RULE'},
+    {href:'#reviews',sec:'reviews',txt:'03 · REVIEWS'},
     {href:'#exp',sec:'exp',txt:'04 · TRACK'},
-    {href:'#contact',sec:'contact',txt:'05 · SHIP'}
+    {href:'#contact',sec:'contact',txt:'05 · CONTACT'},
+    {href:'services.html',act:true,txt:'SERVICES'},
+    {href:'start-a-project.html',act:true,txt:'START ▸'}
   ],
   systems:[
-    {href:'#/',back:true,txt:'◂ INDEX'},
+    {href:'#/',back:true,txt:'◂ HOME'},
     {href:'#run-01',sec:'run-01',txt:'RUN-01'},
     {href:'#run-02',sec:'run-02',txt:'RUN-02'},
     {href:'#run-03',sec:'run-03',txt:'RUN-03'},
     {href:'#run-04',sec:'run-04',txt:'RUN-04'},
     {href:'#run-05',sec:'run-05',txt:'RUN-05'},
-    {href:'#run-06',sec:'run-06',txt:'RUN-06'}
+    {href:'#run-06',sec:'run-06',txt:'RUN-06'},
+    {href:'services.html',act:true,txt:'SERVICES'},
+    {href:'start-a-project.html',act:true,txt:'START ▸'}
   ]
 };
 function buildRail(view){
@@ -1009,10 +1017,10 @@ function buildRail(view){
   rail.innerHTML='';
   RAILS[view].forEach(s=>{
     const a=document.createElement('a');
-    a.className='stage'+(s.back?' back':'');
+    a.className='stage'+(s.back?' back':'')+(s.act?' act':'');
     a.href=s.href;if(s.sec)a.dataset.sec=s.sec;
     a.innerHTML=`<i></i><span class="dot"></span><span class="txt">${s.txt}</span>`;
-    if(s.back){a.innerHTML=`<span class="txt">${s.txt}</span>`}
+    if(s.back||s.act){a.innerHTML=`<span class="txt">${s.txt}</span>`}
     rail.appendChild(a);
   });
   bindCursorTargets();
@@ -1121,13 +1129,13 @@ if(matchMedia('(pointer:fine)').matches){
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   let W,H,DPR;
   const NODES=[
-    {id:'RESEARCH',x:.10,y:.30},
-    {id:'ARCHITECT',x:.28,y:.16},
-    {id:'INTEGRATE',x:.30,y:.52},
+    {id:'RESEARCH',x:.12,y:.30},
+    {id:'ARCHITECT',x:.30,y:.16},
+    {id:'INTEGRATE',x:.32,y:.52},
     {id:'ORCHESTRATE',x:.50,y:.30},
-    {id:'AUTOMATE',x:.66,y:.14},
-    {id:'OPTIMIZE',x:.70,y:.48},
-    {id:'VALIDATE',x:.86,y:.30}
+    {id:'AUTOMATE',x:.68,y:.14},
+    {id:'OPTIMIZE',x:.72,y:.48},
+    {id:'VALIDATE',x:.88,y:.30}
   ];
   const EDGES=[[0,1],[0,2],[1,3],[2,3],[3,4],[3,5],[4,6],[5,6],[6,3]];
   const packets=[];const mouse={x:-9e3,y:-9e3};
@@ -1135,7 +1143,7 @@ if(matchMedia('(pointer:fine)').matches){
     DPR=Math.min(devicePixelRatio||1,2);
     W=cv.clientWidth;H=cv.clientHeight;
     cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
-    NODES.forEach(n=>{n.px=n.x*W;n.py=n.y*H;n.ox=n.px;n.oy=n.py;n.pulse=0;n.phase=Math.random()*6.28});
+    const GW=Math.min(W,1500),GX=(W-GW)/2;NODES.forEach(n=>{n.px=GX+n.x*GW;n.py=n.y*H;n.ox=n.px;n.oy=n.py;n.pulse=0;n.phase=Math.random()*6.28});
   }
   resize();addEventListener('resize',resize);
   cv.parentElement.addEventListener('mousemove',e=>{
