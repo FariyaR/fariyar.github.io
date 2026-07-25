@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Services — Fariya Raza</title>
+<title>Services · Fariya Raza</title>
 <meta name="description" content="Automation services catalogue: fast-win automations, core business automations, premium AI builds, and custom data engineering.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230B2038'/%3E%3Cpath d='M32 10 L54 32 L32 54 L10 32 Z' fill='none' stroke='%2362D9FF' stroke-width='4'/%3E%3Cpath d='M32 22 L42 32 L32 42 L22 32 Z' fill='%23FF7A29'/%3E%3C/svg%3E">
 <meta name="theme-color" content="#0B2038">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Services — Fariya Raza">
+<meta property="og:title" content="Services · Fariya Raza">
 <meta property="og:description" content="From 3-day fast wins to multi-agent systems. Every service ships with its pipeline.">
 <meta property="og:url" content="https://fariyar.github.io/services.html">
 <meta property="og:image" content="https://fariyar.github.io/og-image.png">
@@ -138,22 +138,40 @@ footer{
   justify-content:space-between;font-family:var(--mono);font-size:11.5px;
   letter-spacing:.12em;color:#4A6076;
 }
+
+/* ---------- site rail (matches home + systems) ---------- */
+#rail{
+  position:fixed;top:0;left:0;right:0;z-index:800;height:44px;
+  display:flex;align-items:stretch;
+  background:rgba(7,22,40,.86);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+}
+#rail .stage{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+  color:var(--text-dim);border-right:1px dashed var(--line);
+  position:relative;overflow:hidden;text-decoration:none;
+  transition:color .3s;white-space:nowrap;
+}
+#rail .stage:last-child{border-right:none}
+#rail .stage:hover{color:var(--cyan)}
+#rail .stage.here{color:var(--cyan)}
+#rail .stage .dot{width:6px;height:6px;border:1px solid currentColor;transform:rotate(45deg);flex:none}
+#rail .stage.here .dot{background:var(--orange);border-color:var(--orange)}
+#rail .stage.back{flex:0 0 auto;padding:0 18px;color:var(--orange)}
+#rail .stage.act{flex:0 0 auto;padding:0 16px;color:var(--orange);border-left:1px dashed var(--line)}
+@media(max-width:760px){#rail{font-size:9px}}
+body{padding-top:44px}
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <a href="./" aria-label="Back to portfolio">
-    <svg width="30" height="30" viewBox="0 0 64 64"><path d="M32 10 L54 32 L32 54 L10 32 Z" fill="none" stroke="#62D9FF" stroke-width="4"/><path d="M32 22 L42 32 L32 42 L22 32 Z" fill="#FF7A29"/></svg>
-    <span>◂ BACK TO PORTFOLIO</span>
-  </a>
-  <div><span class="status-dot"></span>SVC-CATALOG // ACCEPTING NEW PROJECTS</div>
-</div>
+<nav id="rail" aria-label="Site navigation"><a class="stage back" href="./"><span class="txt">◂ HOME</span></a><a class="stage" href="./#/systems"><span class="dot"></span><span class="txt">SYSTEMS</span></a><a class="stage here" href="services.html"><span class="dot"></span><span class="txt">SERVICES</span></a><a class="stage act" href="start-a-project.html"><span class="txt">START ▸</span></a></nav>
 
 <div class="wrap">
   <p class="kicker">02 · Service catalogue</p>
   <h1>Automation, sized to the problem.</h1>
-  <p class="lede">From a 3-day quick win to a multi-agent system — every build ships the way my pipelines do: <strong>QA gates built in, humans on consequential calls, and designed to run whether anyone is watching or not</strong>. All engagements are scoped per project.</p>
+  <p class="lede">From a 3-day quick win to a multi-agent system, every build ships the way my pipelines do: <strong>QA gates built in, humans on consequential calls, and designed to run whether anyone is watching or not</strong>. All engagements are scoped per project.</p>
 
   <!-- TIER 1 -->
   <div class="tier">
@@ -161,13 +179,13 @@ footer{
       <h2><span class="num">T1</span> · Simple, Fast Wins</h2>
       <span class="meta">DELIVERY: 1–3 DAYS</span>
     </div>
-    <p class="tier-sub">Small automations with instant, visible value — running in days, not weeks, with near-zero maintenance.</p>
+    <p class="tier-sub">Small automations with instant, visible value, running in days instead of weeks.</p>
     <div class="cards">
       <div class="card">
         <div class="card-top"><span class="id">T1-01</span><span>NEAR-ZERO MAINTENANCE</span></div>
         <div class="card-body">
           <h3>Scheduled Reports &amp; Digests</h3>
-          <p>Pull from Sheets, a database, or an API on a schedule; format; deliver as <em>daily digests, weekly reports, or alerts</em> — straight to email or Slack.</p>
+          <p>Pull from Sheets, a database, or an API on a schedule; format; deliver as <em>daily digests, weekly reports, or alerts</em>, straight to email or Slack.</p>
         </div>
         <div class="card-cta"><a href="start-a-project.html?type=automation">Start this build ▸</a></div>
       </div>
@@ -175,7 +193,7 @@ footer{
         <div class="card-top"><span class="id">T1-02</span><span>SHEET-CONTROLLED</span></div>
         <div class="card-body">
           <h3>Sheet-Driven Bulk Processing</h3>
-          <p>Paste instructions or data into a Google Sheet; the system processes every row automatically — <em>bulk image generation, enrichment, formatting</em>. You control everything from one sheet.</p>
+          <p>Paste instructions or data into a Google Sheet; the system processes every row automatically: <em>bulk image generation, enrichment, formatting</em>. You control everything from one sheet.</p>
         </div>
         <div class="card-cta"><a href="start-a-project.html?type=automation">Start this build ▸</a></div>
       </div>
@@ -196,7 +214,7 @@ footer{
       <h2><span class="num">T2</span> · Core Business Automations</h2>
       <span class="meta">DELIVERY: 1–2 WEEKS</span>
     </div>
-    <p class="tier-sub">The automations that run your day-to-day: inbox, leads, documents, follow-ups — with AI drafting and humans approving.</p>
+    <p class="tier-sub">The automations that run your day-to-day: inbox, leads, documents, follow-ups, with AI drafting and humans approving.</p>
     <div class="cards">
       <div class="card">
         <div class="card-top"><span class="id">T2-01</span><span>HUMAN-APPROVED</span></div>
@@ -226,7 +244,7 @@ footer{
         <div class="card-top"><span class="id">T2-04</span><span>VALIDATION-GATED</span></div>
         <div class="card-body">
           <h3>Document Extraction Pipelines</h3>
-          <p>PDFs or emails in; AI extracts structured data <em>with validation</em>; templates or databases populated — invoices, orders, applications, quotes.</p>
+          <p>PDFs or emails in; AI extracts structured data <em>with validation</em>; templates or databases populated: invoices, orders, applications, quotes.</p>
           <span class="proof-tag">PROOF: RUN-03 · 412 RECORDS, 0 ERRORS</span>
         </div>
         <div class="card-cta"><a href="start-a-project.html?type=docs">Start this build ▸</a></div>
@@ -248,7 +266,7 @@ footer{
       <h2><span class="num">T3</span> · Premium Builds</h2>
       <span class="meta">DELIVERY: 2–6 WEEKS</span>
     </div>
-    <p class="tier-sub">Production AI systems with the full treatment: architecture, QA loops, monitoring — the systems on the portfolio's spec sheets.</p>
+    <p class="tier-sub">Production AI systems with the full treatment: architecture, QA loops, monitoring. These are the systems on the portfolio's spec sheets.</p>
     <div class="cards">
       <div class="card">
         <div class="card-top"><span class="id">T3-01</span><span>PROVEN IN PRODUCTION</span></div>
@@ -272,7 +290,7 @@ footer{
         <div class="card-top"><span class="id">T3-03</span><span>FLAGSHIP</span></div>
         <div class="card-body">
           <h3>Multi-Agent Workflow Systems</h3>
-          <p>Specialized agents — research, scoring, drafting, QA — in <em>coordinated LangGraph pipelines</em> with typed shared state and retry-with-correction.</p>
+          <p>Specialized agents (research, scoring, drafting, QA) in <em>coordinated LangGraph pipelines</em> with typed shared state and retry-with-correction.</p>
           <span class="proof-tag">PROOF: RUN-01 · SIX-AGENT SYSTEM</span>
         </div>
         <div class="card-cta"><a href="start-a-project.html?type=agents">Start this build ▸</a></div>
@@ -291,7 +309,7 @@ footer{
   <!-- CUSTOM / ETL -->
   <div class="tier">
     <div class="tier-head">
-      <h2><span class="num">CX</span> · Custom — Data Engineering &amp; ETL</h2>
+      <h2><span class="num">CX</span> · Custom: Data Engineering &amp; ETL</h2>
       <span class="meta">MULTI-WEEK TO MULTI-MONTH</span>
     </div>
     <div class="cards">
@@ -300,7 +318,7 @@ footer{
         <div class="card-body">
           <div>
             <h3>E-Commerce Data Warehouse / ETL</h3>
-            <p>Production pipelines integrating platform data (ShipHero, Shopify) into SQL Server — validated so your <em>revenue numbers are actually right</em>, and BI-ready for Power BI. Every client's data landscape is different, so these are scoped as custom engagements.</p>
+            <p>Production pipelines integrating platform data (ShipHero, Shopify) into SQL Server, validated so your <em>revenue numbers are actually right</em>, and BI-ready for Power BI. Every client's data landscape is different, so these are scoped as custom engagements.</p>
             <span class="proof-tag">PROOF: RUN-06 · 68K+ ORDERS RECONCILED</span>
           </div>
           <ul>
@@ -320,17 +338,17 @@ footer{
   <div class="strip">
     <div class="txt">
       <h3>Every build can include ongoing maintenance</h3>
-      <p>Monitoring, small changes, and support on a monthly retainer — on systems designed to run reliably in the first place.</p>
+      <p>Monitoring, small changes, and support on a monthly retainer, on systems designed to run reliably in the first place.</p>
     </div>
     <span class="mono">SETUP + MONTHLY RETAINER</span>
   </div>
 
   <div class="banner">
     <h2>Not sure which one fits?</h2>
-    <p>Describe the problem in the intake form — I'll tell you what the system actually needs, even if it's smaller than what you were about to buy.</p>
+    <p>Describe the problem in the intake form and I'll tell you what the system actually needs, even if it's smaller than what you were about to buy.</p>
     <div class="row">
       <a class="btn solid" href="start-a-project.html"><span>Start a project</span></a>
-      <a class="btn" href="mailto:sy.faraza2899@gmail.com"><span>Write to me</span></a>
+      <a class="btn" href="https://calendly.com/sy-faraza2899/30min" target="_blank" rel="noopener"><span>Book a call</span></a>
     </div>
   </div>
 </div>
@@ -340,5 +358,40 @@ footer{
   <span>EVERY SERVICE SHIPS WITH ITS PIPELINE</span>
 </footer>
 
+
+<canvas id="ambient" style="position:fixed;inset:0;z-index:-1;width:100%;height:100%"></canvas>
+<div style="position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%, transparent 50%, rgba(7,22,40,.5) 100%)"></div>
+<script>
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var cv=document.getElementById('ambient'), ctx=cv.getContext('2d');
+  var W,H,P=[],N=innerWidth<760?36:80;
+  function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+  rs(); addEventListener('resize',rs);
+  for(var i=0;i<N;i++)P.push({
+    x:Math.random()*W, y:Math.random()*H,
+    r:Math.random()*1.6+.4,
+    vx:(Math.random()-.5)*.12, vy:(Math.random()-.5)*.1,
+    o:Math.random()*.5+.15, ph:Math.random()*6.28,
+    c:Math.random()<.09?'255,122,41':'98,217,255'
+  });
+  var t=0;
+  (function fr(){
+    t++; ctx.clearRect(0,0,W,H);
+    for(var i=0;i<N;i++){
+      var p=P[i];
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<-5)p.x=W+5; if(p.x>W+5)p.x=-5;
+      if(p.y<-5)p.y=H+5; if(p.y>H+5)p.y=-5;
+      var tw=p.o*(0.6+0.4*Math.sin(t*.02+p.ph));
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.28);
+      ctx.fillStyle='rgba('+p.c+','+tw+')';
+      ctx.shadowColor='rgba('+p.c+',.8)'; ctx.shadowBlur=6;
+      ctx.fill(); ctx.shadowBlur=0;
+    }
+    requestAnimationFrame(fr);
+  })();
+})();
+</script>
 </body>
 </html>
