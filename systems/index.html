@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Systems · six production AI systems by Fariya Raza</title>
+<meta name="description" content="Case studies: multi-agent lead research, creative generation with vision QA, document intelligence, analytics agent, GPU-backed SaaS, e-commerce ETL.">
+<link rel="canonical" href="https://fariyar.github.io/systems/">
+<meta property="og:type" content="website"><meta property="og:title" content="Systems · six production AI systems by Fariya Raza"><meta property="og:description" content="Case studies: multi-agent lead research, creative generation with vision QA, document intelligence, analytics agent, GPU-backed SaaS, e-commerce ETL."><meta property="og:url" content="https://fariyar.github.io/systems/"><meta property="og:image" content="https://fariyar.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Systems · six production AI systems by Fariya Raza"><meta name="twitter:description" content="Case studies: multi-agent lead research, creative generation with vision QA, document intelligence, analytics agent, GPU-backed SaaS, e-commerce ETL."><meta name="twitter:image" content="https://fariyar.github.io/og-image.png">
+<meta name="theme-color" content="#0C0F14">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","itemListElement":[{"@type":"ListItem","position":1,"url":"https://fariyar.github.io/systems/leadforge/","name":"LeadForge AI"},{"@type":"ListItem","position":2,"url":"https://fariyar.github.io/systems/creative-pipeline/","name":"Creative Generation Pipeline"},{"@type":"ListItem","position":3,"url":"https://fariyar.github.io/systems/document-intelligence/","name":"Tournament Document Intelligence"},{"@type":"ListItem","position":4,"url":"https://fariyar.github.io/systems/openclaw/","name":"OpenClaw Analytics Agent"},{"@type":"ListItem","position":5,"url":"https://fariyar.github.io/systems/dentasmile/","name":"DentaSmile AI"},{"@type":"ListItem","position":6,"url":"https://fariyar.github.io/systems/ecommerce-etl/","name":"E-commerce Fulfillment ETL"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="pill">
+  <a class="brand" href=".././"><i></i><span>Fariya Raza</span></a>
+  <ul id="menu"><li><a href="../systems/" aria-current="page">Systems</a></li><li><a href="../services.html">Services</a></li><li><a href=".././#about">About</a></li><li><a href="../partnership.html">Betterlab</a></li>
+    <li class="cta-nav"><a class="btn primary small" href="../start-a-project.html">Start a project</a></li></ul>
+  <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><svg class="i" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+<main id="main">
+
+<section class="case-hero"><div class="wrap"><span class="eyebrow">Systems</span><h1>Six systems in production.</h1><p class="lede" style="margin-top:16px">Each card shows the real pipeline. Hover a step to see what it does; Play walks a run through, retries included. Open a case study for problem, decisions, validation and result.</p></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap sys"><article class="sys-card" data-reveal>
+  <div class="top"><div><span class="n">01</span><h3>LeadForge AI</h3><p class="tag">Multi-agent lead research and outreach</p></div><a class="more" href="leadforge/">View case study <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  <div class="arch"><div class="pipe-wrap" data-retry="5,4">
+  <ol class="pipe" aria-label="Pipeline steps"><li><button type="button" data-note="Pulls company and contact context from the web and enrichment APIs.">Research</button></li><li><button type="button" data-note="Reads the prospect site and extracts offer, stack and signals.">Website intel</button></li><li><button type="button" data-note="Scores fit against the ideal customer profile; low scores stop here.">ICP score</button></li><li><button type="button" data-note="Finds the concrete angle worth writing about.">Opportunity</button></li><li><button type="button" data-note="Drafts a personal message from the shared state.">Outreach</button></li><li><button type="button" class=gate data-note="Validates structure and tone; rejects and sends back for one correction.">QA gate</button></li></ol>
+  <div class="pipe-note" aria-live="polite"></div>
+  <div class="pipe-ctl"><button type="button" data-play aria-pressed="true">Pause</button><span class="pipe-hint">Hover a step for what it does</span></div>
+  <p class="sr" style="position:absolute;left:-9999px">Text version: Research → Website intel → ICP score → Opportunity → Outreach → QA gate</p>
+</div></div>
+  <div class="kpis"><div><b>6</b><span>agents, one shared state</span></div><div><b>6</b><span>pipeline steps</span></div><div><b>QA-gated</b><span>retry with correction</span></div></div>
+  <div class="foot"><details><summary>Technical details</summary><p>A six-agent LangGraph system with one typed shared state: Researcher, Website Intelligence, ICP Scorer, Opportunity Finder, Outreach Writer and QA Validator, streamed into a Next.js front end.</p><p class="meta" style="margin-top:8px">LangGraph · Claude · Pydantic · FastAPI · Next.js 14 · Railway</p></details></div>
+</article><article class="sys-card" data-reveal>
+  <div class="top"><div><span class="n">02</span><h3>Creative Generation Pipeline</h3><p class="tag">On-brand ad creatives at volume, QA-checked by a vision model</p></div><a class="more" href="creative-pipeline/">View case study <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  <div class="arch"><div class="pipe-wrap" data-retry="3,2">
+  <ol class="pipe" aria-label="Pipeline steps"><li><button type="button" data-note="A row in the content sheet describes the campaign angle.">Brief</button></li><li><button type="button" data-note="Brand context is cached; only the angle changes per run.">Prompt</button></li><li><button type="button" data-note="Image model produces the candidate creative.">Generate</button></li><li><button type="button" class=gate data-note="A vision model checks the image against written brand rules.">Vision QA</button></li><li><button type="button" data-note="Failed creatives are regenerated once with the QA feedback.">Regenerate</button></li><li><button type="button" data-note="Passing creatives are filed and logged for the ads team.">Approve</button></li></ol>
+  <div class="pipe-note" aria-live="polite"></div>
+  <div class="pipe-ctl"><button type="button" data-play aria-pressed="true">Pause</button><span class="pipe-hint">Hover a step for what it does</span></div>
+  <p class="sr" style="position:absolute;left:-9999px">Text version: Brief → Prompt → Generate → Vision QA → Regenerate → Approve</p>
+</div></div>
+  <div class="kpis"><div><b>100+</b><span>creatives a day, QA-checked</span></div><div><b>6</b><span>pipeline steps</span></div><div><b>QA-gated</b><span>retry with correction</span></div></div>
+  <div class="foot"><details><summary>Technical details</summary><p>A scheduled n8n pipeline: brief → cached prompt → image generation → vision-model QA against written brand rules → automatic regeneration on failure, capped.</p><p class="meta" style="margin-top:8px">n8n · Claude · Image generation · Vision QA · Meta Ads</p></details></div>
+</article><article class="sys-card" data-reveal>
+  <div class="top"><div><span class="n">03</span><h3>Tournament Document Intelligence</h3><p class="tag">Messy documents in, validated records out</p></div><a class="more" href="document-intelligence/">View case study <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  <div class="arch"><div class="pipe-wrap">
+  <ol class="pipe" aria-label="Pipeline steps"><li><button type="button" data-note="HTML, text PDF or scanned PDF arrives.">Upload</button></li><li><button type="button" data-note="Text and vision models pull structured fields.">Extract</button></li><li><button type="button" data-note="8-tier fuzzy matching links entities despite OCR noise.">Resolve</button></li><li><button type="button" class=gate data-note="Deterministic rules check every record; failures stop here.">Validate</button></li><li><button type="button" data-note="Only validated records reach the dataset.">Merge</button></li></ol>
+  <div class="pipe-note" aria-live="polite"></div>
+  <div class="pipe-ctl"><button type="button" data-play aria-pressed="true">Pause</button><span class="pipe-hint">Hover a step for what it does</span></div>
+  <p class="sr" style="position:absolute;left:-9999px">Text version: Upload → Extract → Resolve → Validate → Merge</p>
+</div></div>
+  <div class="kpis"><div><b>412</b><span>records, 0 validation errors</span></div><div><b>5</b><span>pipeline steps</span></div><div><b>Validated</b><span>deterministic checks</span></div></div>
+  <div class="foot"><details><summary>Technical details</summary><p>Multi-format intake (vision model for scans) feeding an 8-tier fuzzy entity resolver built for OCR noise, with a hard validation gate before anything reaches the merged dataset.</p><p class="meta" style="margin-top:8px">Python · Gemini Vision · Fuzzy matching · Validation gate</p></details></div>
+</article><article class="sys-card" data-reveal>
+  <div class="top"><div><span class="n">04</span><h3>OpenClaw Analytics Agent</h3><p class="tag">Reads the marketing numbers every morning, reports in Slack</p></div><a class="more" href="openclaw/">View case study <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  <div class="arch"><div class="pipe-wrap">
+  <ol class="pipe" aria-label="Pipeline steps"><li><button type="button" data-note="Tool calls pull the last 24h of metrics.">GA4 · Meta · Google Ads · Kajabi</button></li><li><button type="button" data-note="Claude compares against baselines and finds what moved.">Reason</button></li><li><button type="button" data-note="A short narrative with the numbers that matter.">Write</button></li><li><button type="button" data-note="Posted to the team channel at 07:00.">Slack</button></li></ol>
+  <div class="pipe-note" aria-live="polite"></div>
+  <div class="pipe-ctl"><button type="button" data-play aria-pressed="true">Pause</button><span class="pipe-hint">Hover a step for what it does</span></div>
+  <p class="sr" style="position:absolute;left:-9999px">Text version: GA4 · Meta · Google Ads · Kajabi → Reason → Write → Slack</p>
+</div></div>
+  <div class="kpis"><div><b>4</b><span>live integrations, 24/7</span></div><div><b>4</b><span>pipeline steps</span></div><div><b>Validated</b><span>deterministic checks</span></div></div>
+  <div class="foot"><details><summary>Technical details</summary><p>An agent with MCP tools over the four APIs, running on a hardened Hetzner VPS (key-only SSH, dual firewall, fail2ban, loopback-only services) for EU data residency, delivering to Slack.</p><p class="meta" style="margin-top:8px">Claude · MCP · Docker · Hetzner · Slack</p></details></div>
+</article><article class="sys-card" data-reveal>
+  <div class="top"><div><span class="n">05</span><h3>DentaSmile AI</h3><p class="tag">Cosmetic-dentistry previews from a patient photo</p></div><a class="more" href="dentasmile/">View case study <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  <div class="arch"><div class="pipe-wrap">
+  <ol class="pipe" aria-label="Pipeline steps"><li><button type="button" data-note="Patient photo is stored and a job is created.">Upload</button></li><li><button type="button" data-note="The job waits for a free GPU worker.">Queue</button></li><li><button type="button" data-note="Self-hosted model edits the image, about ~110 s.">Inference</button></li><li><button type="button" data-note="The front end polls status instead of holding a request.">Poll</button></li><li><button type="button" data-note="The result is shown and stored with the job record.">Preview</button></li></ol>
+  <div class="pipe-note" aria-live="polite"></div>
+  <div class="pipe-ctl"><button type="button" data-play aria-pressed="true">Pause</button><span class="pipe-hint">Hover a step for what it does</span></div>
+  <p class="sr" style="position:absolute;left:-9999px">Text version: Upload → Queue → Inference → Poll → Preview</p>
+</div></div>
+  <div class="kpis"><div><b>3</b><span>services, async GPU jobs</span></div><div><b>5</b><span>pipeline steps</span></div><div><b>Validated</b><span>deterministic checks</span></div></div>
+  <div class="foot"><details><summary>Technical details</summary><p>A three-service SaaS: Next.js front end, FastAPI job API, and a self-hosted Qwen Image Edit worker on RunPod L40S GPUs, with queued jobs and polling.</p><p class="meta" style="margin-top:8px">Qwen Image Edit · RunPod · FastAPI · Next.js · GPU inference</p></details></div>
+</article><article class="sys-card" data-reveal>
+  <div class="top"><div><span class="n">06</span><h3>E-commerce Fulfillment ETL</h3><p class="tag">Revenue numbers that reconcile, every night</p></div><a class="more" href="ecommerce-etl/">View case study <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  <div class="arch"><div class="pipe-wrap">
+  <ol class="pipe" aria-label="Pipeline steps"><li><button type="button" data-note="Orders and shipments via GraphQL.">ShipHero</button></li><li><button type="button" data-note="Paginated pulls into staging.">n8n</button></li><li><button type="button" data-note="Staging tables, raw.">SQL Server</button></li><li><button type="button" data-note="Dedup, voids, silver tables.">Stored procs</button></li><li><button type="button" data-note="Order and sales facts.">Fact tables</button></li><li><button type="button" data-note="BI-ready datasets.">Power BI</button></li></ol>
+  <div class="pipe-note" aria-live="polite"></div>
+  <div class="pipe-ctl"><button type="button" data-play aria-pressed="true">Pause</button><span class="pipe-hint">Hover a step for what it does</span></div>
+  <p class="sr" style="position:absolute;left:-9999px">Text version: ShipHero → n8n → SQL Server → Stored procs → Fact tables → Power BI</p>
+</div></div>
+  <div class="kpis"><div><b>68,890</b><span>orders reconciled</span></div><div><b>6</b><span>pipeline steps</span></div><div><b>Validated</b><span>deterministic checks</span></div></div>
+  <div class="foot"><details><summary>Technical details</summary><p>ShipHero → SQL Server ingestion via n8n and GraphQL into staging tables, stored procedures building silver and fact tables, and a parity audit against the legacy production system.</p><p class="meta" style="margin-top:8px">n8n · GraphQL · SQL Server · Stored procedures · Power BI</p></details></div>
+</article></div></section>
+</main>
+<footer><div class="wrap">
+  <div><b>Fariya Raza</b>AI Systems Engineer<br><span class="muted">AI systems · automation · data · product</span></div>
+  <ul><li><a href="../systems/">Systems</a></li><li><a href="../services.html">Services</a></li><li><a href=".././#about">About</a></li><li><a href="../start-a-project.html">Start a project</a></li></ul>
+  <ul><li><a href="https://www.linkedin.com/in/fariyar/" target="_blank" rel="noopener">LinkedIn ↗</a></li><li><a href="https://github.com/FariyaR" target="_blank" rel="noopener">GitHub ↗</a></li><li><a href="mailto:sy.faraza2899@gmail.com">sy.faraza2899@gmail.com</a></li><li><a href="../privacy.html">Privacy</a></li></ul>
+  <div class="end"><span>Karachi · UTC+5</span><span>© 2026 Fariya Raza</span></div>
+</div></footer>
+<script src="../js/site.js" defer></script>
+</body>
+</html>

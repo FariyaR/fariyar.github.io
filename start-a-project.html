@@ -1,506 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Start a Project · Fariya Raza</title>
-<meta name="description" content="Tell me about the system you need. Structured project intake for LLM pipelines, multi-agent systems, and automation.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230B2038'/%3E%3Cpath d='M32 10 L54 32 L32 54 L10 32 Z' fill='none' stroke='%2362D9FF' stroke-width='4'/%3E%3Cpath d='M32 22 L42 32 L32 42 L22 32 Z' fill='%23FF7A29'/%3E%3C/svg%3E">
-<meta name="theme-color" content="#0B2038">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Start a Project · Fariya Raza">
-<meta property="og:description" content="Tell me about the system you need. I reply within 24 hours.">
-<meta property="og:url" content="https://fariyar.github.io/start-a-project.html">
-<meta property="og:image" content="https://fariyar.github.io/og-image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --navy:#0B2038; --navy-deep:#071628; --cyan:#62D9FF; --cyan-dim:#3AA8CF;
-  --orange:#FF7A29; --text:#D7E6F2; --text-dim:#8FA9C0; --line:#1E3A5C;
-  --line-soft:rgba(98,217,255,.10);
-  --display:'Unbounded',sans-serif; --body:'Instrument Sans',system-ui,sans-serif;
-  --mono:'IBM Plex Mono',ui-monospace,monospace;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--navy); color:var(--text); font-family:var(--body);
-  font-size:17px; line-height:1.6; overflow-x:hidden;
-  background-image:
-    linear-gradient(var(--line-soft) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
-  background-size:60px 60px;
-}
-::selection{background:var(--orange);color:var(--navy-deep)}
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start a project · Fariya Raza</title>
+<meta name="description" content="Quick project brief. Tell me what you are trying to solve; I reply within one working day.">
+<link rel="canonical" href="https://fariyar.github.io/start-a-project.html">
+<meta property="og:type" content="website"><meta property="og:title" content="Start a project · Fariya Raza"><meta property="og:description" content="Quick project brief. Tell me what you are trying to solve; I reply within one working day."><meta property="og:url" content="https://fariyar.github.io/start-a-project.html"><meta property="og:image" content="https://fariyar.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Start a project · Fariya Raza"><meta name="twitter:description" content="Quick project brief. Tell me what you are trying to solve; I reply within one working day."><meta name="twitter:image" content="https://fariyar.github.io/og-image.png">
+<meta name="theme-color" content="#0C0F14">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
 
-/* ---------- top bar ---------- */
-.topbar{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:20px 5vw;border-bottom:1px solid var(--line);
-  font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--text-dim);
-  background:rgba(7,22,40,.7);backdrop-filter:blur(6px);
-  position:sticky;top:0;z-index:10;
-}
-.topbar a{color:var(--cyan);text-decoration:none}
-.topbar a:hover{color:var(--orange)}
-.logo{display:flex;align-items:center;gap:12px}
-.logo svg{display:block}
-.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#3ddc84;margin-right:8px;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-
-/* ---------- layout ---------- */
-.wrap{max-width:1180px;margin:0 auto;padding:64px 5vw 96px}
-.kicker{font-family:var(--mono);font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin-bottom:18px}
-h1{font-family:var(--display);font-weight:900;font-size:clamp(34px,5vw,58px);line-height:1.08;color:#fff;margin-bottom:18px}
-.lede{color:var(--text-dim);max-width:56ch;margin-bottom:56px}
-.lede strong{color:var(--cyan);font-weight:600}
-.grid{display:grid;grid-template-columns:1.6fr 1fr;gap:56px;align-items:start}
-@media(max-width:900px){.grid{grid-template-columns:1fr}}
-
-/* ---------- form ---------- */
-form{border:1px solid var(--line);background:rgba(7,22,40,.55);padding:40px}
-.form-head{
-  font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--cyan-dim);
-  border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:32px;
-  display:flex;justify-content:space-between;
-}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-@media(max-width:640px){.row{grid-template-columns:1fr}}
-.field{margin-bottom:26px}
-label{
-  display:block;font-family:var(--mono);font-size:12px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--text-dim);margin-bottom:9px;
-}
-label .req{color:var(--orange)}
-label .opt{color:var(--cyan-dim);text-transform:none;letter-spacing:0}
-input,select,textarea{
-  width:100%;background:var(--navy-deep);border:1px solid var(--line);
-  color:var(--text);font-family:var(--body);font-size:16px;padding:13px 15px;
-  transition:border-color .2s, box-shadow .2s;border-radius:0;appearance:none;
-}
-select{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2362D9FF' stroke-width='2' fill='none'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 15px center;padding-right:40px;cursor:pointer;
-}
-textarea{min-height:170px;resize:vertical;line-height:1.55}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(98,217,255,.12)}
-input::placeholder,textarea::placeholder{color:#4A6076}
-.hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
-
-.submit-btn{
-  font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
-  background:var(--orange);border:1px solid var(--orange);color:var(--navy-deep);
-  font-weight:600;padding:17px 34px;cursor:pointer;position:relative;overflow:hidden;
-  transition:color .25s;width:100%;
-}
-.submit-btn::before{content:'';position:absolute;inset:0;background:#fff;transform:translateY(101%);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
-.submit-btn span{position:relative;z-index:1}
-.submit-btn:hover::before{transform:none}
-.fine{font-family:var(--mono);font-size:11.5px;color:#4A6076;margin-top:16px;letter-spacing:.04em}
-.fine a{color:var(--cyan-dim)}
-
-/* ---------- side panel ---------- */
-.panel{border:1px solid var(--line);background:rgba(7,22,40,.55)}
-.panel-head{
-  font-family:var(--mono);font-size:12px;letter-spacing:.18em;color:var(--cyan-dim);
-  border-bottom:1px solid var(--line);padding:18px 28px;
-}
-.panel-body{padding:28px}
-.step{display:flex;gap:18px;margin-bottom:28px}
-.step:last-child{margin-bottom:0}
-.step-num{
-  font-family:var(--mono);font-size:12px;color:var(--orange);border:1px solid var(--line);
-  width:38px;height:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
-.step h3{font-family:var(--body);font-size:16px;font-weight:600;color:#fff;margin-bottom:4px}
-.step p{font-size:14.5px;color:var(--text-dim)}
-.step p em{color:var(--cyan);font-style:normal}
-.direct{
-  margin-top:24px;border:1px solid var(--line);background:var(--navy-deep);
-  padding:22px 28px;font-family:var(--mono);font-size:13px;
-}
-.direct .lbl{font-size:11px;letter-spacing:.2em;color:var(--text-dim);margin-bottom:8px}
-.direct a{color:var(--cyan);text-decoration:none;word-break:break-all}
-.direct a:hover{color:var(--orange)}
-.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
-.badge{
-  font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--cyan);
-  border:1px solid var(--line);padding:6px 12px;background:rgba(98,217,255,.05);
-}
-.badge.orange{color:var(--orange)}
-
-/* ---------- success state ---------- */
-.success{
-  display:none;border:1px solid var(--cyan);background:rgba(98,217,255,.06);
-  padding:48px 40px;text-align:center;
-}
-.success.show{display:block;animation:successIn .5s cubic-bezier(.2,.8,.2,1)}
-@keyframes successIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.success h2{font-family:var(--display);font-weight:700;font-size:26px;color:#fff;margin-bottom:10px}
-.success p{color:var(--text-dim);max-width:44ch;margin:0 auto 24px}
-.success a{color:var(--cyan)}
-/* animated delivery pipeline in success panel */
-.delivery{width:min(340px,80%);margin:0 auto 26px;display:block}
-.delivery .wire{stroke:var(--line);stroke-width:2}
-.delivery .wire-lit{
-  stroke:var(--cyan);stroke-width:2;stroke-dasharray:300;stroke-dashoffset:300;
-  animation:wire 1.1s .2s cubic-bezier(.4,0,.2,1) forwards;
-}
-@keyframes wire{to{stroke-dashoffset:0}}
-.delivery .node{fill:var(--navy-deep);stroke:var(--line);stroke-width:2}
-.delivery .node-lit{animation:nodeLit .3s forwards}
-.delivery .n1{animation-delay:.35s}.delivery .n2{animation-delay:.75s}.delivery .n3{animation-delay:1.15s}
-@keyframes nodeLit{to{stroke:var(--cyan);fill:rgba(98,217,255,.15)}}
-.delivery .tick{
-  stroke:#3ddc84;stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round;
-  stroke-dasharray:40;stroke-dashoffset:40;animation:tick .45s 1.35s cubic-bezier(.2,.8,.2,1) forwards;
-}
-@keyframes tick{to{stroke-dashoffset:0}}
-.delivery .ring{
-  fill:none;stroke:#3ddc84;stroke-width:2;opacity:0;transform-origin:290px 30px;
-  animation:ring 1.6s 1.5s ease-out infinite;
-}
-@keyframes ring{0%{opacity:.7;transform:scale(.6)}100%{opacity:0;transform:scale(1.5)}}
-.delivery text{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;fill:var(--text-dim)}
-/* sending states on button */
-.submit-btn.sending{background:var(--navy-deep);border-color:var(--cyan);color:var(--cyan);cursor:wait}
-.submit-btn.sending::before{display:none}
-.submit-btn .dots::after{content:'';animation:dots 1.2s steps(4,end) infinite}
-@keyframes dots{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
-/* error strip */
-.err{
-  display:none;border:1px solid #E5484D;background:rgba(229,72,77,.08);
-  font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:#FF9599;
-  padding:14px 18px;margin-top:16px;line-height:1.6;
-}
-.err.show{display:block}
-.err a{color:var(--cyan)}
-footer{
-  border-top:1px solid var(--line);padding:26px 5vw;display:flex;flex-wrap:wrap;gap:16px;
-  justify-content:space-between;font-family:var(--mono);font-size:11.5px;
-  letter-spacing:.12em;color:#4A6076;
-}
-
-/* ---------- site rail (matches home + systems) ---------- */
-#rail{
-  position:fixed;top:0;left:0;right:0;z-index:800;height:44px;
-  display:flex;align-items:stretch;
-  background:rgba(7,22,40,.86);backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--line);
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
-}
-#rail .stage{
-  flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
-  color:var(--text-dim);border-right:1px dashed var(--line);
-  position:relative;overflow:hidden;text-decoration:none;
-  transition:color .3s;white-space:nowrap;
-}
-#rail .stage:last-child{border-right:none}
-#rail .stage:hover{color:var(--cyan)}
-#rail .stage.here{color:var(--cyan)}
-#rail .stage .dot{width:6px;height:6px;border:1px solid currentColor;transform:rotate(45deg);flex:none}
-#rail .stage.here .dot{background:var(--orange);border-color:var(--orange)}
-#rail .stage.back{flex:0 0 auto;padding:0 18px;color:var(--orange)}
-#rail .stage.act{flex:0 0 auto;padding:0 16px;color:var(--orange);border-left:1px dashed var(--line)}
-@media(max-width:760px){#rail{font-size:9px}}
-body{padding-top:44px}
-</style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="pill">
+  <a class="brand" href="./"><i></i><span>Fariya Raza</span></a>
+  <ul id="menu"><li><a href="systems/">Systems</a></li><li><a href="services.html">Services</a></li><li><a href="./#about">About</a></li><li><a href="partnership.html">Betterlab</a></li>
+    <li class="cta-nav"><a class="btn primary small" href="start-a-project.html">Start a project</a></li></ul>
+  <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><svg class="i" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+<main id="main">
 
-<nav id="rail" aria-label="Site navigation"><a class="stage back" href="./"><span class="txt">◂ HOME</span></a><a class="stage" href="./#/systems"><span class="dot"></span><span class="txt">SYSTEMS</span></a><a class="stage" href="services.html"><span class="dot"></span><span class="txt">SERVICES</span></a><a class="stage act here" href="start-a-project.html"><span class="txt">START ▸</span></a></nav>
-
-<div class="wrap">
-  <p class="kicker">06 · Project intake</p>
-  <h1>Start a project.</h1>
-  <p class="lede">Skip the discovery-call roulette. Give me the shape of the problem below and you'll get a <strong>reply within 24 hours</strong>, with first questions, a rough approach, or both.</p>
-
-  <div class="success" id="successBox">
-    <svg class="delivery" viewBox="0 0 340 78" aria-hidden="true">
-      <line class="wire" x1="20" y1="30" x2="290" y2="30"/>
-      <line class="wire-lit" x1="20" y1="30" x2="290" y2="30"/>
-      <circle class="node node-lit n1" cx="20" cy="30" r="8"/>
-      <circle class="node node-lit n2" cx="155" cy="30" r="8"/>
-      <circle class="node node-lit n3" cx="290" cy="30" r="12"/>
-      <circle class="ring" cx="290" cy="30" r="12"/>
-      <path class="tick" d="M284.5 30.5 L288.5 34.5 L296 26.5"/>
-      <text x="20" y="62" text-anchor="middle">BRIEF</text>
-      <text x="155" y="62" text-anchor="middle">VALIDATED</text>
-      <text x="290" y="62" text-anchor="middle">DELIVERED</text>
-    </svg>
-    <h2>Brief received.</h2>
-    <p>Your project brief just landed in my inbox. Expect a personal reply within 24 hours (Karachi time, full EU overlap).</p>
-    <a href="./">◂ Back to the portfolio</a>
-  </div>
-
-  <div class="grid" id="formGrid">
-    <form action="https://api.web3forms.com/submit" method="POST" id="intakeForm">
-      <div class="form-head"><span>NEW PROJECT BRIEF</span><span>EST. 3 MIN</span></div>
-
-      <!-- Web3Forms config -->
-      <input type="hidden" name="access_key" value="697a41e8-5af5-4de8-a1cd-4fb25b6a8c3e">
-      <input type="hidden" name="subject" value="🚀 New project inquiry from fariyar.github.io">
-      <input type="hidden" name="from_name" value="fariyar.github.io intake form">
-      <input type="hidden" name="redirect" value="https://fariyar.github.io/start-a-project.html?sent=1">
-      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
-
-      <div class="row">
-        <div class="field">
-          <label for="name">Name <span class="req">*</span></label>
-          <input type="text" id="name" name="name" required placeholder="Jane Founder">
-        </div>
-        <div class="field">
-          <label for="email">Email <span class="req">*</span></label>
-          <input type="email" id="email" name="email" required placeholder="jane@company.com">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label for="company">Company / Website <span class="opt">(optional)</span></label>
-          <input type="text" id="company" name="Company or Website" placeholder="company.com">
-        </div>
-        <div class="field">
-          <label for="role">Your Role <span class="opt">(optional)</span></label>
-          <input type="text" id="role" name="Role" placeholder="Founder, CTO, Ops lead…">
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label for="ptype">Project Type <span class="req">*</span></label>
-          <select id="ptype" name="Project Type" required>
-            <option value="" disabled selected>Select one…</option>
-            <option>Multi-agent system / orchestration</option>
-            <option>LLM pipeline (generation, parsing, QA)</option>
-            <option>Automation / workflow (n8n, integrations)</option>
-            <option>Document intelligence / data extraction</option>
-            <option>Data engineering / ETL</option>
-            <option>AI SaaS product build</option>
-            <option>Rescue mission: fix a failing AI system</option>
-            <option>Ongoing retainer / maintenance</option>
-            <option>Not sure yet, need guidance</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="budget">Budget Range (USD) <span class="req">*</span></label>
-          <select id="budget" name="Budget Range" required>
-            <option value="" disabled selected>Select one…</option>
-            <option>Under $1,000</option>
-            <option>$1,000 – $5,000</option>
-            <option>$5,000 – $10,000</option>
-            <option>$10,000 – $25,000</option>
-            <option>$25,000+</option>
-            <option>Ongoing / retainer</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="field">
-          <label for="timeline">Timeline <span class="req">*</span></label>
-          <select id="timeline" name="Timeline" required>
-            <option value="" disabled selected>Select one…</option>
-            <option>ASAP, it's urgent</option>
-            <option>Within a month</option>
-            <option>1–3 months</option>
-            <option>Flexible / exploring</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="source">How Did You Find Me? <span class="opt">(optional)</span></label>
-          <select id="source" name="Found Via">
-            <option value="" disabled selected>Select one…</option>
-            <option>Upwork</option>
-            <option>LinkedIn</option>
-            <option>Referral</option>
-            <option>Search</option>
-            <option>Other</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="desc">Project Description <span class="req">*</span></label>
-        <textarea id="desc" name="Project Description" required placeholder="What should the system do? What exists today (stack, tools, data)? What does success look like? Rough numbers help: volume per day, formats, integrations."></textarea>
-      </div>
-
-      <div class="field">
-        <label for="links">Links <span class="opt">(optional: docs, repo, current site, Loom)</span></label>
-        <input type="text" id="links" name="Links" placeholder="https://…">
-      </div>
-
-      <button type="submit" class="submit-btn" id="submitBtn"><span>Send project brief ▸</span></button>
-      <div class="err" id="errBox">TRANSMISSION FAILED: the form service didn't respond. Please retry, or email me directly at <a href="mailto:sy.faraza2899@gmail.com">sy.faraza2899@gmail.com</a> (your text is preserved above).</div>
-      <p class="fine">Goes straight to my inbox. No newsletters, no spam. Your details are used only to reply to this inquiry. Prefer email? <a href="mailto:sy.faraza2899@gmail.com">sy.faraza2899@gmail.com</a></p>
+<section class="case-hero"><div class="wrap"><span class="eyebrow">Quick project brief</span><h1>Start a project.</h1><p class="lede" style="margin-top:16px">One question matters most: what are you trying to solve? Everything else is optional. I reply personally within one working day.</p></div></section>
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="done card" id="done"><h2>Received.</h2><p class="lede" style="margin:12px auto 20px">Your brief is in my inbox. Expect a reply within one working day (Karachi time, full EU overlap).</p><a class="btn" href="./">Back to the homepage</a></div>
+  <div class="form-grid">
+    <form class="card" id="intake" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="697a41e8-5af5-4de8-a1cd-4fb25b6a8c3e"><input type="hidden" name="subject" value="New project inquiry from fariyar.github.io"><input type="hidden" name="from_name" value="fariyar.github.io intake"><input type="hidden" name="redirect" value="https://fariyar.github.io/start-a-project.html?sent=1"><input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+      <div class="f"><label for="problem">What are you trying to solve?</label><textarea id="problem" name="Problem" required placeholder="Describe the work that’s still manual, or the system that isn’t working. “Not sure yet, here’s the situation” is a perfectly good answer."></textarea></div>
+      <div class="f2"><div class="f"><label for="name">Name</label><input id="name" name="name" required autocomplete="name"></div><div class="f"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div></div>
+      <div class="f"><label for="company">Company <span>optional</span></label><input id="company" name="Company" autocomplete="organization"></div>
+      <details class="opt"><summary>Optional details</summary><div>
+        <div class="f2"><div class="f"><label for="ptype">Project type</label><select id="ptype" name="Project Type"><option value="">Not sure yet</option><option value="agents">AI system / agents</option><option value="automation">Automation</option><option value="docs">Document intelligence</option><option value="data">Data system / ETL</option><option value="saas">AI product</option><option value="rescue">Fix a failing AI system</option><option value="retainer">Retainer</option></select></div>
+        <div class="f"><label for="budget">Budget range, USD</label><select id="budget" name="Budget"><option value="">Not sure yet</option><option>Under 1,000</option><option>1,000 – 5,000</option><option>5,000 – 10,000</option><option>10,000 – 25,000</option><option>25,000+</option><option>Ongoing / retainer</option></select></div></div>
+        <div class="f2"><div class="f"><label for="timeline">Timeline</label><select id="timeline" name="Timeline"><option value="">Flexible</option><option>As soon as possible</option><option>Within a month</option><option>1–3 months</option></select></div><div class="f"><label for="stack">Existing tools</label><input id="stack" name="Existing tools" placeholder="HubSpot, Shopify, Sheets…"></div></div>
+        <div class="f"><label for="links">Links</label><input id="links" name="Links" placeholder="Docs, repo, current site, Loom"></div>
+      </div></details>
+      <button class="btn primary" type="submit" style="width:100%;justify-content:center">Send brief <svg class="i" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+      <div class="status" id="f-status" role="status" aria-live="polite"></div>
+      <p class="privacy">Sent via Web3Forms to my inbox and used only to reply to you. No newsletters. <a href="privacy.html">Privacy notice</a>.</p>
     </form>
-
-    <div>
-      <div class="panel">
-        <div class="panel-head">WHAT HAPPENS NEXT</div>
-        <div class="panel-body">
-          <div class="step">
-            <div class="step-num">01</div>
-            <div><h3>Brief lands in my inbox</h3>
-            <p>You get an instant confirmation email. I reply personally <em>within 24 hours</em>.</p></div>
-          </div>
-          <div class="step">
-            <div class="step-num">02</div>
-            <div><h3>Scoping call or written spec</h3>
-            <p>A short call (or async thread, your choice) to pin down requirements, constraints, and QA gates.</p></div>
-          </div>
-          <div class="step">
-            <div class="step-num">03</div>
-            <div><h3>Proposal with architecture sketch</h3>
-            <p>Fixed scope, milestones, and a diagram of the pipeline we'd build, <em>like the ones on this site</em>.</p></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="direct">
-        <div class="lbl">PREFER TO TALK?</div>
-        <a href="https://calendly.com/sy-faraza2899/30min" target="_blank" rel="noopener">Book a 30-minute call ▸</a>
-      </div>
-
-      <div class="direct">
-        <div class="lbl">DIRECT LINE</div>
-        <a href="mailto:sy.faraza2899@gmail.com">sy.faraza2899@gmail.com</a>
-      </div>
-
-      <div class="badges">
-        <span class="badge orange">★ 5.0 ON UPWORK</span>
-        <span class="badge">REPLIES &lt; 24H</span>
-        <span class="badge">KHI · UTC+5</span>
-        <span class="badge">FULL EU OVERLAP</span>
-        <span class="badge">GDPR-CONSCIOUS</span>
-      </div>
-    </div>
+    <aside><div class="card"><h3 style="font-size:1.05rem">What happens next</h3><ol style="padding-left:18px;color:var(--text-2);display:grid;gap:10px;margin-top:12px;font-size:14.5px"><li>I reply within one working day with first questions or a rough approach.</li><li>A short call, or an async thread if you prefer.</li><li>A written proposal with fixed scope, milestones and an architecture sketch.</li></ol></div>
+      <div class="card" style="margin-top:16px"><p style="font-size:14px;color:var(--muted);margin-bottom:10px">Prefer to talk?</p><a class="btn" href="https://calendly.com/sy-faraza2899/30min" target="_blank" rel="noopener">Book 30 minutes <svg class="i" viewBox="0 0 24 24"><path d="M8 2v4M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></a><p style="font-size:14px;color:var(--muted);margin:16px 0 6px">Or email</p><a href="mailto:sy.faraza2899@gmail.com" style="color:var(--text)">sy.faraza2899@gmail.com</a></div></aside>
   </div>
-</div>
-
-<footer>
-  <span>FARIYA RAZA · AI ENGINEER</span>
-  <span>BUILT LIKE MY PIPELINES: NO WASTED CALLS</span>
-</footer>
-
-<script>
-// preselect project type from services page links (?type=...)
-(function () {
-  var map = {
-    agents: 'Multi-agent system / orchestration',
-    pipeline: 'LLM pipeline (generation, parsing, QA)',
-    automation: 'Automation / workflow (n8n, integrations)',
-    docs: 'Document intelligence / data extraction',
-    data: 'Data engineering / ETL',
-    saas: 'AI SaaS product build',
-    rescue: 'Rescue mission: fix a failing AI system',
-    retainer: 'Ongoing retainer / maintenance'
-  };
-  var t = new URLSearchParams(location.search).get('type');
-  if (t && map[t]) {
-    var sel = document.getElementById('ptype');
-    for (var i = 0; i < sel.options.length; i++) {
-      if (sel.options[i].text === map[t]) { sel.selectedIndex = i; break; }
-    }
-  }
-})();
-// success state after no-JS redirect fallback (?sent=1)
-function showSuccess() {
-  document.getElementById('formGrid').style.display = 'none';
-  var box = document.getElementById('successBox');
-  box.classList.add('show');
-  box.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-if (new URLSearchParams(location.search).has('sent')) {
-  showSuccess();
-  history.replaceState({}, '', location.pathname);
-}
-
-// AJAX submit with staged transmission animation
-document.getElementById('intakeForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  var form = this;
-  var btn = document.getElementById('submitBtn');
-  var span = btn.querySelector('span');
-  document.getElementById('errBox').classList.remove('show');
-
-  btn.disabled = true;
-  btn.classList.add('sending');
-
-  var stages = ['Compiling brief', 'Running QA gate', 'Transmitting to KHI'];
-  var i = 0;
-  span.innerHTML = stages[0] + '<span class="dots"></span>';
-  var cycler = setInterval(function () {
-    i = (i + 1) % stages.length;
-    span.innerHTML = stages[i] + '<span class="dots"></span>';
-  }, 900);
-
-  function showError() {
-    clearInterval(cycler);
-    btn.disabled = false;
-    btn.classList.remove('sending');
-    span.textContent = 'Retry: send project brief ▸';
-    document.getElementById('errBox').classList.add('show');
-  }
-
-  var started = Date.now();
-  fetch('https://api.web3forms.com/submit', {
-    method: 'POST',
-    headers: { 'Accept': 'application/json' },
-    body: new FormData(form)
-  })
-  .then(function (r) { return r.json(); })
-  .then(function (data) {
-    // let the animation breathe at least 1.8s so it doesn't flash
-    var wait = Math.max(0, 1800 - (Date.now() - started));
-    setTimeout(function () {
-      if (data.success) {
-        clearInterval(cycler);
-        span.textContent = 'Delivered ✓';
-        setTimeout(showSuccess, 500);
-      } else { showError(); }
-    }, wait);
-  })
-  .catch(showError);
-});
-</script>
-
-<canvas id="ambient" style="position:fixed;inset:0;z-index:-1;width:100%;height:100%"></canvas>
-<div style="position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%, transparent 50%, rgba(7,22,40,.5) 100%)"></div>
-<script>
-(function(){
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var cv=document.getElementById('ambient'), ctx=cv.getContext('2d');
-  var W,H,P=[],N=innerWidth<760?36:80;
-  function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}
-  rs(); addEventListener('resize',rs);
-  for(var i=0;i<N;i++)P.push({
-    x:Math.random()*W, y:Math.random()*H,
-    r:Math.random()*1.6+.4,
-    vx:(Math.random()-.5)*.12, vy:(Math.random()-.5)*.1,
-    o:Math.random()*.5+.15, ph:Math.random()*6.28,
-    c:Math.random()<.09?'255,122,41':'98,217,255'
-  });
-  var t=0;
-  (function fr(){
-    t++; ctx.clearRect(0,0,W,H);
-    for(var i=0;i<N;i++){
-      var p=P[i];
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<-5)p.x=W+5; if(p.x>W+5)p.x=-5;
-      if(p.y<-5)p.y=H+5; if(p.y>H+5)p.y=-5;
-      var tw=p.o*(0.6+0.4*Math.sin(t*.02+p.ph));
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.28);
-      ctx.fillStyle='rgba('+p.c+','+tw+')';
-      ctx.shadowColor='rgba('+p.c+',.8)'; ctx.shadowBlur=6;
-      ctx.fill(); ctx.shadowBlur=0;
-    }
-    requestAnimationFrame(fr);
-  })();
-})();
-</script>
+</div></section>
+</main>
+<footer><div class="wrap">
+  <div><b>Fariya Raza</b>AI Systems Engineer<br><span class="muted">AI systems · automation · data · product</span></div>
+  <ul><li><a href="systems/">Systems</a></li><li><a href="services.html">Services</a></li><li><a href="./#about">About</a></li><li><a href="start-a-project.html">Start a project</a></li></ul>
+  <ul><li><a href="https://www.linkedin.com/in/fariyar/" target="_blank" rel="noopener">LinkedIn ↗</a></li><li><a href="https://github.com/FariyaR" target="_blank" rel="noopener">GitHub ↗</a></li><li><a href="mailto:sy.faraza2899@gmail.com">sy.faraza2899@gmail.com</a></li><li><a href="privacy.html">Privacy</a></li></ul>
+  <div class="end"><span>Karachi · UTC+5</span><span>© 2026 Fariya Raza</span></div>
+</div></footer>
+<script src="js/site.js" defer></script>
 </body>
 </html>

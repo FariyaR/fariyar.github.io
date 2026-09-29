@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creative Generation Pipeline · case study · Fariya Raza</title>
+<meta name="description" content="On-brand ad creatives at volume, QA-checked by a vision model. 100+ creatives a day for an EU education brand, each checked against brand rules before a human sees it, at 78% lower inference cost.">
+<link rel="canonical" href="https://fariyar.github.io/systems/creative-pipeline/">
+<meta property="og:type" content="website"><meta property="og:title" content="Creative Generation Pipeline · case study · Fariya Raza"><meta property="og:description" content="On-brand ad creatives at volume, QA-checked by a vision model. 100+ creatives a day for an EU education brand, each checked against brand rules before a human sees it, at 78% lower inference cost."><meta property="og:url" content="https://fariyar.github.io/systems/creative-pipeline/"><meta property="og:image" content="https://fariyar.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Creative Generation Pipeline · case study · Fariya Raza"><meta name="twitter:description" content="On-brand ad creatives at volume, QA-checked by a vision model. 100+ creatives a day for an EU education brand, each checked against brand rules before a human sees it, at 78% lower inference cost."><meta name="twitter:image" content="https://fariyar.github.io/og-image.png">
+<meta name="theme-color" content="#0C0F14">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"Creative Generation Pipeline","author":{"@type":"Person","name":"Fariya Raza"},"url":"https://fariyar.github.io/systems/creative-pipeline/","description":"On-brand ad creatives at volume, QA-checked by a vision model"}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="pill">
+  <a class="brand" href="../.././"><i></i><span>Fariya Raza</span></a>
+  <ul id="menu"><li><a href="../../systems/" aria-current="page">Systems</a></li><li><a href="../../services.html">Services</a></li><li><a href="../.././#about">About</a></li><li><a href="../../partnership.html">Betterlab</a></li>
+    <li class="cta-nav"><a class="btn primary small" href="../../start-a-project.html">Start a project</a></li></ul>
+  <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><svg class="i" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+<main id="main">
+
+<section class="case-hero"><div class="wrap">
+  <span class="meta">System 02</span><h1 style="margin-top:8px">Creative Generation Pipeline</h1><p class="lede" style="margin-top:12px">On-brand ad creatives at volume, QA-checked by a vision model. 100+ creatives a day for an EU education brand, each checked against brand rules before a human sees it, at 78% lower inference cost.</p>
+  <div class="kpis"><div><b>100+</b><span>creatives a day, QA-checked</span></div></div>
+</div></section>
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="card" style="margin-bottom:var(--s4)"><div class="pipe-wrap" data-retry="3,2">
+  <ol class="pipe" aria-label="Pipeline steps"><li><button type="button" data-note="A row in the content sheet describes the campaign angle.">Brief</button></li><li><button type="button" data-note="Brand context is cached; only the angle changes per run.">Prompt</button></li><li><button type="button" data-note="Image model produces the candidate creative.">Generate</button></li><li><button type="button" class=gate data-note="A vision model checks the image against written brand rules.">Vision QA</button></li><li><button type="button" data-note="Failed creatives are regenerated once with the QA feedback.">Regenerate</button></li><li><button type="button" data-note="Passing creatives are filed and logged for the ads team.">Approve</button></li></ol>
+  <div class="pipe-note" aria-live="polite"></div>
+  <div class="pipe-ctl"><button type="button" data-play aria-pressed="true">Pause</button><span class="pipe-hint">Hover a step for what it does</span></div>
+  <p class="sr" style="position:absolute;left:-9999px">Text version: Brief → Prompt → Generate → Vision QA → Regenerate → Approve</p>
+</div></div>
+  <div class="case-grid"><article class="case">
+    <h3>Problem</h3><p>The brand needed a steady stream of Meta ad creatives without a designer reviewing every image.</p>
+    <h3>What I built</h3><p>A scheduled n8n pipeline: brief → cached prompt → image generation → vision-model QA against written brand rules → automatic regeneration on failure, capped.</p>
+    <h3>Key engineering decisions</h3><ul><li>Prompt caching on the stable brand context cut per-image inference cost by 78%.</li><li>A vision model reviews every output against explicit rules (logo placement, palette, text density) rather than a human eyeballing batches.</li><li>Capped retries: a creative that fails twice is parked for review instead of looping.</li></ul>
+    <h3>Validation and QA</h3><p>Every creative carries its QA verdict and the rule it passed or failed; the pipeline logs all runs.</p>
+    <h3>Result</h3><p>100+ QA-checked creatives a day, running on schedule whether anyone is watching or not.</p>
+  </article>
+  <aside class="case-side"><div class="card"><dl><dt>Stack</dt><dd>n8n · Claude · Image generation · Vision QA · Meta Ads</dd><dt>Status</dt><dd>In production</dd><dt>Role</dt><dd>Design, build, validation, deployment</dd></dl>
+    <a class="btn primary" href="../../start-a-project.html?type=automation" style="margin-top:22px;width:100%;justify-content:center">Build something like this</a></div></aside></div>
+  <nav class="pager" aria-label="Case studies"><a href="../leadforge/">← LeadForge AI</a><a href="../document-intelligence/">Tournament Document Intelligence →</a></nav>
+</div></section>
+</main>
+<footer><div class="wrap">
+  <div><b>Fariya Raza</b>AI Systems Engineer<br><span class="muted">AI systems · automation · data · product</span></div>
+  <ul><li><a href="../../systems/">Systems</a></li><li><a href="../../services.html">Services</a></li><li><a href="../.././#about">About</a></li><li><a href="../../start-a-project.html">Start a project</a></li></ul>
+  <ul><li><a href="https://www.linkedin.com/in/fariyar/" target="_blank" rel="noopener">LinkedIn ↗</a></li><li><a href="https://github.com/FariyaR" target="_blank" rel="noopener">GitHub ↗</a></li><li><a href="mailto:sy.faraza2899@gmail.com">sy.faraza2899@gmail.com</a></li><li><a href="../../privacy.html">Privacy</a></li></ul>
+  <div class="end"><span>Karachi · UTC+5</span><span>© 2026 Fariya Raza</span></div>
+</div></footer>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>

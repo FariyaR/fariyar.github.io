@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E-commerce Fulfillment ETL · case study · Fariya Raza</title>
+<meta name="description" content="Revenue numbers that reconcile, every night. 68,890 orders reconciled against the legacy system across 25 audited columns.">
+<link rel="canonical" href="https://fariyar.github.io/systems/ecommerce-etl/">
+<meta property="og:type" content="website"><meta property="og:title" content="E-commerce Fulfillment ETL · case study · Fariya Raza"><meta property="og:description" content="Revenue numbers that reconcile, every night. 68,890 orders reconciled against the legacy system across 25 audited columns."><meta property="og:url" content="https://fariyar.github.io/systems/ecommerce-etl/"><meta property="og:image" content="https://fariyar.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="E-commerce Fulfillment ETL · case study · Fariya Raza"><meta name="twitter:description" content="Revenue numbers that reconcile, every night. 68,890 orders reconciled against the legacy system across 25 audited columns."><meta name="twitter:image" content="https://fariyar.github.io/og-image.png">
+<meta name="theme-color" content="#0C0F14">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../css/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","name":"E-commerce Fulfillment ETL","author":{"@type":"Person","name":"Fariya Raza"},"url":"https://fariyar.github.io/systems/ecommerce-etl/","description":"Revenue numbers that reconcile, every night"}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="pill">
+  <a class="brand" href="../.././"><i></i><span>Fariya Raza</span></a>
+  <ul id="menu"><li><a href="../../systems/" aria-current="page">Systems</a></li><li><a href="../../services.html">Services</a></li><li><a href="../.././#about">About</a></li><li><a href="../../partnership.html">Betterlab</a></li>
+    <li class="cta-nav"><a class="btn primary small" href="../../start-a-project.html">Start a project</a></li></ul>
+  <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu"><svg class="i" viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+<main id="main">
+
+<section class="case-hero"><div class="wrap">
+  <span class="meta">System 06</span><h1 style="margin-top:8px">E-commerce Fulfillment ETL</h1><p class="lede" style="margin-top:12px">Revenue numbers that reconcile, every night. 68,890 orders reconciled against the legacy system across 25 audited columns.</p>
+  <div class="kpis"><div><b>68,890</b><span>orders reconciled</span></div></div>
+</div></section>
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="card" style="margin-bottom:var(--s4)"><div class="pipe-wrap">
+  <ol class="pipe" aria-label="Pipeline steps"><li><button type="button" data-note="Orders and shipments via GraphQL.">ShipHero</button></li><li><button type="button" data-note="Paginated pulls into staging.">n8n</button></li><li><button type="button" data-note="Staging tables, raw.">SQL Server</button></li><li><button type="button" data-note="Dedup, voids, silver tables.">Stored procs</button></li><li><button type="button" data-note="Order and sales facts.">Fact tables</button></li><li><button type="button" data-note="BI-ready datasets.">Power BI</button></li></ol>
+  <div class="pipe-note" aria-live="polite"></div>
+  <div class="pipe-ctl"><button type="button" data-play aria-pressed="true">Pause</button><span class="pipe-hint">Hover a step for what it does</span></div>
+  <p class="sr" style="position:absolute;left:-9999px">Text version: ShipHero → n8n → SQL Server → Stored procs → Fact tables → Power BI</p>
+</div></div>
+  <div class="case-grid"><article class="case">
+    <h3>Problem</h3><p>A US retailer needed fulfillment data in SQL Server, but the existing numbers did not match the legacy system.</p>
+    <h3>What I built</h3><p>ShipHero → SQL Server ingestion via n8n and GraphQL into staging tables, stored procedures building silver and fact tables, and a parity audit against the legacy production system.</p>
+    <h3>Key engineering decisions</h3><ul><li>Staging then stored procedures, so every transformation is inspectable in SQL.</li><li>Explicit handling of voided shipments and multi-cause data inflation found during root-cause debugging.</li><li>Column-by-column parity audit before cutover, not sampling.</li></ul>
+    <h3>Validation and QA</h3><p>Parity verified column by column: 68,890 orders, 25 columns, alongside the client’s QC team.</p>
+    <h3>Result</h3><p>Nightly sync the finance team trusts. Delivered through TheProject19.</p>
+  </article>
+  <aside class="case-side"><div class="card"><dl><dt>Stack</dt><dd>n8n · GraphQL · SQL Server · Stored procedures · Power BI</dd><dt>Status</dt><dd>In production</dd><dt>Role</dt><dd>Design, build, validation, deployment</dd></dl>
+    <a class="btn primary" href="../../start-a-project.html?type=automation" style="margin-top:22px;width:100%;justify-content:center">Build something like this</a></div></aside></div>
+  <nav class="pager" aria-label="Case studies"><a href="../dentasmile/">← DentaSmile AI</a><a href="../leadforge/">LeadForge AI →</a></nav>
+</div></section>
+</main>
+<footer><div class="wrap">
+  <div><b>Fariya Raza</b>AI Systems Engineer<br><span class="muted">AI systems · automation · data · product</span></div>
+  <ul><li><a href="../../systems/">Systems</a></li><li><a href="../../services.html">Services</a></li><li><a href="../.././#about">About</a></li><li><a href="../../start-a-project.html">Start a project</a></li></ul>
+  <ul><li><a href="https://www.linkedin.com/in/fariyar/" target="_blank" rel="noopener">LinkedIn ↗</a></li><li><a href="https://github.com/FariyaR" target="_blank" rel="noopener">GitHub ↗</a></li><li><a href="mailto:sy.faraza2899@gmail.com">sy.faraza2899@gmail.com</a></li><li><a href="../../privacy.html">Privacy</a></li></ul>
+  <div class="end"><span>Karachi · UTC+5</span><span>© 2026 Fariya Raza</span></div>
+</div></footer>
+<script src="../../js/site.js" defer></script>
+</body>
+</html>
