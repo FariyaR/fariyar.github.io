@@ -418,8 +418,5 @@ h2.mask .ml:nth-child(2) span{transition-delay:.08s}h2.mask .ml:nth-child(3) spa
 /* light theme: things tokens cannot express */
 :root[data-theme=light] .holo-panel img{mix-blend-mode:normal;opacity:1;border:1px solid var(--border)}
 :root[data-theme=light] .robot-scene .visor{opacity:.6}
-/* light: no cast shadow or floor glow, so the gaps between the robot's limbs stay white */
-:root[data-theme=light] .robot-scene .robot{filter:none}
-:root[data-theme=light] .robot-scene .floor{display:none}
 :root[data-theme=light] .pipe button.lit{box-shadow:0 0 0 3px rgba(var(--accent-rgb),.12),0 0 18px -4px rgba(var(--accent-rgb),.3)}
 :root[data-theme=light] .orbit .sat text{fill:var(--text-2)}
