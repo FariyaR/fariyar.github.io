@@ -42,8 +42,7 @@
   --shadow-stack:0 -12px 40px -20px rgba(15,23,42,.18);
   --shadow-core:0 20px 40px -24px rgba(15,23,42,.25);
   --shadow-uc:0 40px 80px -40px rgba(15,23,42,.28);
-  --robot-shadow:0 24px 40px rgba(15,23,42,.22);
-  --scene-light:rgba(11,122,142,.08); --scene-floor:rgba(11,122,142,.14);
+  --scene-light:rgba(11,122,142,.05);
 }
 @media(max-width:900px){:root{--sec:80px;--s5:48px}}
 @media(max-width:600px){:root{--sec:60px;--s5:40px;--s4:28px}}
