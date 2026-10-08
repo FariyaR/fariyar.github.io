@@ -1,7 +1,9 @@
 :root{
   --bg:#0C0F14; --surface:#12161D; --surface-2:#181D26; --border:#232A35; --border-strong:#2F3846;
   --text:#EEF1F5; --text-2:#B7BFCA; --muted:#7F8A99;
-  --accent:#38D6E9; --accent-strong:#7BE7F3; --accent-soft:rgba(56,214,233,.10); --accent-line:rgba(56,214,233,.35);
+  --accent:#38D6E9; --accent-strong:#7BE7F3; --accent-rgb:56,214,233; --accent-soft:rgba(56,214,233,.10); --accent-line:rgba(56,214,233,.35); --on-accent:#06141a;
+  --glass:rgba(12,15,20,.72); --glass-strong:rgba(12,15,20,.9); --holo:rgba(18,22,29,.82); --panel:rgba(18,22,29,.96);
+  --shadow-deep:0 40px 80px -40px rgba(0,0,0,.9); --shadow-mid:0 20px 40px -20px rgba(0,0,0,.9); --shadow-soft:0 12px 30px -12px rgba(0,0,0,.8); --robot-shadow:drop-shadow(0 24px 40px rgba(0,0,0,.6));
   --ok:#5BD69A; --warn:#F0A44B; --danger:#F2707A;
   --font:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
   --mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
@@ -9,6 +11,16 @@
   --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --sec:112px;
   --maxw:1160px;
   --shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 20px 50px -30px rgba(0,0,0,.8);
+}
+[data-theme=light]{
+  --bg:#F5F7FA; --surface:#FFFFFF; --surface-2:#EDF1F6; --border:#DFE5EC; --border-strong:#C9D2DD;
+  --text:#0F1520; --text-2:#3F4B5B; --muted:#6B7787;
+  --accent:#0E9DB3; --accent-strong:#0B8598; --accent-rgb:14,157,179; --accent-soft:rgba(14,157,179,.10); --accent-line:rgba(14,157,179,.40); --on-accent:#FFFFFF;
+  --ok:#1F9D63; --warn:#C27A16; --danger:#D64550;
+  --glass:rgba(245,247,250,.72); --glass-strong:rgba(245,247,250,.92); --holo:rgba(255,255,255,.85); --panel:rgba(255,255,255,.97);
+  --shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 20px 50px -30px rgba(15,25,40,.25);
+  --shadow-deep:0 40px 80px -40px rgba(15,25,40,.35); --shadow-mid:0 20px 40px -20px rgba(15,25,40,.3); --shadow-soft:0 12px 30px -12px rgba(15,25,40,.25); --robot-shadow:drop-shadow(0 24px 40px rgba(15,25,40,.28));
+  color-scheme:light;
 }
 @media(max-width:900px){:root{--sec:80px;--s5:48px}}
 @media(max-width:600px){:root{--sec:60px;--s5:40px;--s4:28px}}
