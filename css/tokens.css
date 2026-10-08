@@ -1,7 +1,9 @@
 :root{
+  color-scheme:dark;
   --bg:#0C0F14; --surface:#12161D; --surface-2:#181D26; --border:#232A35; --border-strong:#2F3846;
   --text:#EEF1F5; --text-2:#B7BFCA; --muted:#7F8A99;
-  --accent:#38D6E9; --accent-strong:#7BE7F3; --accent-soft:rgba(56,214,233,.10); --accent-line:rgba(56,214,233,.35);
+  --accent:#38D6E9; --accent-rgb:56,214,233; --accent-strong:#7BE7F3; --accent-strong-rgb:123,231,243; --accent-soft:rgba(56,214,233,.10); --accent-line:rgba(56,214,233,.35);
+  --on-accent:#06141a;
   --ok:#5BD69A; --warn:#F0A44B; --danger:#F2707A;
   --font:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
   --mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
@@ -9,6 +11,39 @@
   --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --sec:112px;
   --maxw:1160px;
   --shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 20px 50px -30px rgba(0,0,0,.8);
+  /* glass surfaces and shadows that are not plain tokens */
+  --nav-bg:rgba(12,15,20,.72); --nav-bg-scrolled:rgba(12,15,20,.9);
+  --glass:rgba(18,22,29,.82); --glass-solid:rgba(18,22,29,.96);
+  --shadow-pop:0 10px 30px -18px rgba(0,0,0,.9);
+  --shadow-menu:0 20px 40px -20px rgba(0,0,0,.9);
+  --shadow-float:0 12px 30px -12px rgba(0,0,0,.8);
+  --shadow-panel:0 30px 60px -20px rgba(0,0,0,.9);
+  --shadow-stack:0 -12px 40px -20px rgba(0,0,0,.8);
+  --shadow-core:0 20px 40px -24px rgba(0,0,0,.9);
+  --shadow-uc:0 40px 80px -40px rgba(0,0,0,.9);
+  --robot-shadow:0 24px 40px rgba(0,0,0,.6);
+  --scene-light:rgba(56,214,233,.14); --scene-floor:rgba(56,214,233,.18);
+}
+/* light theme: set by the toggle in the nav, persisted in localStorage */
+:root[data-theme=light]{
+  color-scheme:light;
+  --bg:#F6F8FB; --surface:#FFFFFF; --surface-2:#EEF2F7; --border:#DCE2EA; --border-strong:#C5CED9;
+  --text:#0F141B; --text-2:#3E4A5A; --muted:#5F6C7E;
+  --accent:#0B7A8E; --accent-rgb:11,122,142; --accent-strong:#086A7C; --accent-strong-rgb:8,106,124; --accent-soft:rgba(11,122,142,.10); --accent-line:rgba(11,122,142,.45);
+  --on-accent:#FFFFFF;
+  --ok:#1A7F50; --warn:#A4620F; --danger:#C2303E;
+  --shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 20px 50px -30px rgba(15,23,42,.22);
+  --nav-bg:rgba(246,248,251,.78); --nav-bg-scrolled:rgba(246,248,251,.92);
+  --glass:rgba(255,255,255,.84); --glass-solid:rgba(255,255,255,.97);
+  --shadow-pop:0 10px 30px -18px rgba(15,23,42,.28);
+  --shadow-menu:0 20px 40px -20px rgba(15,23,42,.28);
+  --shadow-float:0 12px 30px -12px rgba(15,23,42,.22);
+  --shadow-panel:0 30px 60px -20px rgba(15,23,42,.3);
+  --shadow-stack:0 -12px 40px -20px rgba(15,23,42,.18);
+  --shadow-core:0 20px 40px -24px rgba(15,23,42,.25);
+  --shadow-uc:0 40px 80px -40px rgba(15,23,42,.28);
+  --robot-shadow:0 24px 40px rgba(15,23,42,.22);
+  --scene-light:rgba(11,122,142,.08); --scene-floor:rgba(11,122,142,.14);
 }
 @media(max-width:900px){:root{--sec:80px;--s5:48px}}
 @media(max-width:600px){:root{--sec:60px;--s5:40px;--s4:28px}}

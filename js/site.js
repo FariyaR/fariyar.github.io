@@ -2,6 +2,19 @@
 (function(){
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* theme: dark by default, light when chosen. The inline script in <head> applies the saved choice before first paint. */
+  var root=document.documentElement, themeBtns=[].slice.call(document.querySelectorAll('[data-theme-toggle]')), themeMeta=document.querySelector('meta[name=theme-color]'), TK={};
+  function readTokens(){ var cs=getComputedStyle(root); TK.accentRGB=cs.getPropertyValue('--accent-rgb').trim()||'56,214,233'; TK.text=cs.getPropertyValue('--text').trim()||'#EEF1F5'; }
+  function applyTheme(){ var light=root.getAttribute('data-theme')==='light';
+    themeBtns.forEach(function(b){ b.setAttribute('aria-label', light?'Switch to dark mode':'Switch to light mode'); });
+    if(themeMeta) themeMeta.setAttribute('content', light?'#F6F8FB':'#0C0F14');
+    readTokens(); }
+  themeBtns.forEach(function(b){ b.addEventListener('click',function(){ var light=root.getAttribute('data-theme')!=='light';
+    if(light) root.setAttribute('data-theme','light'); else root.removeAttribute('data-theme');
+    try{ localStorage.setItem('theme', light?'light':'dark'); }catch(e){}
+    applyTheme(); }); });
+  applyTheme();
+
   /* nav */
   var nav=document.querySelector('.nav'), burger=document.querySelector('.burger');
   var onScroll=function(){ if(nav) nav.classList.toggle('scrolled', scrollY>8); };
@@ -79,7 +92,7 @@
     fit(); if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fit);
     var pks=[].slice.call(orbit.querySelectorAll('.pk')).map(function(c){ var k=+c.dataset.k; return {el:c,s:sats[k],out:c.dataset.dir==='out',phase:(k*0.17)%1,speed:1/3400}; });
     var coreG=0, last=0, running=false, vis=false;
-    function paint(){ sats.forEach(function(s){ var g=s.glow; s.halo.style.opacity=(g*.55).toFixed(3); s.pill.setAttribute('stroke','rgba(56,214,233,'+(.22+.78*g).toFixed(3)+')'); s.pill.style.fill=g>.02?'rgba(56,214,233,'+(g*.16).toFixed(3)+')':''; s.tx.style.fill=g>.5?'#EEF1F5':''; });
+    function paint(){ sats.forEach(function(s){ var g=s.glow; s.halo.style.opacity=(g*.55).toFixed(3); s.pill.setAttribute('stroke','rgba('+TK.accentRGB+','+(.22+.78*g).toFixed(3)+')'); s.pill.style.fill=g>.02?'rgba('+TK.accentRGB+','+(g*.16).toFixed(3)+')':''; s.tx.style.fill=g>.5?TK.text:''; });
       if(coreGlow) coreGlow.style.opacity=(coreG*.5).toFixed(3); }
     function frame(ts){ if(!running) return; var dt=last?Math.min(48,ts-last):16; last=ts;
       sats.forEach(function(s){ s.glow=Math.max(0,s.glow-dt/520); }); coreG=Math.max(0,coreG-dt/520);
