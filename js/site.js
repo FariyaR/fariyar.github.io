@@ -146,21 +146,54 @@
     if(reduce&&play){ play.textContent='Play'; play.setAttribute('aria-pressed','false'); }
   });
 
-  /* calculator */
-  var H=document.getElementById('c-hours'); if(H){
-    var P=document.getElementById('c-people'),R=document.getElementById('c-rate');
-    var $=function(id){return document.getElementById(id)}, usd=function(n){return '$'+Math.round(n).toLocaleString('en-US')};
+  /* calculator: one init for the page and for the pop-up (root = the [data-calc] block) */
+  function initCalc(root, base){
+    var H=root.querySelector('#c-hours'), P=root.querySelector('#c-people'), R=root.querySelector('#c-rate'); if(!H||!P||!R) return;
+    var $=function(id){return root.querySelector('#'+id)}, usd=function(n){return '$'+Math.round(n).toLocaleString('en-US')}, cta=root.querySelector('[data-calc-cta]');
     function calc(){ var h=+H.value,p=+P.value,r=+R.value, hm=h*p*4.33, cm=hm*r;
       $('o-hours-in').value=h; $('o-people-in').value=p; $('o-rate-in').value='$'+r;
       $('o-hours').textContent=Math.round(hm).toLocaleString('en-US')+' h'; $('o-month').textContent=usd(cm); $('o-year').textContent=usd(cm*12);
-      $('o-fte').textContent=(hm/160).toFixed(2)+' FTE'; $('o-weeks').textContent='≈ '+(hm/40).toFixed(1)+' work weeks of one full-time person, per month'; }
+      $('o-fte').textContent=(hm/160).toFixed(2)+' FTE'; $('o-weeks').textContent='≈ '+(hm/40).toFixed(1)+' work weeks of one full-time person, per month';
+      if(cta) cta.href=(base||'')+'start-a-project.html?est='+encodeURIComponent(usd(cm*12)+' per year ('+h+' h/week × '+p+' people × $'+r+'/h)'); }
     [H,P,R].forEach(function(i){i.addEventListener('input',calc)}); calc(); }
+  var calcOnPage=document.querySelector('[data-calc]'); if(calcOnPage) initCalc(calcOnPage,'');
+
+  /* calculator pop-up: floating button bottom-right on every other page, a nudge bubble pointing at it, and a dialog filled from calculator.html */
+  var calcLink=document.querySelector('.nav a[href$="calculator.html"]');
+  if(!calcOnPage && calcLink){
+    var calcHref=calcLink.getAttribute('href'), calcBase=calcHref.replace(/calculator\.html$/,'');
+    var fab=document.createElement('a'); fab.className='calc-fab'; fab.href=calcHref; fab.setAttribute('aria-haspopup','dialog');
+    fab.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h2M12 11h2M16 11h2M8 15h2M12 15h2M16 15h2M8 19h2M12 19h2M16 19h2"/></svg><span class="long">What’s manual work costing you?</span><span class="short">Cost calculator</span>';
+    var nudge=document.createElement('div'); nudge.className='calc-nudge'; nudge.hidden=true;
+    nudge.innerHTML='<p><b>Three sliders, ten seconds.</b> See what repetitive work costs your team per year.</p><button type="button" aria-label="Dismiss">×</button>';
+    var dlg=document.createElement('dialog'); dlg.className='calc-modal'; dlg.setAttribute('aria-labelledby','cm-title');
+    dlg.innerHTML='<div class="cm-head"><div><span class="eyebrow">Planning calculator</span><h2 id="cm-title">What is manual work costing you?</h2></div><button type="button" class="cm-close" aria-label="Close">×</button></div><div class="cm-body"><p class="muted">Loading the calculator…</p></div><div class="cm-foot"><a href="'+calcHref+'">Open the full calculator ↗</a></div>';
+    document.body.appendChild(fab); document.body.appendChild(nudge); document.body.appendChild(dlg);
+    var cmBody=dlg.querySelector('.cm-body'), loading=null;
+    function loadCalc(){ if(!loading) loading=fetch(calcHref,{credentials:'same-origin'}).then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); }).then(function(html){
+        var c=new DOMParser().parseFromString(html,'text/html').querySelector('[data-calc]'); if(!c) throw new Error('no calculator');
+        cmBody.innerHTML=''; cmBody.appendChild(document.importNode(c,true)); initCalc(cmBody,calcBase); }).catch(function(e){ loading=null; throw e; });
+      return loading; }
+    function hideNudge(){ nudge.hidden=true; try{ sessionStorage.setItem('calc-nudge','1'); }catch(e){} }
+    nudge.querySelector('button').addEventListener('click',hideNudge);
+    var seen=false; try{ seen=sessionStorage.getItem('calc-nudge')==='1'; }catch(e){}
+    if(!seen) setTimeout(function(){ if(dlg.open) return; nudge.hidden=false; loadCalc().catch(function(){}); },3500);
+    var warm=function(){ loadCalc().catch(function(){}); }; fab.addEventListener('mouseenter',warm,{once:true}); fab.addEventListener('focus',warm,{once:true});
+    if(typeof dlg.showModal==='function'){
+      fab.addEventListener('click',function(e){ e.preventDefault(); hideNudge(); dlg.showModal(); document.body.classList.add('modal-open');
+        loadCalc().then(function(){ var f=cmBody.querySelector('input'); if(f&&!matchMedia('(pointer:coarse)').matches) f.focus(); }).catch(function(){ dlg.close(); location.href=calcHref; }); });
+      dlg.querySelector('.cm-close').addEventListener('click',function(){ dlg.close(); });
+      dlg.addEventListener('click',function(e){ if(e.target===dlg) dlg.close(); });
+      dlg.addEventListener('close',function(){ document.body.classList.remove('modal-open'); fab.focus(); });
+    }
+  }
 
   /* intake form: honest states, no-JS fallback keeps action attribute */
   var form=document.getElementById('intake'); if(form){
     var st=document.getElementById('f-status'), btn=form.querySelector('button[type=submit]');
     if(new URLSearchParams(location.search).has('sent')){ document.getElementById('done').classList.add('show'); form.hidden=true; history.replaceState({},'',location.pathname); }
     var t=new URLSearchParams(location.search).get('type'), sel=document.getElementById('ptype'); if(t&&sel){ for(var i=0;i<sel.options.length;i++){ if(sel.options[i].value===t){sel.selectedIndex=i;break;} } }
+    var est=new URLSearchParams(location.search).get('est'), ta=form.querySelector('textarea'); if(est&&ta&&!ta.value){ ta.value='Planning estimate from the calculator: '+est+'.\n\nWhat is still done by hand: '; ta.focus(); try{ ta.setSelectionRange(ta.value.length,ta.value.length); }catch(e){} }
     form.addEventListener('submit',function(e){ e.preventDefault(); btn.disabled=true; st.className='status'; st.textContent='Sending…';
       fetch(form.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)}).then(function(r){return r.json()}).then(function(d){
         if(d.success){ st.className='status ok'; st.textContent='Delivered.'; document.getElementById('done').classList.add('show'); form.hidden=true; document.getElementById('done').scrollIntoView({behavior:'smooth',block:'center'}); }
