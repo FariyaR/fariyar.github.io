@@ -427,3 +427,39 @@ h2.mask .ml:nth-child(2) span{transition-delay:.08s}h2.mask .ml:nth-child(3) spa
 [data-theme=light] .sec.band{background:#FAFBFD}
 [data-theme=light] .marquee li{color:var(--text-2)}
 [data-theme=light] ::selection{background:var(--accent);color:#fff}
+
+/* calculator: nav highlight, page extras, floating button, nudge bubble and pop-up */
+.nav ul a.hot{color:var(--accent);position:relative;padding-right:20px}
+.nav ul a.hot::after{content:'';position:absolute;right:8px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:var(--accent);animation:hotdot 2.4s ease-out infinite}
+.nav ul a.hot:hover{color:var(--accent-strong);background:var(--accent-soft)}
+@keyframes hotdot{0%{box-shadow:0 0 0 0 rgba(var(--accent-rgb),.6)}100%{box-shadow:0 0 0 8px rgba(var(--accent-rgb),0)}}
+.out .calc-cta{display:block;border:0;padding:18px 0 0}.calc-cta .btn{width:100%;justify-content:center}
+.calc-why .card h3{font-size:1.05rem;margin-bottom:8px}.calc-why .card p{font-size:14.5px;color:var(--text-2)}.calc-why .card a{color:var(--accent)}
+.calc-fab{position:fixed;right:20px;bottom:20px;z-index:90;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 20px 0 16px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-family:var(--font);font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 18px 40px -16px rgba(var(--accent-rgb),.75),var(--shadow-mid);transition:transform .2s,background .2s}
+.calc-fab:hover{transform:translateY(-2px);background:var(--accent-strong)}
+.calc-fab svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.calc-fab .short{display:none}
+.calc-fab::before{content:'';position:absolute;inset:-4px;border-radius:999px;border:2px solid rgba(var(--accent-rgb),.7);animation:fabring 2.4s ease-out 3;opacity:0;pointer-events:none}
+@keyframes fabring{0%{transform:scale(.92);opacity:.9}100%{transform:scale(1.3);opacity:0}}
+.calc-nudge{position:fixed;right:20px;bottom:88px;z-index:90;max-width:280px;padding:14px 40px 14px 16px;border-radius:14px;background:var(--surface);border:1px solid var(--border-strong);box-shadow:var(--shadow-deep);color:var(--text);font-size:14px;line-height:1.45;animation:nudgein .4s ease-out}
+.calc-nudge::after{content:'';position:absolute;right:30px;bottom:-7px;width:12px;height:12px;background:var(--surface);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);transform:rotate(45deg)}
+.calc-nudge p{margin:0}.calc-nudge b{color:var(--accent)}
+.calc-nudge button{position:absolute;right:8px;top:6px;background:none;border:0;color:var(--muted);font-size:18px;cursor:pointer;line-height:1;padding:4px 6px;font-family:var(--font)}
+.calc-nudge button:hover{color:var(--text)}
+@keyframes nudgein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+dialog.calc-modal{width:min(980px,92vw);max-height:90vh;padding:0;border:1px solid var(--border-strong);border-radius:var(--r-lg);background:var(--surface);color:var(--text);box-shadow:var(--shadow-deep);overflow:auto;font-family:var(--font)}
+dialog.calc-modal::backdrop{background:var(--backdrop);backdrop-filter:blur(6px)}
+.cm-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:26px 28px 4px}
+.cm-head .eyebrow{margin-bottom:8px}.cm-head h2{font-size:clamp(1.3rem,2.4vw,1.7rem)}
+.cm-close{background:none;border:1px solid var(--border);border-radius:999px;width:36px;height:36px;color:var(--muted);font-size:20px;line-height:1;cursor:pointer;flex:none;font-family:var(--font)}
+.cm-close:hover{color:var(--text);border-color:var(--border-strong)}
+.cm-body{padding:14px 28px 6px}.cm-body .calc{gap:18px}.cm-body .card{padding:22px}
+.cm-foot{display:flex;justify-content:flex-end;padding:6px 28px 22px;font-size:14px}.cm-foot a{color:var(--text-2)}.cm-foot a:hover{color:var(--text)}
+body.modal-open{overflow:hidden}
+@media(max-width:600px){
+  .calc-fab{right:14px;bottom:14px;min-height:48px;padding:0 16px 0 14px;font-size:14px}.calc-fab .long{display:none}.calc-fab .short{display:inline}
+  .calc-nudge{right:14px;bottom:74px;max-width:calc(100vw - 28px)}
+  dialog.calc-modal{width:100%;max-width:100%;max-height:94vh;margin:auto 0 0;border-radius:20px 20px 0 0;border-bottom:0}
+  .cm-head,.cm-body,.cm-foot{padding-left:18px;padding-right:18px}.cm-body .card{padding:18px}
+}
+@media(prefers-reduced-motion:reduce){.calc-fab::before,.nav ul a.hot::after{animation:none}.calc-nudge{animation:none}}
