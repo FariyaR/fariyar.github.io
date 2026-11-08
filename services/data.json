@@ -1,0 +1,387 @@
+[
+ {
+  "slug": "construction", "name": "Construction and trades", "short": "Construction", "sub": "Contractors, builders, trades", "type": "automation", "calc": [8, 2, 40],
+  "question_lede": "Jobs come in by phone and WhatsApp, pricing happens from site photos, and the paperwork waits for the evening.",
+  "areas": [
+   {"slug": "quotes", "name": "Quotes and estimates", "pain": "Quote requests arrive as WhatsApp photos and voice notes, typed up after hours.",
+    "hook": "Still typing up quotes at night from WhatsApp photos and voice notes?",
+    "services": [
+     {"name": "Quote drafted from WhatsApp photos and voice notes", "what": "Photos, voice notes and messages from WhatsApp or email go into one intake. The system pulls out scope, quantities and site details and drafts the quote against your price list, in your template.", "human": "You approve every quote before it is sent.", "capability": "Automation"},
+     {"name": "Quote follow-ups that stop on reply", "what": "A sent quote gets a scheduled follow-up sequence in templates you signed off. A customer reply stops it and lands in your inbox.", "human": "You choose the templates and the schedule; a reply always goes to you.", "capability": "Automation"},
+     {"name": "Quote filed to the job in your CRM", "what": "Every quote, its photos and the thread are filed against the customer and the job in the tool you already run, so nothing lives only in a phone.", "human": "Nothing is deleted or merged without your say.", "capability": "Automation"}
+    ],
+    "proof_case": "document-intelligence", "proof_note": "Same mechanics: messy photos and scans in, validated records out. The client was a tournament data platform, not a contractor."},
+   {"slug": "supplier-paperwork", "name": "Supplier paperwork", "pain": "Invoices and delivery notes pile up as scans and phone photos until month end.",
+    "hook": "Still matching supplier invoices to jobs at month end, from a pile of photos?",
+    "services": [
+     {"name": "Invoices and delivery notes read into job costs", "what": "Scanned invoices, delivery notes and photographed receipts are read by a vision model, tied to the right supplier and job with fuzzy matching, and checked against quantities and totals before anything is written.", "human": "Documents that fail a check wait in a queue with the reason. You clear the queue.", "capability": "AI systems"},
+     {"name": "Delivery notes checked against the order", "what": "Each delivery note is compared with the purchase order line by line. Short deliveries and price differences are flagged the same day, not at invoice time.", "human": "You decide what to query with the supplier; the system only flags.", "capability": "AI systems"}
+    ],
+    "proof_case": "document-intelligence", "proof_note": "412 records, 0 validation errors on mixed PDFs and scans, with a hard validation gate. Built for tournament data, not construction."},
+   {"slug": "job-margins", "name": "Job costing and reporting", "pain": "Which jobs actually made money is a question for the accountant, months later.",
+    "hook": "Still finding out which jobs made money from the accountant, months later?",
+    "services": [
+     {"name": "Margin per job, refreshed every night", "what": "Quotes, supplier costs and timesheets from the tools you already run, pulled into one dataset with margin per job. Reconciled against your accounting totals before anyone relies on it.", "human": "You and your bookkeeper sign off the reconciliation before cutover. The report is read-only.", "capability": "Data systems"},
+     {"name": "Monday numbers in your inbox", "what": "A short scheduled report: jobs quoted, won, in progress, invoiced and overdue, with the numbers linked to their source. No dashboard to log into.", "human": "You read it. The system changes nothing in your books.", "capability": "Automation"}
+    ],
+    "proof_case": "ecommerce-etl", "proof_note": "68,890 orders reconciled across 25 audited columns for a retailer’s finance team. Same reconciliation work, different industry."}
+  ]
+ },
+ {
+  "slug": "manufacturing", "name": "Manufacturing and wholesale", "short": "Manufacturing & wholesale", "sub": "Factories, distributors, importers", "type": "data", "calc": [10, 3, 35],
+  "question_lede": "Orders arrive by email, stock lives in one system, accounting in another, and month end is where they disagree.",
+  "areas": [
+   {"slug": "order-intake", "name": "Order intake", "pain": "Purchase orders arrive as emailed PDFs and get retyped into the ERP line by line.",
+    "hook": "Still retyping purchase orders from PDF into the ERP, line by line?",
+    "services": [
+     {"name": "Purchase orders read from PDF and email", "what": "Emailed PDFs and scans in, validated order lines out. Customer part numbers and names are matched to your catalogue, and SKUs, quantities and prices are checked before an order reaches the ERP.", "human": "Orders that pass every check post automatically. Anything that fails waits for your order desk with the reason.", "capability": "AI systems"},
+     {"name": "Order confirmations sent from the ERP", "what": "Once an order posts, the confirmation with lead time and delivery date goes back to the customer from a template, and the thread is filed.", "human": "A person approves confirmations for new customers and anything over a limit you set.", "capability": "Automation"}
+    ],
+    "proof_case": "document-intelligence", "proof_note": "Messy PDFs and scans into validated records, 412 records and 0 validation errors. Tournament data, not purchase orders, so the shape matches and the industry does not."},
+   {"slug": "quoting", "name": "RFQs and quoting", "pain": "RFQs sit in the inbox until someone checks stock, lead times and the price list.",
+    "hook": "Still leaving RFQs in the inbox until someone has time to check stock and prices?",
+    "services": [
+     {"name": "Quote drafted from the RFQ", "what": "An RFQ arrives by email or PDF. The system drafts the quote from your price list, stock levels and lead times, in your template, and files it against the customer in your CRM.", "human": "A person approves every quote before it is sent.", "capability": "Automation"},
+     {"name": "Quote follow-ups and win/loss filed", "what": "Open quotes get a follow-up sequence that stops on reply. Outcomes are written back to the CRM so the pipeline is real, not remembered.", "human": "You set the cadence; replies land with a person.", "capability": "Automation"}
+    ],
+    "proof_case": "leadforge", "proof_note": "Drafting behind a QA gate with capped retries is the LeadForge pattern, built for outreach rather than quotes."},
+   {"slug": "reconciliation", "name": "Warehouse to finance", "pain": "The warehouse system, the ERP and the finance spreadsheet show three different totals.",
+    "hook": "Still explaining why the warehouse, the ERP and finance show three different totals?",
+    "services": [
+     {"name": "Warehouse and order data into SQL Server, nightly", "what": "Ingestion from your warehouse and order platforms into staging tables, then stored procedures building silver and fact tables, so every transformation is inspectable.", "human": "Your finance or QC team signs off a column-by-column parity audit before the new numbers replace the old ones.", "capability": "Data systems"},
+     {"name": "Power BI datasets that are not a spreadsheet", "what": "Shipments, stock movements and margins served as datasets Power BI reads directly, refreshed on schedule, with failures logged rather than hidden.", "human": "Finance reviews differences weekly; nothing is averaged away.", "capability": "Data systems"},
+     {"name": "Month-end pack built on schedule", "what": "The exports and pivot tables rebuilt by hand every month become a scheduled job that lands in the inbox with the numbers linked to their source.", "human": "The controller reads and signs off; the job never posts an adjustment.", "capability": "Automation"}
+    ],
+    "proof_case": "ecommerce-etl", "proof_note": "Warehouse platform, legacy system, finance team, parity audit: 68,890 orders reconciled across 25 audited columns. A US retailer, not a manufacturer."}
+  ]
+ },
+ {
+  "slug": "clinics", "name": "Healthcare clinics", "short": "Clinics", "sub": "Dental, cosmetic, physio, private practice", "type": "automation", "calc": [10, 2, 30],
+  "question_lede": "The front desk runs the book, the phone, WhatsApp and the paperwork, between patients.",
+  "areas": [
+   {"slug": "patient-enquiries", "name": "Patient enquiries and booking", "pain": "The same questions arrive on WhatsApp, Instagram and the phone all day.",
+    "hook": "Still answering “anything this week?” on WhatsApp between patients?",
+    "services": [
+     {"name": "Enquiries answered from your own FAQ and price list", "what": "One flow over WhatsApp, Instagram DMs and email drafts replies from your FAQ and price list and offers open slots from your booking system.", "human": "The front desk approves every reply before it sends. Anything clinical goes to a person, never the machine.", "capability": "Automation"},
+     {"name": "Reminders and recalls on schedule", "what": "Appointment reminders, recall follow-ups and unfinished treatment plan nudges run on a schedule and stop on reply.", "human": "You choose the wording and timing; replies always reach a person.", "capability": "Automation"},
+     {"name": "Reviews asked for at the right moment", "what": "After a completed visit, a review request goes out in your words, once, and never to someone who had a problem flagged.", "human": "The practice manager sets the rules for who is asked.", "capability": "Automation"}
+    ],
+    "proof_case": "dentasmile", "proof_note": "DentaSmile is in production for dental clinics; the inbox handling is a listed automation offer with human approval before send."},
+   {"slug": "intake-documents", "name": "Intake documents", "pain": "Intake forms, referrals and insurance letters arrive as photos and get retyped.",
+    "hook": "Still retyping intake forms and referral letters from photos into the practice system?",
+    "services": [
+     {"name": "Intake forms and referrals read into the record", "what": "Photos, scans and PDFs of intake forms, referral letters and insurance documents are read by text and vision models, matched to the patient record, and checked against hard rules before anything is written.", "human": "Records that fail the validation gate wait for a staff member with the reason.", "capability": "AI systems"},
+     {"name": "Patient data kept in your stack", "what": "Models can run on self-hosted infrastructure so patient documents and photos never reach a third-party API.", "human": "You decide where data may go before the build starts.", "capability": "AI products"}
+    ],
+    "proof_case": "document-intelligence", "proof_note": "412 records, 0 validation errors on mixed PDFs and scans. Tournament data rather than patient records."},
+   {"slug": "patient-preview", "name": "Patient-facing previews", "pain": "Cosmetic consults still run on “trust me”.",
+    "hook": "Still asking cosmetic patients to commit without seeing their own result?",
+    "services": [
+     {"name": "A preview app in the shape of DentaSmile", "what": "The patient uploads a photo, a self-hosted model generates the preview on a GPU, and the app queues and polls instead of timing out.", "human": "The clinician reviews the preview with the patient. It is a conversation aid; the treatment decision stays with the clinician.", "capability": "AI products"},
+     {"name": "Previews logged from upload to result", "what": "Every job is tracked with status and timing, so you can audit what a patient was shown and when.", "human": "Your team decides retention and who can see the log.", "capability": "AI products"}
+    ],
+    "proof_case": "dentasmile", "proof_note": "Built for dental clinics and live: 3 services, ~110 s per inference, queued and polled, photos kept off third-party APIs."}
+  ]
+ },
+ {
+  "slug": "legal-accounting", "name": "Legal and accounting firms", "short": "Legal & accounting", "sub": "Law firms, accountants, bookkeepers", "type": "docs", "calc": [8, 3, 60],
+  "question_lede": "The day is email, PDFs, scans and deadlines, and the off-the-shelf AI tools got vetoed on data residency.",
+  "areas": [
+   {"slug": "document-intake", "name": "Document intake and filing", "pain": "Every attachment named scan_0412.pdf is opened by hand to find its matter.",
+    "hook": "Still opening every client PDF by hand to find out which matter it belongs to?",
+    "services": [
+     {"name": "Documents filed to the right client and matter", "what": "Incoming attachments, scans and PDFs are read, matched to the client and matter with a resolver built for OCR noise, and filed only after a validation gate.", "human": "Anything that fails the gate waits for a clerk with the reason. Nothing is filed on a guess.", "capability": "AI systems"},
+     {"name": "Key fields extracted into the case or engagement record", "what": "Names, dates, amounts and deadlines pulled from the document into your practice system in a fixed schema, so the record is searchable and the deadline is in the calendar.", "human": "Deadlines are proposed, never set, without a person confirming.", "capability": "AI systems"},
+     {"name": "Everything in your own stack", "what": "Models can run on hardened, EU-resident infrastructure so client documents never leave your environment.", "human": "You set the residency rules before the build.", "capability": "AI products"}
+    ],
+    "proof_case": "document-intelligence", "proof_note": "The same mechanism: messy documents in, 412 records out with 0 validation errors. Built for tournament data, not a firm."},
+   {"slug": "client-inbox", "name": "Client inbox", "pain": "Status questions and document chasing are unbilled time nobody tracks.",
+    "hook": "Still answering “what’s the status?” by hand, as unbilled time?",
+    "services": [
+     {"name": "Status replies drafted from the matter record", "what": "Routine questions get a reply drafted from the matter or engagement record: what is done, what is due, what is needed from the client.", "human": "Every outbound message is approved by a person. Anything that reads as advice goes to the responsible lawyer or accountant.", "capability": "Automation"},
+     {"name": "Document requests and reminders that stop on reply", "what": "Missing-document requests and deadline reminders run on schedule from the record and stop when the client responds.", "human": "The fee earner sets what is chased and when.", "capability": "Automation"}
+    ],
+    "proof_case": "openclaw", "proof_note": "Scheduled, source-linked messages are the analytics agent pattern, built for a marketing team rather than a firm."},
+   {"slug": "reconciliation", "name": "Reconciliation and reporting", "pain": "Month end and tax season mean retyping statements into the ledger and hunting mismatches.",
+    "hook": "Still retyping bank statements into the ledger and hunting for what doesn’t reconcile?",
+    "services": [
+     {"name": "Statements and invoices read into the ledger", "what": "Bank statements, supplier invoices and client statements extracted from PDFs and scans with totals, dates and duplicates checked before anything posts.", "human": "The accountant clears the exceptions queue; the system never posts an adjustment.", "capability": "AI systems"},
+     {"name": "Line-by-line reconciliation, served to partners", "what": "Bank exports, client statements and ledger data in SQL, transformed in inspectable steps and reconciled line by line, with a Power BI dataset for partner reporting.", "human": "Mismatches are listed with the reason for a person to resolve.", "capability": "Data systems"}
+    ],
+    "proof_case": "ecommerce-etl", "proof_note": "68,890 orders reconciled across 25 audited columns alongside the client’s QC team. Fulfilment data, not a firm’s ledger."}
+  ]
+ },
+ {
+  "slug": "agencies", "name": "Marketing and advertising agencies", "short": "Marketing agencies", "sub": "Paid media, creative, growth", "type": "automation", "calc": [6, 4, 45],
+  "question_lede": "A small team running Meta and Google for several clients, reporting on all of them every Monday.",
+  "areas": [
+   {"slug": "reporting", "name": "Client reporting", "pain": "Monday morning is four dashboards per client, pasted into a deck nobody reads past page two.",
+    "hook": "Still building Monday client reports by hand from GA4, Meta and Google Ads?",
+    "services": [
+     {"name": "Morning digest, one message per client", "what": "An agent with tools over GA4, Meta, Google Ads and the client’s other sources pulls the last 24 hours overnight and posts one short narrative per account. Every number links back to its source.", "human": "The account manager reads it before anything reaches the client. No budget moves without a person.", "capability": "Automation"},
+     {"name": "Weekly client report drafted, not built", "what": "The weekly deck becomes a drafted narrative with the charts attached, in your template, ready for the account lead to edit.", "human": "The account lead edits and sends. Nothing goes to a client automatically.", "capability": "Automation"},
+     {"name": "Broken syncs caught before the client notices", "what": "Expired tokens and stalled connections are detected and flagged the same morning, with non-expiring auth flows where the platform allows it.", "human": "A person fixes the connection; the system only alerts.", "capability": "Automation"}
+    ],
+    "proof_case": "openclaw", "proof_note": "4 live integrations, one message at 07:00, every number linked to its source. Built for an in-house marketing team, the same Monday job agencies do by hand."},
+   {"slug": "creative", "name": "Creative production", "pain": "Every ad variation waits on one designer’s review.",
+    "hook": "Still waiting on one designer to review every ad variation?",
+    "services": [
+     {"name": "Ad creative generated and QA-checked on schedule", "what": "Brief, cached prompt, image generation, then a vision model checks each image against the client’s written brand rules and regenerates on failure, capped.", "human": "A creative that fails twice is parked for review. A person approves the batch before it goes into the ad account.", "capability": "AI systems"},
+     {"name": "Brand rules written down once, applied every time", "what": "Logo placement, palette and text density become explicit rules the QA model enforces, so every creative carries its verdict and the rule it passed or failed.", "human": "The creative director owns the rules and can change them any time.", "capability": "AI systems"}
+    ],
+    "proof_case": "creative-pipeline", "proof_note": "100+ QA-checked creatives a day at 78% lower inference cost, in production for an EU education brand."},
+   {"slug": "new-business", "name": "New business", "pain": "Prospect research is a junior pasting company details into a sheet, one at a time.",
+    "hook": "Still researching prospects one account at a time, by hand?",
+    "services": [
+     {"name": "Prospect research and outreach drafts, QA-gated", "what": "Coordinated agents research a prospect, read its website, score it against your ideal client profile, find the opening and draft the outreach. A QA agent rejects weak drafts and the writer retries, capped at two attempts.", "human": "You review the QA-passed draft and press send. Rejected drafts show the reason.", "capability": "AI systems"},
+     {"name": "Leads scored and routed into the CRM", "what": "Inbound enquiries and researched prospects land in your CRM scored, with the research attached, so the first call starts informed.", "human": "Your team decides who to pursue; the score is advice.", "capability": "Automation"}
+    ],
+    "proof_case": "leadforge", "proof_note": "6 agents, one shared state, retries visible in the UI, QA gate capped at two attempts."}
+  ]
+ },
+ {
+  "slug": "ecommerce", "name": "E-commerce and DTC brands", "short": "E-commerce & DTC", "sub": "Shopify brands, multichannel retail", "type": "data", "calc": [8, 3, 40],
+  "question_lede": "A 3PL handles fulfilment, finance closes the month from exports, and the ad account always needs more creative.",
+  "areas": [
+   {"slug": "month-end", "name": "Fulfilment and revenue data", "pain": "Month end is three exports and a lookup, and the totals still don’t match.",
+    "hook": "Still closing the month from Shopify and 3PL exports that never agree?",
+    "services": [
+     {"name": "Shopify and 3PL data into SQL Server, reconciled nightly", "what": "ShipHero or Shopify into staging tables, then stored procedures building silver and fact tables, with Power BI reading the fact tables. Voided shipments and double-counted orders handled explicitly.", "human": "A column-by-column parity audit runs with your finance or QC team before cutover. They sign off.", "capability": "Data systems"},
+     {"name": "Payouts reconciled against orders", "what": "Processor payouts matched to orders, refunds and fees line by line, so the bank balance and the sales report agree.", "human": "Finance reviews listed mismatches; nothing is averaged away.", "capability": "Data systems"}
+    ],
+    "proof_case": "ecommerce-etl", "proof_note": "Built for a US retailer’s finance team: 68,890 orders reconciled across 25 audited columns, synced nightly. Same platforms, same problem."},
+   {"slug": "creative", "name": "Ad creative", "pain": "The ad account is starved of fresh creative because every image waits on a designer.",
+    "hook": "Still starving the ad account of creative because every image waits on a designer?",
+    "services": [
+     {"name": "Creative generated and QA-checked on schedule", "what": "Brief, cached prompt, image generation, vision-model QA against your written brand rules, capped regeneration. Runs on a schedule whether anyone is watching or not.", "human": "A creative that fails twice is parked for review. A person approves the batch before it goes to Meta Ads.", "capability": "AI systems"},
+     {"name": "Product shots on a white background, at volume", "what": "Catalogue images regenerated to a consistent standard with the same QA rules, so new SKUs go live without a shoot.", "human": "Your team approves the set before it reaches the storefront.", "capability": "AI systems"}
+    ],
+    "proof_case": "creative-pipeline", "proof_note": "100+ creatives a day, QA-checked, in production for a DTC education brand in the EU."},
+   {"slug": "daily-numbers", "name": "Daily numbers", "pain": "Every morning someone opens Shopify, Meta, Google Ads and GA4 to answer “how did yesterday go”.",
+    "hook": "Still opening four tabs every morning to find out how yesterday went?",
+    "services": [
+     {"name": "Yesterday’s numbers in Slack before the team starts", "what": "An agent with tools over GA4, Meta and Google Ads pulls the last 24 hours, reasons over them and posts one narrative every morning, with every number linked to its source.", "human": "The team reads it. The agent moves no budget and changes nothing in the ad accounts.", "capability": "Automation"},
+     {"name": "Stock and reorder alerts from the fact tables", "what": "Days of cover per SKU computed from the reconciled data, with a scheduled alert when a bestseller is about to run out.", "human": "Buying decisions stay with a person; the alert only informs.", "capability": "Data systems"}
+    ],
+    "proof_case": "openclaw", "proof_note": "4 live integrations, one message at 07:00, running 24/7 for an EU marketing team."}
+  ]
+ },
+ {
+  "slug": "logistics", "name": "Logistics, fulfilment and 3PL", "short": "Logistics & 3PL", "sub": "Fulfilment centres, warehouses", "type": "data", "calc": [10, 3, 35],
+  "question_lede": "Life is the WMS, the client reports and a shared inbox full of PDFs.",
+  "areas": [
+   {"slug": "wms-data", "name": "WMS data and client reporting", "pain": "Order counts in the WMS, the storefront and the finance report never agree.",
+    "hook": "Still exporting the WMS every Monday to find out why the order count doesn’t match finance?",
+    "services": [
+     {"name": "WMS to SQL Server, reconciled every night", "what": "ShipHero or your WMS into staging, stored procedures building silver and fact tables, Power BI on top. Voided and duplicated shipments handled explicitly, not filtered by hand.", "human": "Your QC or finance team signs off the parity audit before cutover. Rows that fail a check are queued with the reason.", "capability": "Data systems"},
+     {"name": "Client reports built and sent on schedule", "what": "Per-client volume, SLA and billing reports generated from the fact tables and sent on the day they are due, with the numbers linked to their source.", "human": "The account manager reviews before the first send to each client; after that it runs unless a check fails.", "capability": "Automation"}
+    ],
+    "proof_case": "ecommerce-etl", "proof_note": "Same data, same stack: ShipHero fulfilment data into SQL Server, 68,890 orders reconciled across 25 audited columns, nightly."},
+   {"slug": "inbound-paperwork", "name": "Inbound paperwork", "pain": "Packing lists, bills of lading and PODs arrive as scans someone retypes.",
+    "hook": "Still retyping packing lists and bills of lading from scanned PDFs?",
+    "services": [
+     {"name": "Packing lists and PODs read into validated records", "what": "HTML, text PDFs and scans read by text and vision models, SKUs and customers matched through OCR noise, and a hard validation gate before anything reaches the WMS.", "human": "Records that fail the gate wait for a person with the reason attached.", "capability": "AI systems"},
+     {"name": "Client order sheets imported, not keyed", "what": "Spreadsheets in each client’s own layout mapped to your schema once, then imported on every arrival with the same checks.", "human": "New layouts are confirmed by a person before the mapping is saved.", "capability": "AI systems"}
+    ],
+    "proof_case": "document-intelligence", "proof_note": "412 records, 0 validation errors on mixed HTML, PDF and scanned input. Tournament data, not freight paperwork."},
+   {"slug": "inbox", "name": "RFQs and exceptions", "pain": "Carrier exceptions and rate requests sit in the shared inbox until someone has time.",
+    "hook": "Still quoting rates and chasing carrier exceptions by hand from a shared inbox?",
+    "services": [
+     {"name": "RFQs quoted from your rate card", "what": "An RFQ arrives by email or PDF; the quote is drafted from your rates and lead times, in your template, and filed against the client.", "human": "A person approves every quote before it is sent.", "capability": "Automation"},
+     {"name": "Carrier exceptions triaged and answered", "what": "Exception emails are classified, matched to the order, and a reply or escalation is drafted with the order status pulled from your systems.", "human": "Replies to clients are approved by a person; the system drafts and files.", "capability": "Automation"}
+    ],
+    "proof_case": "leadforge", "proof_note": "Drafting behind a QA gate is the LeadForge pattern; quote and RFQ drafting from email or PDF is a listed automation offer."}
+  ]
+ },
+ {
+  "slug": "finance", "name": "Finance teams and lenders", "short": "Finance teams", "sub": "Controllers, credit, lenders", "type": "data", "calc": [10, 2, 50],
+  "question_lede": "Real transaction volume, several systems that should agree, and a month end that proves they don’t.",
+  "areas": [
+   {"slug": "reconciliation", "name": "Reconciliation and close", "pain": "Month end means exporting from the ERP, the bank and billing, then matching by hand.",
+    "hook": "Still closing the month from three exports and a spreadsheet?",
+    "services": [
+     {"name": "Nightly reconciliation, audited column by column", "what": "Billing, ERP and bank data into SQL Server staging, stored procedures building silver and fact tables, and a parity audit against your current reports before cutover.", "human": "Your team signs off the parity audit before anything replaces the old report. Mismatches are queued with the reason.", "capability": "Data systems"},
+     {"name": "The weekly pack assembled before the meeting", "what": "The numbers currently collected from four logins become a scheduled report that lands before the meeting it was for, every figure linked to its source.", "human": "The controller reads and signs off; nothing is posted by the job.", "capability": "Automation"}
+    ],
+    "proof_case": "ecommerce-etl", "proof_note": "Built for a retailer’s finance team: 68,890 orders reconciled across 25 audited columns before cutover. Fulfilment data, not a ledger."},
+   {"slug": "document-intake", "name": "Invoices, statements and applications", "pain": "Supplier invoices and applications arrive as PDFs and scans that someone keys in.",
+    "hook": "Still keying supplier invoices and applications in from PDFs and scans?",
+    "services": [
+     {"name": "Invoices read into the ledger after checks", "what": "Text PDFs and scans extracted, supplier and customer names matched through OCR noise, and totals, dates, duplicates and required fields checked before anything reaches the ledger.", "human": "Documents that fail a check wait for a person with the reason. Nothing posts without passing the gate.", "capability": "AI systems"},
+     {"name": "Applications and statements into a case file", "what": "Bank statements and application documents extracted into a fixed schema with the figures cross-checked, so an analyst starts from a filled file, not a stack of PDFs.", "human": "The credit decision stays with the analyst; the system prepares.", "capability": "AI systems"}
+    ],
+    "proof_case": "document-intelligence", "proof_note": "412 records, 0 validation errors on mixed PDFs and scans, but on tournament data rather than financial documents."},
+   {"slug": "collections", "name": "Collections", "pain": "Overdue invoices get chased when someone remembers, in whatever tone they are in that day.",
+    "hook": "Still chasing overdue invoices from a spreadsheet, when someone remembers?",
+    "services": [
+     {"name": "Reminder sequences drafted, approved, then sent", "what": "Overdue invoices picked up from the ledger, a reminder sequence drafted in your wording with the invoice and amount filled in, stopping on reply or on payment.", "human": "A person approves every reminder before it goes out. Replies land with a human.", "capability": "Automation"},
+     {"name": "Ageing digest without logging in", "what": "A scheduled ageing summary to Slack or email: what is overdue, by how long, what was promised, so nobody builds it by hand.", "human": "The credit lead decides escalation; the digest informs.", "capability": "Automation"}
+    ],
+    "proof_case": "openclaw", "proof_note": "Scheduled, source-linked digests are the analytics agent pattern, built for a marketing team rather than a credit team."}
+  ]
+ },
+ {
+  "slug": "real-estate", "name": "Real estate and property management", "short": "Real estate", "sub": "Letting agencies, property managers", "type": "automation", "calc": [8, 3, 35],
+  "question_lede": "Enquiries from portals, email and WhatsApp; leases and inspections as scans; owner statements once a month.",
+  "areas": [
+   {"slug": "enquiries", "name": "Enquiries and viewings", "pain": "Portal enquiries land at night and the lead books a viewing elsewhere by morning.",
+    "hook": "Still answering portal enquiries one by one, after the lead has moved on?",
+    "services": [
+     {"name": "Enquiries scored, routed and answered with viewing slots", "what": "Portal, email and WhatsApp enquiries are read, scored against your criteria, routed into your CRM, and a reply is drafted with viewing slots.", "human": "An agent approves every first reply. Enquiries below your line go to a person, not the machine.", "capability": "Automation"},
+     {"name": "Viewing confirmations and follow-ups", "what": "Confirmations, reminders and after-viewing follow-ups run on schedule and stop on reply, with outcomes written back to the CRM.", "human": "The agent sets the cadence and handles any reply.", "capability": "Automation"}
+    ],
+    "proof_case": "leadforge", "proof_note": "Scoring against a profile and drafting behind a QA gate is the LeadForge pattern, built for B2B outreach."},
+   {"slug": "maintenance", "name": "Tenant requests and maintenance", "pain": "Maintenance requests arrive by WhatsApp, phone and email and get retyped into a sheet.",
+    "hook": "Still retyping tenant requests out of WhatsApp and chasing contractors by hand?",
+    "services": [
+     {"name": "Requests logged from WhatsApp, email and phone notes", "what": "Each request is classified, matched to the property and tenancy, and logged with photos attached, in the system you run.", "human": "Urgent categories are escalated to a person immediately.", "capability": "Automation"},
+     {"name": "Contractor dispatch and follow-up", "what": "The right contractor is messaged with the job details, chased until they confirm, and the tenant is updated at each step.", "human": "Spend above a limit you set waits for approval.", "capability": "Automation"}
+    ],
+    "proof_case": "openclaw", "proof_note": "Multi-source intake with scheduled, logged actions; the closest shipped system served a marketing team."},
+   {"slug": "documents-statements", "name": "Leases, inspections and owner statements", "pain": "Leases and inspection reports get typed in by hand, and owner statements go out wrong when an invoice is missed.",
+    "hook": "Still typing deposit amounts and inspection dates in from scans?",
+    "services": [
+     {"name": "Leases and inspection reports read into the system", "what": "Leases, inspection reports, IDs and proof of income extracted to names, dates, rent and deposit, then a validation gate before your property management system is written to.", "human": "Documents that fail are queued with the reason for a person to check.", "capability": "AI systems"},
+     {"name": "Owner statements from a reconciled ledger", "what": "Rent ledger, maintenance invoices and bank transactions reconciled line by line, with owner statements and a portfolio view built from the same tables.", "human": "Your accounts person releases statements after the monthly reconciliation passes.", "capability": "Data systems"}
+    ],
+    "proof_case": "document-intelligence", "proof_note": "Messy scans into validated records, 412 records and 0 validation errors. Tournament data, not leases."}
+  ]
+ },
+ {
+  "slug": "education", "name": "Education, coaching and course businesses", "short": "Courses & coaching", "sub": "Online academies, cohorts, coaches", "type": "automation", "calc": [8, 2, 45],
+  "question_lede": "Cohorts sell on Kajabi or similar, enrolment runs on ads and DMs, and the numbers live in four tools.",
+  "areas": [
+   {"slug": "creative", "name": "Enrolment ads and creative", "pain": "Enrolment ads need fresh creative every week and one designer reviews every image.",
+    "hook": "Still building every enrolment ad by hand, capped by one designer’s calendar?",
+    "services": [
+     {"name": "Creative generated and checked against your brand rules", "what": "Brief, cached prompt, image generation, then a vision model checks each image against written brand rules and regenerates on failure, capped. Runs on a schedule.", "human": "A creative that fails twice is parked for review. Your team approves the final set before it goes to Meta Ads.", "capability": "AI systems"},
+     {"name": "Testimonials and course visuals at volume", "what": "Quote cards, module graphics and launch assets produced from the same rules, so a launch does not wait on design.", "human": "You approve each launch set.", "capability": "AI systems"}
+    ],
+    "proof_case": "creative-pipeline", "proof_note": "Built for an EU education brand and still running: 100+ QA-checked creatives a day at 78% lower inference cost."},
+   {"slug": "numbers", "name": "Daily performance", "pain": "Yesterday’s numbers live in Kajabi, Meta, Google Ads and GA4.",
+    "hook": "Still logging into Kajabi, Meta and GA4 each morning to find out what sold?",
+    "services": [
+     {"name": "Morning performance digest", "what": "An agent with tools over Kajabi, Meta, Google Ads and GA4 pulls the last 24 hours, reasons over them and posts one narrative message at a set time, every number linked to its source.", "human": "The agent writes the digest and changes nothing. The team decides from the message.", "capability": "Automation"},
+     {"name": "Launch tracker in one place", "what": "Enrolments, ad spend and checkout drop-off for a launch pulled into one dataset and reported daily until the cart closes.", "human": "You decide what to change; the tracker only shows.", "capability": "Data systems"}
+    ],
+    "proof_case": "openclaw", "proof_note": "In production for the same education brand: 4 live integrations, one message at 07:00, 24/7."},
+   {"slug": "enrolment-inbox", "name": "Enrolment DMs and onboarding", "pain": "“Is this course right for me?” arrives at all hours and a slow reply loses the enrolment.",
+    "hook": "Still answering “is this course right for me?” by hand, hours after it was asked?",
+    "services": [
+     {"name": "DMs and emails answered from your own FAQ", "what": "Enquiries qualified against your course criteria, replies drafted from your FAQ and pricing, follow-ups that run until the person answers and then stop. Leads land in your CRM scored.", "human": "Every reply is approved by a person. Questions the FAQ does not cover are handed to you with the draft.", "capability": "Automation"},
+     {"name": "Abandoned checkouts and onboarding on schedule", "what": "Abandoned-checkout nudges, cohort reminders and onboarding emails run from the platform’s events instead of a sheet someone remembers.", "human": "You own the sequences; replies reach a person.", "capability": "Automation"}
+    ],
+    "proof_case": "creative-pipeline", "proof_note": "The brand’s creative generation, analytics agent and ads-handoff automation are all in production; inbox handling with approval is a listed offer."}
+  ]
+ },
+ {
+  "slug": "recruiting", "name": "Recruiting, staffing and HR", "short": "Recruiting & HR", "sub": "Agencies, staffing, talent teams", "type": "docs", "calc": [10, 3, 40],
+  "question_lede": "An ATS, LinkedIn, email and WhatsApp, measured on time to shortlist and placements made.",
+  "areas": [
+   {"slug": "cv-intake", "name": "CV intake and shortlisting", "pain": "CVs arrive in every layout and someone retypes them into the ATS.",
+    "hook": "Still reading every CV by hand and retyping it into the ATS?",
+    "services": [
+     {"name": "CVs in any format read into the ATS", "what": "PDFs, Word files, scans and LinkedIn exports extracted, names, dates and employers normalised with matching built for scan noise, then a validation gate before your ATS is written to.", "human": "Files that fail wait with the reason; nothing is dropped silently.", "capability": "AI systems"},
+     {"name": "Shortlist scored against written criteria", "what": "Each candidate scored against the job criteria written down once, with the evidence for each score shown next to it.", "human": "A recruiter reviews the scored shortlist before anyone is contacted or sent to a client.", "capability": "AI systems"}
+    ],
+    "proof_case": "document-intelligence", "proof_note": "Same problem shape: mixed PDFs and scans with inconsistent names, 412 records and 0 validation errors. Tournament data, not CVs."},
+   {"slug": "candidate-messaging", "name": "Candidate and client messaging", "pain": "Replies land in email, WhatsApp and LinkedIn and the follow-up stops when the recruiter is on a call.",
+    "hook": "Still chasing candidates one WhatsApp at a time, between calls?",
+    "services": [
+     {"name": "Next message drafted from the job and the history", "what": "Replies across email, WhatsApp and LinkedIn are read, the next message is drafted from the job and the candidate’s history, follow-ups are scheduled and stop on reply, status written back to the ATS.", "human": "Every outbound message waits for the recruiter’s approval. Offers and rejections are never sent automatically.", "capability": "Automation"},
+     {"name": "Interview scheduling without the back-and-forth", "what": "Slots offered from the calendar, confirmations and reminders sent, and the ATS updated when the interview is booked.", "human": "The recruiter confirms any interview a client must attend.", "capability": "Automation"}
+    ],
+    "proof_case": "leadforge", "proof_note": "Research, scoring and drafting behind a QA gate capped at two attempts, built for B2B outreach rather than candidates."},
+   {"slug": "placements-reporting", "name": "Placements and timesheets", "pain": "Placements, timesheets and invoices sit in three spreadsheets that never match finance.",
+    "hook": "Still reconciling timesheets, placements and invoices across three spreadsheets?",
+    "services": [
+     {"name": "Placement and hours tables that match the invoices", "what": "ATS, timesheet and invoicing exports into SQL, stored procedures building clean placement and hours tables, and a parity audit against the invoices.", "human": "Finance signs off the parity audit before the new report replaces the old one.", "capability": "Data systems"},
+     {"name": "Timesheets read from photos and PDFs", "what": "Signed timesheets arriving as photos and scans extracted to hours per day with totals checked before they reach payroll or billing.", "human": "Anything that fails a check waits for a person.", "capability": "AI systems"}
+    ],
+    "proof_case": "ecommerce-etl", "proof_note": "68,890 orders reconciled across 25 audited columns with the client’s QC team. Fulfilment data, not placements."}
+  ]
+ },
+ {
+  "slug": "hospitality", "name": "Hospitality, restaurants and events", "short": "Hospitality & events", "sub": "Restaurants, hotels, venues, caterers", "type": "automation", "calc": [8, 2, 25],
+  "question_lede": "The booking calendar, the POS, WhatsApp and Instagram, all before service.",
+  "areas": [
+   {"slug": "enquiries", "name": "Enquiries and event quotes", "pain": "Enquiries arrive through DMs, WhatsApp, email and the form; the one that waits a day books elsewhere.",
+    "hook": "Still answering booking enquiries at midnight and pricing events from last year’s spreadsheet?",
+    "services": [
+     {"name": "Enquiries answered with availability", "what": "Inbox, WhatsApp and Instagram DMs read, the booking calendar checked, and a reply drafted with availability and next steps.", "human": "The manager approves every reply before it is sent.", "capability": "Automation"},
+     {"name": "Event quotes built from your menu and price list", "what": "An event enquiry becomes a drafted quote from your menu, price list and the last similar event, with the deposit invoice ready to send.", "human": "A quote goes out only after the manager edits it and taps send.", "capability": "Automation"},
+     {"name": "Deposit chasing that stops when it lands", "what": "Follow-ups run until the deposit arrives and stop on reply or payment, with the booking confirmed in the calendar.", "human": "You set the wording and cadence.", "capability": "Automation"}
+    ],
+    "proof_case": "leadforge", "proof_note": "Quote drafting from email and inbox handling with human approval are listed offers; the drafting-behind-a-gate pattern is LeadForge’s."},
+   {"slug": "supplier-invoices", "name": "Supplier invoices and food cost", "pain": "Invoices and delivery notes pile up as photos, so food cost is known a month late.",
+    "hook": "Still learning your food cost from the accountant, a month late?",
+    "services": [
+     {"name": "Invoices and delivery notes into the books", "what": "Photos and PDFs of invoices and delivery notes extracted to line items, supplier and product matched through scan noise, and totals, VAT and duplicates checked before posting.", "human": "The bookkeeper clears the flagged queue; nothing unmatched is posted.", "capability": "AI systems"},
+     {"name": "Weekly food cost by site", "what": "Purchases and POS sales reconciled into a weekly cost-of-sales view per site, with price changes from suppliers flagged.", "human": "The GM decides on the menu; the report only shows.", "capability": "Data systems"}
+    ],
+    "proof_case": "document-intelligence", "proof_note": "412 records, 0 validation errors from mixed PDFs and scans. Tournament data rather than invoices."},
+   {"slug": "morning-numbers", "name": "Numbers before service", "pain": "Covers, POS sales, OTA bookings and reviews sit in four tabs nobody opens before service.",
+    "hook": "Still opening four tabs before service to find out how yesterday went?",
+    "services": [
+     {"name": "One morning message before service", "what": "POS, booking platform and payment processor data into SQL, reconciled against payouts, with a digest of covers, sales, cancellations and review score posted at a set time each morning.", "human": "The GM reads and decides; finance reviews reconciliation differences weekly.", "capability": "Automation"},
+     {"name": "Review responses drafted in your voice", "what": "New reviews pulled daily and a response drafted in your tone for each, with anything serious flagged first.", "human": "A person approves every response before it is posted.", "capability": "Automation"}
+    ],
+    "proof_case": "openclaw", "proof_note": "Four tools and nobody with time to read them: 4 live integrations, one message at 07:00, built for an EU marketing team."}
+  ]
+ },
+ {
+  "slug": "dashboards", "name": "Dashboards and BI for operations teams", "short": "Dashboards & BI", "sub": "Any ops team with numbers in four tools", "type": "data", "calc": [6, 3, 50],
+  "question_lede": "Numbers in three or four platforms, one person who owns the spreadsheet, and a dashboard nobody opens.",
+  "areas": [
+   {"slug": "pipeline", "name": "Data pipeline and reconciliation", "pain": "Two systems report two different order counts and nobody can say which is right.",
+    "hook": "Still building Monday’s report from four CSV exports, with totals that never match?",
+    "services": [
+     {"name": "Platform data into SQL Server, reconciled every night", "what": "Ingestion from the platforms you already run into staging tables, then stored procedures building silver and fact tables, every transformation inspectable in SQL.", "human": "Your finance or QC team reviews the parity audit with me and signs off each column. The old report is not switched off until then.", "capability": "Data systems"},
+     {"name": "Root causes of inflated totals found and handled", "what": "Voided shipments, duplicate rows and refunds that inflate totals are traced to their cause and handled explicitly in the pipeline, not filtered by hand.", "human": "Each handling rule is agreed with you before it is applied.", "capability": "Data systems"}
+    ],
+    "proof_case": "ecommerce-etl", "proof_note": "This is the niche, already built: 68,890 orders reconciled across 25 audited columns, nightly, for a US retailer’s finance team."},
+   {"slug": "dashboards", "name": "Dashboards people open", "pain": "The Power BI dashboard points at a sheet someone edits by hand, so it is stale by Wednesday.",
+    "hook": "Still pointing Power BI at a spreadsheet someone edits by hand?",
+    "services": [
+     {"name": "Power BI on fact tables, not a sheet", "what": "Dashboards rebuilt on the reconciled fact tables with scheduled refresh, so the number on screen is the number in the database.", "human": "You decide the metrics; definitions are written down once.", "capability": "Data systems"},
+     {"name": "The morning digest for people who will not open the dashboard", "what": "A scheduled agent reads the fact tables and your other sources each morning and posts one short narrative, every number linked to its source.", "human": "Anything out of range is flagged for a person to look at. The agent changes nothing.", "capability": "Automation"}
+    ],
+    "proof_case": "openclaw", "proof_note": "4 live integrations, one message at 07:00, every number linked to its source, running 24/7."},
+   {"slug": "documents", "name": "Documents into the same tables", "pain": "Supplier invoices and scanned PDFs never make it into the numbers.",
+    "hook": "Still leaving the paperwork out of the numbers because it only exists as scans?",
+    "services": [
+     {"name": "Invoices and scans extracted into the dataset", "what": "Supplier invoices, delivery notes, scanned PDFs and HTML exports extracted by text and vision models into the same validated tables, with deterministic checks after the model.", "human": "Nothing is written until it passes the gate. A person clears the queue; the pipeline never guesses.", "capability": "AI systems"},
+     {"name": "Entity resolution built for OCR noise", "what": "“ACME Ltd” and “Acme Limited” resolved to one supplier with an escalating matcher instead of one similarity threshold.", "human": "Low-confidence matches are confirmed by a person once, then remembered.", "capability": "AI systems"}
+    ],
+    "proof_case": "document-intelligence", "proof_note": "412 records, 0 validation errors with an 8-tier fuzzy resolver and a hard validation gate."}
+  ]
+ },
+ {
+  "slug": "saas", "name": "SaaS and software companies", "short": "SaaS adding AI", "sub": "Software teams, product companies", "type": "saas", "calc": [10, 3, 80],
+  "question_lede": "A working product, paying users, and an AI feature that is still a prompt in a notebook.",
+  "areas": [
+   {"slug": "inference", "name": "Slow inference in production", "pain": "The feature worked in a notebook; in the product the request hangs until the gateway gives up.",
+    "hook": "Still shipping an AI feature that works in the demo and times out on the first real customer?",
+    "services": [
+     {"name": "Queued jobs and polling instead of held requests", "what": "A job API and a worker as separate services: jobs are queued and polled, not held open until they time out, and the expensive part scales on its own.", "human": "Every job is tracked from upload to result with status and timing, so your team can audit a run before it ships.", "capability": "AI products"},
+     {"name": "Self-hosted models where data must stay", "what": "Open-weight models on your own GPUs, EU-resident and hardened where residency matters, so the enterprise security review does not stall on a third-party API.", "human": "You sign off the architecture sketch before the build starts.", "capability": "AI products"},
+     {"name": "Typed contracts on every boundary", "what": "Model output validated into a fixed schema before the UI sees it, so a new edge case fails loudly in one place instead of shipping as a hotfix.", "human": "Your team owns the schema; changes are reviewed like any code.", "capability": "AI products"}
+    ],
+    "proof_case": "dentasmile", "proof_note": "A live three-service SaaS with self-hosted GPU inference: ~110 s per job, queued and polled, and the app does not break."},
+   {"slug": "agent-rescue", "name": "Agent prototype rescue", "pain": "The agent demo works twice and loops on the third run, and nobody can say why.",
+    "hook": "Still demoing an agent that loops on the third run?",
+    "services": [
+     {"name": "Prototype rebuilt with one typed shared state", "what": "The prototype rebuilt as a graph with one typed shared state instead of message passing, validated outputs at every agent boundary, a QA agent, and retries with correction capped at two attempts.", "human": "Outputs that fail QA twice are parked for a person with the reason. Nothing loops or fails silently.", "capability": "AI systems"},
+     {"name": "Provider-agnostic model layer", "what": "Models swappable per agent without touching orchestration, with tests over the graph and streaming so reviewers see progress.", "human": "Your team chooses models per step and can change them any time.", "capability": "AI systems"}
+    ],
+    "proof_case": "leadforge", "proof_note": "6 agents, one shared state, retries visible in the UI; a failing prototype was rebuilt the same way for a US client."},
+   {"slug": "document-feature", "name": "Document intelligence in your product", "pain": "Users upload PDFs and scans and the feature returns free text that breaks the UI.",
+    "hook": "Still returning free text from uploads and fixing the UI with hotfixes?",
+    "services": [
+     {"name": "Extraction into your own schema, validated after the model", "what": "PDFs, scans and messy uploads extracted into your schema with deterministic validation after the model: the model proposes, rules decide. Built into your existing app.", "human": "Records that fail the gate are queued for your team or your users to resolve.", "capability": "AI systems"},
+     {"name": "Entity resolution instead of one threshold", "what": "An escalating matcher built for OCR noise, so names and references resolve reliably inside your product.", "human": "Confidence thresholds are set with you and visible to users where it matters.", "capability": "AI systems"}
+    ],
+    "proof_case": "document-intelligence", "proof_note": "412 records, 0 validation errors; the Upwork review on the same work notes the solution was implemented inside the client’s own app."}
+  ]
+ }
+]

@@ -155,6 +155,7 @@
       $('o-hours').textContent=Math.round(hm).toLocaleString('en-US')+' h'; $('o-month').textContent=usd(cm); $('o-year').textContent=usd(cm*12);
       $('o-fte').textContent=(hm/160).toFixed(2)+' FTE'; $('o-weeks').textContent='≈ '+(hm/40).toFixed(1)+' work weeks of one full-time person, per month';
       if(cta) cta.href=(base||'')+'start-a-project.html?est='+encodeURIComponent(usd(cm*12)+' per year ('+h+' h/week × '+p+' people × $'+r+'/h)'); }
+    var d=(document.body.dataset.calcDefaults||'').split(','); if(d.length===3&&d.every(function(x){return x&&!isNaN(x)})){ H.value=d[0]; P.value=d[1]; R.value=d[2]; }
     [H,P,R].forEach(function(i){i.addEventListener('input',calc)}); calc(); }
   var calcOnPage=document.querySelector('[data-calc]'); if(calcOnPage) initCalc(calcOnPage,'');
 
@@ -180,11 +181,60 @@
     if(!seen) setTimeout(function(){ if(dlg.open) return; nudge.hidden=false; loadCalc().catch(function(){}); },3500);
     var warm=function(){ loadCalc().catch(function(){}); }; fab.addEventListener('mouseenter',warm,{once:true}); fab.addEventListener('focus',warm,{once:true});
     if(typeof dlg.showModal==='function'){
-      fab.addEventListener('click',function(e){ e.preventDefault(); hideNudge(); dlg.showModal(); document.body.classList.add('modal-open');
-        loadCalc().then(function(){ var f=cmBody.querySelector('input'); if(f&&!matchMedia('(pointer:coarse)').matches) f.focus(); }).catch(function(){ dlg.close(); location.href=calcHref; }); });
+      var openCalc=function(e){ e.preventDefault(); hideNudge(); dlg.showModal(); document.body.classList.add('modal-open');
+        loadCalc().then(function(){ var f=cmBody.querySelector('input'); if(f&&!matchMedia('(pointer:coarse)').matches) f.focus(); }).catch(function(){ dlg.close(); location.href=calcHref; }); };
+      fab.addEventListener('click',openCalc); document.querySelectorAll('[data-calc-open]').forEach(function(a){ a.addEventListener('click',openCalc); });
       dlg.querySelector('.cm-close').addEventListener('click',function(){ dlg.close(); });
       dlg.addEventListener('click',function(e){ if(e.target===dlg) dlg.close(); });
       dlg.addEventListener('close',function(){ document.body.classList.remove('modal-open'); fab.focus(); });
+    }
+  }
+
+  /* guided services page: the whole tree is in the HTML; show one panel at a time and keep the choice in the URL hash */
+  var guide=document.querySelector('[data-guide]');
+  if(guide){
+    var panels=[].slice.call(guide.querySelectorAll('.panel')), steps=guide.querySelectorAll('.gsteps li'), crumbI=guide.querySelector('[data-crumb=industry]'), crumbA=guide.querySelector('[data-crumb=area]');
+    function nameOf(sel){ var a=guide.querySelector(sel); return a?a.querySelector('.t').firstChild.textContent:''; }
+    function show(first){ var h=location.hash.replace(/^#/,''), parts=h?h.split('/'):[], ind=parts[0]||'', area=parts[1]||'';
+      var target=area?guide.querySelector('.panel[data-panel=services][data-industry="'+ind+'"][data-area="'+area+'"]'):ind?guide.querySelector('.panel[data-panel=area][data-industry="'+ind+'"]'):null;
+      if(!target){ target=guide.querySelector('.panel[data-panel=industry]'); ind=''; area=''; }
+      panels.forEach(function(p){ p.classList.toggle('on',p===target); });
+      var step=target.dataset.panel; var order=['industry','area','services'];
+      steps.forEach(function(li){ var k=li.dataset.step; li.classList.toggle('is-cur',k===step); li.classList.toggle('is-done',order.indexOf(k)<order.indexOf(step)); });
+      crumbI.innerHTML=ind?'<a href="#">'+nameOf('.pick a[data-pick="'+ind+'"]')+'</a>':''; crumbA.innerHTML=area?'<a href="#'+ind+'">'+nameOf('.panel[data-industry="'+ind+'"] .pick a[data-pick="'+area+'"]')+'</a>':'';
+      if(step==='services'){ document.body.dataset.calcDefaults=target.dataset.calcPreset||''; var d=(target.dataset.calcPreset||'').split(','), ids=['c-hours','c-people','c-rate'];
+        ids.forEach(function(id,i){ var el=document.querySelector('dialog.calc-modal #'+id); if(el&&d[i]){ el.value=d[i]; el.dispatchEvent(new Event('input')); } }); }
+      if(!first){ var top=guide.getBoundingClientRect().top+scrollY-84; if(scrollY>top) scrollTo({top:top,behavior:reduce?'auto':'smooth'}); target.querySelector('.q').focus({preventScroll:true}); } }
+    addEventListener('hashchange',function(){show(false)}); show(true);
+
+    /* keyword search over every service in the tree; a result jumps to its panel and flashes the row */
+    var gs=guide.querySelector('#gs'), gsClear=guide.querySelector('.gs-clear'), results=guide.querySelector('.panel[data-panel=results]'), pendingHit=null, idx=[];
+    if(gs&&results){
+      guide.querySelectorAll('.panel[data-panel=services]').forEach(function(p){ var crumb=p.querySelector('.eyebrow').textContent, hook=p.querySelector('.q').textContent;
+        [].forEach.call(p.querySelectorAll('.services > li'),function(li,i){ idx.push({ind:p.dataset.industry,area:p.dataset.area,i:i,li:li,crumb:crumb,hook:hook,
+          name:li.querySelector('b').textContent,what:li.querySelector('p').textContent,human:li.querySelector('.who').textContent,cap:li.querySelector('.cap').firstChild.textContent,scope:li.querySelector('.cap small').textContent}); }); });
+      var esc=function(s){ return s.replace(/[&<>"]/g,function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]; }); };
+      var toks=function(q){ return q.toLowerCase().split(/[^a-z0-9+]+/).filter(function(t){ return t.length>=2; }); };
+      function scoreOf(it,ts,all){ var s=0, hit=0; ts.forEach(function(t){ var n=it.name.toLowerCase().indexOf(t)>=0, c=it.crumb.toLowerCase().indexOf(t)>=0, h=it.hook.toLowerCase().indexOf(t)>=0, w=(it.what+' '+it.human).toLowerCase().indexOf(t)>=0;
+          if(n) s+=4; else if(c) s+=3; else if(h) s+=2; else if(w) s+=1; if(n||c||h||w) hit++; }); return (all&&hit<ts.length)?0:s; }
+      function mark(text,ts){ var out=esc(text); if(!ts.length) return out; var re=new RegExp('('+ts.map(function(t){ return t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }).join('|')+')','gi'); return out.replace(re,'<mark>$1</mark>'); }
+      function render(){ var q=gs.value.trim(), ts=toks(q); gsClear.hidden=!q;
+        if(!ts.length){ if(results.classList.contains('on')){ results.classList.remove('on'); show(true); } return; }
+        var hits=idx.map(function(it){ return {it:it,s:scoreOf(it,ts,true)}; }).filter(function(h){ return h.s>0; });
+        if(!hits.length) hits=idx.map(function(it){ return {it:it,s:scoreOf(it,ts,false)}; }).filter(function(h){ return h.s>0; });
+        hits.sort(function(a,b){ return b.s-a.s; }); hits=hits.slice(0,12);
+        var head=hits.length?'<span class="eyebrow">Search</span><h1 class="q" tabindex="-1">'+hits.length+(hits.length===1?' service matches ':' services match ')+'<em>“'+esc(q)+'”</em>.</h1>'
+          :'<span class="eyebrow">Search</span><h1 class="q" tabindex="-1">Nothing matches <em>“'+esc(q)+'”</em> yet.</h1><p class="lede">Try another word, pick an industry below, or <a href="../start-a-project.html">describe the work</a> and I’ll tell you whether a machine should do it.</p>';
+        results.innerHTML=head+(hits.length?'<ol class="results">'+hits.map(function(h){ var it=h.it; return '<li><a href="#'+it.ind+'/'+it.area+'" data-hit="'+it.i+'"><div><span class="crumb">'+esc(it.crumb)+'</span><b>'+mark(it.name,ts)+'</b><p>'+mark(it.what,ts)+'</p></div><span class="cap">'+esc(it.cap)+'<small>'+esc(it.scope)+'</small></span></a></li>'; }).join('')+'</ol>':'');
+        panels.forEach(function(p){ p.classList.remove('on'); }); results.classList.add('on');
+        results.querySelectorAll('a[data-hit]').forEach(function(a){ a.addEventListener('click',function(){ var m=a.getAttribute('href').slice(1).split('/'); pendingHit={ind:m[0],area:m[1],i:+a.dataset.hit}; gs.value=''; gsClear.hidden=true; }); }); }
+      var tmr; gs.addEventListener('input',function(){ clearTimeout(tmr); tmr=setTimeout(render,70); });
+      gs.addEventListener('keydown',function(e){ if(e.key==='Enter'){ var a=results.querySelector('a[data-hit]'); if(a) a.click(); } if(e.key==='Escape'){ gs.value=''; render(); } });
+      gsClear.addEventListener('click',function(){ gs.value=''; render(); gs.focus(); });
+      guide.querySelectorAll('.gs-hints button').forEach(function(b){ b.addEventListener('click',function(){ gs.value=b.textContent; render(); gs.focus(); }); });
+      addEventListener('hashchange',function(){ if(!pendingHit) return; var h=pendingHit; pendingHit=null;
+        var p=guide.querySelector('.panel[data-panel=services][data-industry="'+h.ind+'"][data-area="'+h.area+'"]'); var li=p&&p.querySelectorAll('.services > li')[h.i]; if(!li) return;
+        li.classList.remove('hit'); void li.offsetWidth; li.classList.add('hit'); setTimeout(function(){ li.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'}); },60); });
     }
   }
 
