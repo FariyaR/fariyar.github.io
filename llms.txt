@@ -1,0 +1,33 @@
+# Zetaophi
+
+> Zetaophi is a one-engineer AI systems studio run by Fariya Raza. It builds AI agents, automation, data pipelines and AI products for businesses of all sizes in the US and EU, with deterministic validation and human approval where judgment matters. Six systems are in production.
+
+## What Zetaophi builds
+
+- AI systems: multi-agent workflows with typed shared state, generation pipelines with validation and capped retries, document intelligence for PDFs and scans, rescue of failing agent prototypes. Typical scope 2–6 weeks.
+- Automation: n8n flows, APIs, webhooks, CRM, WhatsApp and inbox handling with human approval before send, lead routing, scheduled reports, quote and RFQ drafting from email or PDF. Typical scope 3 days to 2 weeks.
+- Data systems: ETL into SQL Server, stored-procedure silver and fact tables, reconciliation and parity audits against legacy systems, Power BI-ready datasets. Multi-week, custom.
+- AI products: Next.js and FastAPI products with queued jobs and polling, self-hosted open-weight models on RunPod GPUs, EU-resident hardened infrastructure where residency matters. Typical scope 4–8 weeks.
+
+## Pages
+
+- [Services by industry](https://www.zetaophi.com/services/): pick an industry (construction, manufacturing, clinics, legal and accounting, marketing agencies, e-commerce, logistics, finance, real estate, education, recruiting, hospitality, dashboards and BI, SaaS), then the area where the hours go, then the services for it.
+- [Systems in production](https://www.zetaophi.com/systems/): six case studies with the real pipelines and audited numbers.
+- [Cost of manual work calculator](https://www.zetaophi.com/calculator.html): hours per week × people × hourly cost, with the formula shown.
+- [Start a project](https://www.zetaophi.com/start-a-project.html): a short brief; replies within one working day.
+- [Betterlab partnership](https://www.zetaophi.com/partnership.html): paid ads by Betterlab, the systems that handle the resulting demand by Zetaophi.
+
+## Systems in production
+
+- LeadForge AI: six-agent LangGraph system for lead research and outreach with a QA gate and retries capped at two attempts. https://www.zetaophi.com/systems/leadforge/
+- Creative Generation Pipeline: scheduled n8n pipeline producing 100+ ad creatives a day, each checked by a vision model against written brand rules, at 78% lower inference cost, for an EU education brand. https://www.zetaophi.com/systems/creative-pipeline/
+- Tournament Document Intelligence: HTML, text PDFs and scans into validated records with an 8-tier fuzzy entity resolver and a hard validation gate; 412 records, 0 validation errors in the audited run. https://www.zetaophi.com/systems/document-intelligence/
+- OpenClaw Analytics Agent: an agent over GA4, Meta, Google Ads and Kajabi posting one source-linked digest to Slack at 07:00, running 24/7 on a hardened EU server. https://www.zetaophi.com/systems/openclaw/
+- DentaSmile AI: a three-service SaaS for dental clinics with self-hosted GPU inference, queued jobs and polling around ~110 s inference. https://www.zetaophi.com/systems/dentasmile/
+- E-commerce Fulfillment ETL: ShipHero into SQL Server via n8n, stored procedures building fact tables for Power BI; 68,890 orders reconciled across 25 audited columns, synced nightly, for a US retailer. https://www.zetaophi.com/systems/ecommerce-etl/
+
+## Facts
+
+- Founder and engineer: Fariya Raza, AI Systems Engineer, working with teams in the US and EU with full European overlap.
+- Contact: contact@zetaophi.com
+- Tools used: Python, FastAPI, LangGraph, Pydantic, n8n, Next.js, SQL Server, Shopify, ShipHero, HubSpot, Meta Ads, Google Ads, WhatsApp API, Power BI, RunPod, Docker, OpenAI, Claude, Gemini.
