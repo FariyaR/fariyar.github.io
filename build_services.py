@@ -17,6 +17,7 @@ SITE = 'https://www.zetaophi.com/'
 DATA = json.loads((ROOT / 'services' / 'data.json').read_text(encoding='utf-8'))
 INDEX = (ROOT / 'index.html').read_text(encoding='utf-8')
 SCOPE = {'AI systems': '2–6 weeks', 'Automation': '3 days – 2 weeks', 'Data systems': 'multi-week', 'AI products': '4–8 weeks'}
+TIER = {'quick win': 'Quick win · days to 2 weeks', 'standard build': 'Standard build · 2–6 weeks', 'complex system': 'Complex system · multi-week'}
 CASES = {'leadforge': 'LeadForge AI', 'creative-pipeline': 'Creative Generation Pipeline', 'document-intelligence': 'Tournament Document Intelligence',
          'openclaw': 'OpenClaw Analytics Agent', 'dentasmile': 'DentaSmile AI', 'ecommerce-etl': 'E-commerce Fulfillment ETL'}
 FOUR = [('AI systems', 'Agents, LLM pipelines, vision, structured outputs.', '2–6 weeks'),
@@ -33,9 +34,12 @@ def esc(s):
     return html.escape(s, quote=True)
 
 
+PROPER = {'Amazon', 'Shopify', 'Meta', 'Google', 'Xero', 'QuickBooks', 'Kajabi', 'Stripe', 'Slack', 'Teams'}
+
+
 def lc(s):
     """Lowercase for mid-sentence use, keeping acronyms (SaaS, RFQs, WMS, CVs, DMs, 3PL, DTC, BI, HR)."""
-    return ' '.join(w if w.isupper() or any(ch.isupper() for ch in w[1:]) else w.lower() for w in s.split())
+    return ' '.join(w if w.isupper() or any(ch.isupper() for ch in w[1:]) or w in PROPER else w.lower() for w in s.split())
 
 
 def relink(markup, prefix):
@@ -110,7 +114,7 @@ def area_panel(ind, own_page=False):
 def services_panel(ind, area, prefix, own_page=False):
     rows = ''.join(
         '<li><div><b>%s</b><p>%s</p><p class="who"><b>Where a person decides:</b> %s</p></div><span class="cap">%s<small>%s</small></span></li>'
-        % (esc(s['name']), esc(s['what']), esc(s['human']), esc(s['capability']), esc(SCOPE[s['capability']])) for s in area['services'])
+        % (esc(s['name']), esc(s['what']), esc(s['human']), esc(s['capability']), esc(TIER.get(s.get('tier'), SCOPE[s['capability']]))) for s in area['services'])
     back = '#' if own_page else '#' + ind['slug']
     return ('<section class="panel" data-panel="services" data-industry="%s" data-area="%s" data-calc-preset="%s" aria-labelledby="q-%s-%s">'
             '<span class="eyebrow">%s · %s</span><h2 class="q" id="q-%s-%s" tabindex="-1">%s</h2>'

@@ -195,7 +195,7 @@
   if(guide){
     var panels=[].slice.call(guide.querySelectorAll('.panel')), steps=guide.querySelectorAll('.gsteps li'), crumbI=guide.querySelector('[data-crumb=industry]'), crumbA=guide.querySelector('[data-crumb=area]');
     var fixedInd=guide.dataset.industry||'', hubHref=guide.dataset.hub||'';
-    var SCOPES={'AI systems':'2–6 weeks','Automation':'3 days – 2 weeks','Data systems':'multi-week','AI products':'4–8 weeks'};
+    var SCOPES={'AI systems':'2–6 weeks','Automation':'3 days – 2 weeks','Data systems':'multi-week','AI products':'4–8 weeks'}, TIERS={'quick win':'Quick win · days to 2 weeks','standard build':'Standard build · 2–6 weeks','complex system':'Complex system · multi-week'};
     function nameOf(sel){ var a=guide.querySelector(sel); return a?a.querySelector('.t').firstChild.textContent:''; }
     function parseHash(){ var h=location.hash.replace(/^#/,''), p=h?h.split('/'):[]; return fixedInd?{ind:fixedInd,area:p[0]||'',hit:p[1]||''}:{ind:p[0]||'',area:p[1]||'',hit:''}; }
     function show(first){ var ph=parseHash(), ind=ph.ind, area=ph.area;
@@ -220,7 +220,7 @@
       function loadIndex(){ if(idxReady) return idxReady;
         if(guide.querySelector('.panel[data-panel=services]')||!guide.dataset.data){ fromPanels(); idxReady=Promise.resolve(); return idxReady; }
         idxReady=fetch(guide.dataset.data).then(function(r){ return r.json(); }).then(function(data){ data.forEach(function(ind){ ind.areas.forEach(function(a){ a.services.forEach(function(s,i){
-          idx.push({href:ind.slug+'/#'+a.slug+'/'+i,crumb:ind.name+' · '+a.name,hook:a.hook,name:s.name,what:s.what,human:s.human,cap:s.capability,scope:SCOPES[s.capability]||''}); }); }); }); }).catch(function(){ idxReady=null; });
+          idx.push({href:ind.slug+'/#'+a.slug+'/'+i,crumb:ind.name+' · '+a.name,hook:a.hook,name:s.name,what:s.what,human:s.human,cap:s.capability,scope:TIERS[s.tier]||SCOPES[s.capability]||''}); }); }); }); }).catch(function(){ idxReady=null; });
         return idxReady; }
       var esc=function(x){ return x.replace(/[&<>"]/g,function(ch){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]; }); };
       var toks=function(q){ return q.toLowerCase().split(/[^a-z0-9+]+/).filter(function(t){ return t.length>=2; }); };
